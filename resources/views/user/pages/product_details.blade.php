@@ -30,7 +30,7 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(0 reviews)</span>
+                            <span>(10 reviews)</span>
                         </div>
                         <div class="product__details__price">
                             @if(isset($products['price_new']))
