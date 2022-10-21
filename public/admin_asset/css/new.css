@@ -1,0 +1,54 @@
+th{
+    text-align: center !important;
+}
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+.dropDown{
+    position: relative;
+    line-height: 4.4;
+}
+.dropDown_box{
+background: #ccc;
+width: 130px;
+padding: 0 12px;
+border-radius: 20px;
+cursor: pointer;
+transition: background 0.2s;
+}
+
+.dropDown_box:hover{
+    background: #263544;
+    color: #fff;
+}
+
+.list_dropdow_menu{
+    position: absolute;
+    background: #fff;
+border-radius: 10px;
+display: none;
+width: 200px;
+right: 0;
+}
+
+.list_dropdow_menu li{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_dropdow_menu li img{
+    width: 32px;
+    height: 32px;
+    margin: auto; 
+}
+
+.list_dropdow_menu.openAc{
+    display: block;
+}
+
+.active{
+    background-color: #263544;
+    color: #fff;
+    border-radius: 10px;
+}
