@@ -117,7 +117,7 @@ class BannersController extends Controller
             }
         }
         Banners::whereIn('id', explode(',', $ids))->delete();
-        return response()->json(['success' => "Discounts deleted successfully."]);
+        return response()->json(['success' => "Banners deleted successfully."]);
 
     }
 }
