@@ -11,8 +11,7 @@
                 </div>
             </div>
             <div class="categories__slider owl-carousel">
-            @foreach($products as $pro)
-            @if($pro['featured_product'] == 1)
+            @foreach($featured_products as $pro)
             @if(isset($pro['image']))
             <!-- <div class="col-lg-3">
                 <div class="categories__item set-bg">
@@ -40,7 +39,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
             @endif
             @endforeach
                 </div>
