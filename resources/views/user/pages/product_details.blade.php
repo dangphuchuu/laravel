@@ -89,6 +89,7 @@
                             </li>
                         </ul>
                         <div class="tab-content">
+                            @if(isset($products['content']))
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
@@ -98,7 +99,7 @@
                                             @endif" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
                                 </div>
                             </div>
-                           
+                            @endif
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
@@ -141,7 +142,7 @@
                         <div class="product__item__pic set-bg" data-setbg="user_asset/images/products/{!! $related['image'] !!}">
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="/products/{!! $related['id'] !!}"><i class="fa fa-retweet"></i></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>

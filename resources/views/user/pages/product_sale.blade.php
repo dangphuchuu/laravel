@@ -1,10 +1,9 @@
-@include('user.pages.product_sale')
 <section class="featured spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Featured Product</h2>
+                    <h2>Sale Off</h2>
                 </div>
                 <div class="featured__controls">
 
@@ -13,8 +12,8 @@
         </div>
         <div class="categories__slider owl-carousel">
             @foreach($products as $pro)
-            @if($pro['featured_product'] == 1)
-            @if(isset($pro['image']))
+            @if(isset($pro['price']))
+            @if(isset($pro['price_new']))
             <!-- <div class="col-lg-3">
                 <div class="categories__item set-bg">
                 <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
@@ -24,19 +23,26 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg">
+                    <div class="product__discount__item__pic set-bg" >
                         <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
+                        <div class="product__discount__percent">-20%</div>
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
+                    </div>
                     <div class="featured__item__text">
                         @if(isset($pro['name']))
                         <h6><a href="/products/{!! $pro['id'] !!}">{!! $pro['name'] !!}</a></h6>
                         @endif
                         @if(isset($pro['price']))
-                        <h5>${!! number_format($pro['price']) !!}</h5>
+                        @if(isset($pro['price_new']))
+                        <div class="product__discount__item__text">
+                            <div class="product__item__price" style="color:red">{!! number_format($pro['price_new']) !!} <span>{!! number_format($pro['price']) !!}</span></div>
+                        </div>
+                        @endif
                         @endif
                     </div>
                 </div>
@@ -47,4 +53,3 @@
         </div>
     </div>
 </section>
-@include('user.pages.product_latest')

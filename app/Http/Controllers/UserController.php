@@ -29,8 +29,7 @@ class UserController extends Controller
         $about = About::find(1);
         $brands = Brands::where('active',1)->orderBy('id','ASC')->get();
         $image = Imagelibrary::all();
-        $new_products = Products::get()->where('active',1)->sortByDesc('created_at')->take(4);
-        $featured_products = Products::where('featured_product',1)->orderBy('id','ASC')->get();
+        $new_products = Products::get()->where('active',1)->sortByDesc('created_at')->take(10);
         view()->share('about',$about);
         view()->share('banners',$banners);
         view()->share('brands',$brands);
@@ -41,7 +40,6 @@ class UserController extends Controller
         view()->share('user',$user);
         view()->share('image',$image);
         view()->share('new_products',$new_products);
-        view()->share('featured_products',$featured_products);
     }
     public function home()
     {
@@ -150,7 +148,8 @@ public function product_grid($id)
 {
     $danhmuc = Categories::find($id);
     $categories = Categories::all();
+    $products = Products::where('active',1)->get();
     // $categories = $categorie->
-    return view('user.pages.product_grid',['categories' => $categories,'danhmuc' => $danhmuc]);
+    return view('user.pages.product_grid',['categories' => $categories,'danhmuc' => $danhmuc,'products'=>$products]);
 }
 }
