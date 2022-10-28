@@ -148,7 +148,7 @@ public function product_grid($id)
 {
     $danhmuc = Categories::find($id);
     $categories = Categories::all();
-    $products = Products::where('active',1)->where('categories_id',$id)->take(15)->get();
+    $products = Products::where('active',1)->where('categories_id',$id)->orderBy('id','ASC')->Paginate(3);
     $count = count($products);
     return view('user.pages.product_grid',['categories' => $categories,'danhmuc' => $danhmuc,'products'=>$products,'count'=>$count]);
 }
