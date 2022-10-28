@@ -75,14 +75,15 @@ class SubCategoriesController extends Controller
     {
         $ids = $request->ids;
         $check = count(Products::where('sub_id', $ids)->get());
-        if ($check == 0) 
+        if ($check != 0) 
         {
-            SubCategories::whereIn('id', explode(',', $ids))->delete();
-            return response()->json(['success' => "Categories deleted successfully."]);
+            return response()->json(['error' => "Can't delete because Category exist Product"]);
+            
         } 
         else 
         {
-            return response()->json(['error' => "Can't delete because Category exist Product"]);
+            SubCategories::whereIn('id', explode(',', $ids))->delete();
+            return response()->json(['success' => "Categories deleted successfully."]);
         }
     }
 }

@@ -29,6 +29,7 @@ class UserController extends Controller
         $about = About::find(1);
         $brands = Brands::where('active',1)->orderBy('id','ASC')->get();
         $image = Imagelibrary::all();
+        $new_products = Products::get()->where('active',1)->sortByDesc('created_at')->take(10);
         view()->share('about',$about);
         view()->share('banners',$banners);
         view()->share('brands',$brands);
@@ -38,6 +39,7 @@ class UserController extends Controller
         view()->share('subcategories',$subcategories);
         view()->share('user',$user);
         view()->share('image',$image);
+        view()->share('new_products',$new_products);
     }
     public function home()
     {
@@ -139,13 +141,15 @@ public function logout()
 public function product_deltails($id)
 {
     $products = Products::find($id);
-    return view('user.pages.product_details',['products' => $products]);
+    $related_products = Products::where('sub_id',$products['sub_id'])->take(4)->get();
+    return view('user.pages.product_details',['products' => $products,'related_products'=>$related_products]);
 }
 public function product_grid($id)
 {
     $danhmuc = Categories::find($id);
     $categories = Categories::all();
-    // $categories = $categorie->
-    return view('user.pages.product_grid',['categories' => $categories,'danhmuc' => $danhmuc]);
+    $products = Products::where('active',1)->where('categories_id',$id)->orderBy('id','ASC')->Paginate(3);
+    $count = count($products);
+    return view('user.pages.product_grid',['categories' => $categories,'danhmuc' => $danhmuc,'products'=>$products,'count'=>$count]);
 }
 }

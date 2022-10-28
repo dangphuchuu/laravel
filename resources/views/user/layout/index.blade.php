@@ -11,7 +11,7 @@
     <base href="{{asset('')}}">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+    <link rel="shortcut icon" href="upload/icon/{!! ($about!=null)?$about['icon']:'' !!}" type="image/x-icon">
     <!-- Css Styles -->
     <link rel="stylesheet" href="user_asset/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="user_asset/css/font-awesome.min.css" type="text/css">

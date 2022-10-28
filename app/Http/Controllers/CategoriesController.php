@@ -64,14 +64,15 @@ class CategoriesController extends Controller
     {
         $ids = $request->ids;
         $check = count(Subcategories::where('cat_id', $ids)->get());
-        if ($check == 0) 
+        if ($check != 0) 
         {
-            Categories::whereIn('id', explode(',', $ids))->delete();
-            return response()->json(['success' => "Categories deleted successfully."]);
+            return response()->json(['error' => "Can't delete because Category exist Subcategory"]);
+            
         } 
         else 
         {
-            return response()->json(['error' => "Can't delete because Category exist Subcategory"]);
+            Categories::whereIn('id', explode(',', $ids))->delete();
+            return response()->json(['success' => "Categories deleted successfully."]);
         }
     }
 }
