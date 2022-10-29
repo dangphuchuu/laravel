@@ -5,11 +5,13 @@
                 <div class="section-title">
                     <h2>Sale Off</h2>
                 </div>
+
                 <div class="featured__controls">
 
                 </div>
             </div>
         </div>
+
         <div class="categories__slider owl-carousel">
             @foreach($products as $pro)
             @if(isset($pro['price']))
@@ -23,15 +25,15 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg">
-                    <div class="product__discount__item__pic set-bg" >
-                        <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
+                        <div class="product__discount__item__pic set-bg">
+                            <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
+                            <div class="product__discount__percent">{!! number_format(100-(($pro['price_new']*100)/($pro['price'])),1)!!}%</div>
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="featured__item__text">
                         @if(isset($pro['name']))

@@ -94,9 +94,9 @@
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
                                     <p>{!! $products['content'] !!}</p>
-                                    <p> <iframe style="height: 700px;" width="100%" src="@if(isset($products['link'])) 
-                                            https://www.youtube.com/embed/{!! $products['link'] !!} 
-                                            @endif" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                                    @if(isset($products['link']))
+                                    <p> <iframe style="height: 700px;" width="100%" src="https://www.youtube.com/embed/{!! $products['link'] !!} " title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                                            @endif
                                 </div>
                             </div>
                             @endif
@@ -148,7 +148,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6><a href="#">{!! $related['name'] !!}</a></h6>
-                            <h5>{!! $related['price'] !!}</h5>
+                            <h5>{!! number_format($related['price']) !!}</h5>
                         </div>
                     </div>
                 </div>
