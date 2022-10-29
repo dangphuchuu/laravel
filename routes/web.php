@@ -161,9 +161,10 @@ Route::prefix('admin')->group(function(){
     Route::delete('ajax/deleteimages/{id}',[ ProductsController::class, 'Deleteimages']);
     
     Route::get('/',[UserController::class,'home']);
-    Route::get('/register_login',[UserController::class,'register_login']);
-    Route::post('/register',[UserController::class,'register']);
-    Route::post('/login',[UserController::class,'login']);
+    Route::get('/register',[UserController::class,'get_register']);
+    Route::post('/register',[UserController::class,'post_register']);
+    Route::get('/login',[UserController::class,'get_login']);
+    Route::post('/login',[UserController::class,'post_login']);
     Route::get('/logout',[UserController::class,'logout']);
     Route::get('/products/{id}',[UserController::class,'product_deltails']);
     Route::get('/categories/{id}',[UserController::class,'product_grid']);

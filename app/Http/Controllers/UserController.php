@@ -84,11 +84,11 @@ public function delete_staff($id)
     }
 
 }
-public function register_login()
+public function get_register()
 {
-    return view('user.pages.register-login');
+    return view('user.register');
 }
-public function register(Request $request)
+public function post_register(Request $request)
 {
     $request->validate([
         'firstname' =>'required|min:1',
@@ -106,15 +106,19 @@ public function register(Request $request)
         'email.unique' => 'Email already exists',
         'password.required' => 'Password is required',
         'passwordagain.required' => 'Password is required',
-        'passwordagain.same' => 'Passwords do not match',
+        'passwordagain.same' => "Password doesn't match",
     ]);
     $request['password'] = bcrypt($request['password']);
     $request['image'] = 'avatar.jpg';
     $user=User::create($request->all());
     $user->syncRoles('user');
-    return redirect()->back()->with('thongbao','Create successfully');
+    return redirect('login')->with('thongbao','Sign up successfully');
 }
-public function login(Request $request)
+public function get_login()
+{
+    return view('user.login');
+}
+public function post_login(Request $request)
 {
     $request->validate([
         'username'=>'required',
@@ -130,7 +134,7 @@ public function login(Request $request)
     }
     else
     {
-        return redirect('register_login')->with('canhbao','Đăng nhập không thành công');
+        return redirect('/login')->with('canhbao','Sign in unsuccessfully');
     }
 }
 public function logout()
