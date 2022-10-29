@@ -329,15 +329,14 @@ background-color: red;
 						@foreach($banners as $value)
 						@if($value['id'] == 1)
 						<div class="carousel-item active">
-								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
-							</div>
-							@else
-							<div class="carousel-item">
-								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
-							</div>
-							@endif
-							@endforeach
+							<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
 						</div>
+						@else
+						<div class="carousel-item">
+							<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
+						</div>
+						@endif
+						@endforeach
 						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>

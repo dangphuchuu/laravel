@@ -43,9 +43,9 @@ class Products extends Model
     {
         return $this->hasMany(ImageLibrary::class,'products_id','id');
     }
-    public function favorite()
+    public function wishlist()
     {
         $uid = Auth::user()['id'];
-        return $this->belongsTo(Favorite::class,'id','products_id')->where('users_id',$uid);
+        return $this->belongsTo(Wishlist::class,'id','products_id')->where('users_id',$uid);
     }
 }

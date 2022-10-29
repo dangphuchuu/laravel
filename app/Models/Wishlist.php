@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Favorite extends Model
+use app\models\Products;
+use app\models\User;
+class Wishlist extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -18,6 +20,6 @@ class Favorite extends Model
     }
     public function users()
     {
-        return $this->belongsTo(Users::class,'users_id','id');
+        return $this->belongsTo(User::class,'users_id','id');
     }
 }
