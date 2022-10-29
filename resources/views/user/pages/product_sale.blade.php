@@ -1,3 +1,13 @@
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>    
+<style>
+.bi-arrow-up::before {
+    content: "\f148";
+    position: absolute;
+    border-radius: 50%;
+    background: #379f37;
+    left: 0;
+}
+</style>
 <section class="featured spad">
     <div class="container">
         <div class="row">
@@ -27,7 +37,11 @@
                     <div class="featured__item__pic set-bg">
                         <div class="product__discount__item__pic set-bg">
                             <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
+                            @if($pro['price'] > $pro['price_new'])
                             <div class="product__discount__percent">{!! number_format(100-(($pro['price_new']*100)/($pro['price'])),1)!!}%</div>
+                            @else 
+                            <div class="product__discount__percent"><span class="bi bi-arrow-up" ></span>{!! number_format((($pro['price'])/($pro['price_new'])*100),1)!!}%</div>
+                            @endif
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
