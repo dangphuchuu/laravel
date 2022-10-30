@@ -32,6 +32,7 @@ class UserController extends Controller
         $brands = Brands::where('active', 1)->orderBy('id', 'ASC')->get();
         $image = Imagelibrary::all();
         $new_products = Products::get()->where('active', 1)->sortByDesc('created_at')->take(10);
+        $wishlist = new Wishlist;
         view()->share('about', $about);
         view()->share('banners', $banners);
         view()->share('brands', $brands);
@@ -42,6 +43,7 @@ class UserController extends Controller
         view()->share('user', $user);
         view()->share('image', $image);
         view()->share('new_products', $new_products);
+        view()->share('wishlist', $wishlist);
     }
     public function home()
     {
@@ -138,22 +140,38 @@ class UserController extends Controller
     {
         $products = Products::find($id);
         $related_products = Products::where('sub_id', $products['sub_id'])->take(4)->get();
-        return view('user.pages.product_details', ['products' => $products, 'related_products' => $related_products]);
+        $wishlist = new Wishlist;
+        $countWishlist =$wishlist->countWishlist($products['id']);
+        return view('user.pages.product_details', ['products' => $products, 'related_products' => $related_products,'countWishlist'=>$countWishlist]);
     }
     public function product_grid($id)
     {
         $danhmuc = Categories::find($id);
         $categories = Categories::all();
-        $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
+        $products = Products::find($id)->where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
         $count = count($products);
-        return view('user.pages.product_grid', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count]);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_grid', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
     }
     public function wishlist(Request $request)
     {
         if($request->ajax()) 
         {
             $data = $request->all();
-            print_r($data);
+            $wishlist = new Wishlist;
+            $countWishlist = $wishlist->countWishlist($data['products_id']);
+            if($countWishlist == 0)
+            {
+                $wishlist->products_id = $data['products_id'];
+                $wishlist->users_id = $data['users_id'];
+                $wishlist->save();
+                return response()->json(['action' => 'add','message' =>'Product Added Successfully to Wishlist']);
+            }
+            else
+            {
+                Wishlist::where(['users_id' => Auth::user()->id,'products_id' => $data['products_id']])->delete();
+                return response()->json(['action' => 'remove','message' =>'Product Remove Successfully to Wishlist']);
+            }
         }
     }
 }

@@ -1,12 +1,12 @@
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>    
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
 <style>
-.bi-arrow-up::before {
-    content: "\f148";
-    position: absolute;
-    border-radius: 50%;
-    background: #379f37;
-    left: 0;
-}
+    .bi-arrow-up::before {
+        content: "\f148";
+        position: absolute;
+        border-radius: 50%;
+        background: #379f37;
+        left: 0;
+    }
 </style>
 <section class="featured spad">
     <div class="container">
@@ -39,11 +39,26 @@
                             <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
                             @if($pro['price'] > $pro['price_new'])
                             <div class="product__discount__percent">{!! number_format(100-(($pro['price_new']*100)/($pro['price'])),1)!!}%</div>
-                            @else 
-                            <div class="product__discount__percent"><span class="bi bi-arrow-up" ></span>{!! number_format((($pro['price'])/($pro['price_new'])*100),1)!!}%</div>
+                            @else
+                            <div class="product__discount__percent"><span class="bi bi-arrow-up"></span>{!! number_format((($pro['price'])/($pro['price_new'])*100),1)!!}%</div>
                             @endif
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                @if(Auth::check())
+                                @php
+                                $countWishlist =$wishlist->countWishlist($pro['id']);
+                                @endphp
+                                <li><a href="javascript:void(0)" data-productid="{!! $pro['id'] !!}" class="wishlist">
+                                        @if($countWishlist >0)
+                                        <i class="fas fa-heart"></i>
+                                        @else
+                                        <i class="far fa-heart"></i>
+                                        @endif
+                                    </a></li>
+                                @else
+                                <li><a href="/login" data-productid="{!! $pro['id'] !!}" class="wishlist">
+                                        <i class="far fa-heart"></i>
+                                    </a></li>
+                                @endif
                                 <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
@@ -69,3 +84,45 @@
         </div>
     </div>
 </section>
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('.wishlist').click(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var users_id = "{!! Auth::id() !!}";
+            var products_id = $(this).data('productid');
+            $.ajax({
+                type: 'POST',
+                url: '/wishlist',
+                data: {
+                    products_id: products_id,
+                    users_id: users_id
+                },
+                success: function(response) {
+                    if (response.action == 'add') {
+                        $('a[data-productid=' + products_id + ']').html('<i class="fas fa-heart"></i>');
+                        $('#notifDiv').fadeIn();
+                        $('#notifDiv').css('background', 'green');
+                        $('#notifDiv').text(response.message);
+                        setTimeout(() => {
+                            $('#notifDiv').fadeOut();
+                        }, 3000);
+                    } else if (response.action == 'remove') {
+                        $('a[data-productid=' + products_id + ']').html('<i class="far fa-heart"></i>');
+                        $('#notifDiv').fadeIn();
+                        $('#notifDiv').css('background', 'red');
+                        $('#notifDiv').text(response.message);
+                        setTimeout(() => {
+                            $('#notifDiv').fadeOut();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+    });
+</script>
+@endsection

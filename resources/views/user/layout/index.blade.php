@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="upload/icon/{!! ($about!=null)?$about['icon']:'' !!}" type="image/x-icon">
     <!-- Css Styles -->
+    <link rel="stylesheet" type="text/css" href="admin_asset/css/font-awesome-n.min.css">
     <link rel="stylesheet" href="user_asset/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="user_asset/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="user_asset/css/elegant-icons.css" type="text/css">
@@ -39,7 +40,7 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-   
+    <div id="notifDiv"></div>
 	@yield('content')
     <!-- Footer Section Begin -->
    	@include('user.layout.footer')

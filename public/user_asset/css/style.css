@@ -193,7 +193,18 @@ ol {
 	z-index: 999999;
 	background: #000;
 }
-
+#notifDiv {
+	z-index: 10000;
+	display:none;
+	background:green;
+	font-weight: 450;
+	width:350px;
+	position:fixed;
+	top:5%;
+	right:12px;
+	color:white;
+	padding:5px 20px;
+}
 .loader {
 	width: 40px;
 	height: 40px;
