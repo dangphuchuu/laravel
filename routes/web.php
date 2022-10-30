@@ -168,6 +168,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout',[UserController::class,'logout']);
     Route::get('/products/{id}',[UserController::class,'product_deltails']);
     Route::get('/categories/{id}',[UserController::class,'product_grid']);
+    Route::post('/wishlist',[UserController::class,'wishlist']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {
