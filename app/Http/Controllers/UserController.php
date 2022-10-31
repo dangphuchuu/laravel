@@ -174,4 +174,9 @@ class UserController extends Controller
             }
         }
     }
+    public function total_wishlist()
+    {
+        $total_wishlist = Wishlist::where(['users_id'=>Auth::user()->id])->count();
+        echo json_encode($total_wishlist);
+    }
 }

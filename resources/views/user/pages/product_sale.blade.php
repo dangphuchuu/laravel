@@ -86,6 +86,20 @@
 </section>
 @section('script')
 <script>
+    totalWishlist();
+    function totalWishlist()
+    {
+        $.ajax({
+            type: 'GET',
+            url: '/total_wishlist',
+            success:function(response){
+                var response = JSON.parse(response);
+                $('.total_wishlist').text(response);
+            }
+        });
+    }
+</script>
+<script>
     $(document).ready(function() {
         $('.wishlist').click(function() {
             $.ajaxSetup({
@@ -104,6 +118,7 @@
                 },
                 success: function(response) {
                     if (response.action == 'add') {
+                        totalWishlist();
                         $('a[data-productid=' + products_id + ']').html('<i class="fas fa-heart"></i>');
                         $('#notifDiv').fadeIn();
                         $('#notifDiv').css('background', 'green');
@@ -112,6 +127,7 @@
                             $('#notifDiv').fadeOut();
                         }, 3000);
                     } else if (response.action == 'remove') {
+                        totalWishlist();
                         $('a[data-productid=' + products_id + ']').html('<i class="far fa-heart"></i>');
                         $('#notifDiv').fadeIn();
                         $('#notifDiv').css('background', 'red');
