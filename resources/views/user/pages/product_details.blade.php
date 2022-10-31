@@ -258,6 +258,7 @@
                 },
                 success: function(response) {
                     if (response.action == 'add') {
+                        totalWishlist();
                         $('a[data-productid=' + products_id + ']').html('<i class="fas fa-heart"></i>');
                         $('#notifDiv').fadeIn();
                         $('#notifDiv').css('background', 'green');
@@ -266,6 +267,7 @@
                             $('#notifDiv').fadeOut();
                         }, 3000);
                     } else if (response.action == 'remove') {
+                        totalWishlist();
                         $('a[data-productid=' + products_id + ']').html('<i class="far fa-heart"></i>');
                         $('#notifDiv').fadeIn();
                         $('#notifDiv').css('background', 'red');
