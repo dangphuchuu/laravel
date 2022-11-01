@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Sale Off</h2>
+                    <a href="/product_sale_all"><h2>Sale Off</h2></a>
                 </div>
 
                 <div class="featured__controls">
@@ -68,12 +68,10 @@
                         @if(isset($pro['name']))
                         <h6><a href="/products/{!! $pro['id'] !!}">{!! $pro['name'] !!}</a></h6>
                         @endif
-                        @if(isset($pro['price']))
-                        @if(isset($pro['price_new']))
+                        @if(isset($pro['price'])&& isset($pro['price_new']))
                         <div class="product__discount__item__text">
                             <div class="product__item__price" style="color:red">{!! number_format($pro['price_new']) !!} <span>{!! number_format($pro['price']) !!}</span></div>
                         </div>
-                        @endif
                         @endif
                     </div>
                 </div>

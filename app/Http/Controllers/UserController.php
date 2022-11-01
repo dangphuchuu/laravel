@@ -182,8 +182,21 @@ class UserController extends Controller
     public function product_featured_all()
     {
         $categories = Categories::all();
-        $products = Products::where('featured_product',1)->orderBy('id', 'ASC')->Paginate(12);
+        $products = Products::where('active', 1)->where('featured_product',1)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
         return view('user.pages.product_featured_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+    }
+    public function product_latest_all()
+    {
+        $categories = Categories::all();
+        $products = Products::get()->where('active', 1)->sortByDesc('created_at')->take(21);
+        $count = count($products);
+        return view('user.pages.product_latest_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+    }
+    public function product_sale_all()
+    {
+        $categories = Categories::all();
+        $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
+        return view('user.pages.product_sale_all',['products'=>$products,'categories'=>$categories]);
     }
 }

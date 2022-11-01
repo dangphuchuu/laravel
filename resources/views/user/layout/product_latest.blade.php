@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Latest Product</h2>
+                    <a href="/product_latest_all"><h2>Latest Product</h2></a>
                 </div>
                 <div class="featured__controls">
 

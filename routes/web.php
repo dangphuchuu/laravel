@@ -171,6 +171,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/wishlist',[UserController::class,'wishlist']);
     Route::get('/total_wishlist',[UserController::class,'total_wishlist']);
     Route::get('/product_featured_all',[UserController::class,'product_featured_all']);
+    Route::get('/product_latest_all',[UserController::class,'product_latest_all']);
+    Route::get('/product_sale_all',[UserController::class,'product_sale_all']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

@@ -53,7 +53,7 @@
 
 	/* .submenu-list_item:hover{
 background-color: red;
-} */ 
+} */
 
 	.submenu-list_item:hover .item-show {
 		display: block;
@@ -292,8 +292,6 @@ background-color: red;
 						</div>
 						@endforeach
 					</ul>
-
-
 				</div>
 			</div>
 			<div class="col-lg-9">
@@ -319,38 +317,33 @@ background-color: red;
 					</div>
 				</div>
 				<div class="hero__item set-bg bannerslideshow">
-					
-					
-					
 					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
-							
-						
-						@foreach($banners as $value)
-						@if($value['id'] == 1)
-						<div class="carousel-item active">
-							<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
+							@foreach($banners as $value)
+							@if($value['id'] == 1)
+							<div class="carousel-item active">
+								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
+							</div>
+							@else
+							<div class="carousel-item">
+								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
+							</div>
+							@endif
+							@endforeach
+							<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
 						</div>
-						@else
-						<div class="carousel-item">
-							<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
-						</div>
-						@endif
-						@endforeach
-						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
+
 					</div>
-					
 				</div>
 			</div>
 		</div>
-	</div>
 </section>
 
 <script>
