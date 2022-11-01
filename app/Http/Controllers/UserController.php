@@ -179,4 +179,11 @@ class UserController extends Controller
         $total_wishlist = Wishlist::where(['users_id'=>Auth::user()->id])->count();
         echo json_encode($total_wishlist);
     }
+    public function product_featured_all()
+    {
+        $categories = Categories::all();
+        $products = Products::where('featured_product',1)->orderBy('id', 'ASC')->Paginate(12);
+        $count = count($products);
+        return view('user.pages.product_featured_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+    }
 }

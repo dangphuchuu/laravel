@@ -66,6 +66,7 @@
                     </a>
                     @endif
                     <ul>
+                    <li><b>Brand</b> <span><samp></samp></span></li>
                         <li><b>Availability</b>
                             @if($products['active'] == 1)
                             <span class="text-success">In Stock</span>
