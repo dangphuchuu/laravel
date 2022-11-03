@@ -175,6 +175,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/product_sale_all',[UserController::class,'product_sale_all']);
     Route::get('/all_products',[UserController::class,'product_all']);
     Route::get('/search',[UserController::class,'search_user']);
+    Route::get('/brands/{id}',[UserController::class,'product_brand']);
 
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });

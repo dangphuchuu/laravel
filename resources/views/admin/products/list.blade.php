@@ -56,8 +56,8 @@
                                             <th>@lang('lang.quanty')</th>
                                             <th>@lang('lang.price')</th>
                                             <th>@lang('lang.new_price')</th>
-                                            <th>@lang('lang.created')</th>
-                                            <th>@lang('lang.updated')</th>
+                                            <!-- <th>@lang('lang.created')</th>
+                                            <th>@lang('lang.updated')</th> -->
                                             <th>@lang('lang.staff')</th>
                                             @can('add products')
                                             <th>@lang('lang.featured_product')</th>
@@ -89,8 +89,8 @@
                                             <td>{!! $value['quantity'] !!}</td>
                                             <td>{!! number_format($value['price']) !!}</td>
                                             <td>{!! number_format($value['price_new']) !!}</td>
-                                            <td>{!! $value['created_at'] !!}</td>
-                                            <td>{!! $value['updated_at'] !!}</td>
+                                            <!-- <td>{!! $value['created_at'] !!}</td>
+                                            <td>{!! $value['updated_at'] !!}</td> -->
                                             <td>{!! $value['users']['firstname'] !!}</td>
                                             @can('add products')
                                             <td>

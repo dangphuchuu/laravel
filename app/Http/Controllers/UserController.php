@@ -221,4 +221,13 @@ class UserController extends Controller
             return redirect()->back()->with('canhbao','Empty Search');
         }
     }
+    public function product_brand($id)
+    {
+        $danhmuc = Brands::find($id);
+        $categories = Categories::all();
+        $products = Products::find($id)->where('active', 1)->where('brands_id', $id)->orderBy('id', 'ASC')->Paginate(15);
+        $count = count($products);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
+    }
 }
