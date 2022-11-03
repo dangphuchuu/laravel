@@ -17,12 +17,13 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
+                        <form action="/search" >
+                        <a href="/all_products">
                             <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
+                                -> All Products <-
                             </div>
-                            <input type="text" placeholder="What do yo u need?">
+                        </a>
+                            <input type="search" name="search" value="{!! Request::get('search') !!}" placeholder="Search...">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>

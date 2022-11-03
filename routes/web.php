@@ -173,6 +173,9 @@ Route::prefix('admin')->group(function(){
     Route::get('/product_featured_all',[UserController::class,'product_featured_all']);
     Route::get('/product_latest_all',[UserController::class,'product_latest_all']);
     Route::get('/product_sale_all',[UserController::class,'product_sale_all']);
+    Route::get('/all_products',[UserController::class,'product_all']);
+    Route::get('/search',[UserController::class,'search_user']);
+
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

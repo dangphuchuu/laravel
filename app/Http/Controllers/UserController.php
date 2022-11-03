@@ -199,4 +199,26 @@ class UserController extends Controller
         $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
         return view('user.pages.product_sale_all',['products'=>$products,'categories'=>$categories]);
     }
+    public function product_all()
+    {
+        $categories = Categories::all();
+        $search = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(15);
+        $count = count($search);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_all', ['categories' => $categories, 'search' => $search, 'count' => $count,'wishlist'=>$wishlist]);
+    }
+    public function search_user(Request $request)
+    {
+        if($request['search'])
+        {
+            $categories = Categories::all();
+            $search = Products::where('active',1)->where('name','LIKE','%'.$request['search'].'%')->latest()->Paginate(15);
+            $count = count($search);
+            return view('user.pages.product_all',['categories' => $categories,'search'=>$search,'count' => $count]);
+        }
+        else
+        {
+            return redirect()->back()->with('canhbao','Empty Search');
+        }
+    }
 }
