@@ -81,11 +81,17 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
+                                <form>
+                                    @csrf
+                                    <span>Sort By</span>
+                                    <select name="sort" id="sort">
+                                        <option value="0">Default</option>
+                                        <option value="0">Price Increase</option>
+                                        <option value="0">Price Decrease</option>
+                                        <option value="0">A -> Z</option>
+                                        <option value="0">Z -> A</option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -108,7 +114,7 @@
                             <div class="product__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}">
                                 <ul class="product__item__pic__hover">
                                     @if(Auth::check())
-                                    @php 
+                                    @php
                                     $countWishlist =$wishlist->countWishlist($pro['id']);
                                     @endphp
                                     <li><a href="javascript:void(0)" data-productid="{!! $pro['id'] !!}" class="wishlist">
@@ -154,12 +160,12 @@
 @section('script')
 <script>
     totalWishlist();
-    function totalWishlist()
-    {
+
+    function totalWishlist() {
         $.ajax({
             type: 'GET',
             url: '/total_wishlist',
-            success:function(response){
+            success: function(response) {
                 var response = JSON.parse(response);
                 $('.total_wishlist').text(response);
             }
@@ -205,6 +211,17 @@
                     }
                 }
             });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#sort').on('change', function() {
+            var url = $(this).val();
+            if(url){
+                window.location = url;
+            }
+            return false;
         });
     });
 </script>
