@@ -230,4 +230,12 @@ class UserController extends Controller
         $wishlist = new Wishlist;
         return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
     }
+    public function wishlist_pages()
+    {
+        $categories = Categories::all();
+        $products = Products::orderBy('id','ASC')->Paginate(15);
+        $count = count($products);
+        $wishlist = new Wishlist;
+        return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist]);
+    }
 }
