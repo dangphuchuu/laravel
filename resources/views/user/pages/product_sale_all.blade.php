@@ -1,7 +1,31 @@
 @extends('user.layout.index')
 @section('content')
 @include('user.layout.menu_product')
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+<style>
+    .bi-arrow-up::before {
+        content: "\f148";
+        position: absolute;
+        border-radius: 50%;
+        background: #379f37;
+        left: 0;
+    }
+</style>
 <!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="user_asset/images/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>{!! $about['name'] !!}</h2>
+                    <div class="breadcrumb__option">
+                        <span> Home</span> <span> -> Sale Off </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Breadcrumb Section End -->
 <!-- Product Section Begin -->
 <section class="product spad">
@@ -67,22 +91,15 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <form>
-                                    @csrf
-                                    <span>Sort By</span>
-                                    <select name="sort" id="sort">
-                                        <option value="0">Default</option>
-                                        <option value="0">Price Increase</option>
-                                        <option value="0">Price Decrease</option>
-                                        <option value="0">A -> Z</option>
-                                        <option value="0">Z -> A</option>
-                                    </select>
-                                </form>
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>{!! $count !!}</span> Products found</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
@@ -95,9 +112,16 @@
                 </div>
                 <div class="row">
                     @foreach($products as $pro)
+                    @if(isset($pro['price']) && isset ($pro['price_new']))
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}">
+                            <div class="product__discount__item__pic set-bg">
+                                @if($pro['price'] > $pro['price_new'])
+                                <div class="product__discount__percent">{!! number_format(100-(($pro['price_new']*100)/($pro['price'])),1)!!}%</div>
+                                @else
+                                <div class="product__discount__percent"><span class="bi bi-arrow-up"></span>{!! number_format((($pro['price'])/($pro['price_new'])*100),1)!!}%</div>
+                                @endif
                                 <ul class="product__item__pic__hover">
                                     @if(Auth::check())
                                     @php
@@ -119,16 +143,16 @@
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
+                            </div>
                             <div class="product__item__text">
                                 <h6><a href="#">{!! $pro['name'] !!}</a></h6>
-                                @if(isset($pro['price']))
-                                <h5>{!! number_format($pro['price']) !!}</h5>
-                                @else
-                                <h5>{!! number_format($pro['price_new']) !!}</h5>
-                                @endif
+                                <div class="product__discount__item__text">
+                                    <div class="product__item__price" style="color:red">{!! number_format($pro['price_new']) !!} <span>{!! number_format($pro['price']) !!}</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                 </div>
                 <!-- <div class="product__pagination">
@@ -137,7 +161,7 @@
                     <a href="#">3</a>
                     <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                 </div> -->
-                {!! $products->links() !!}
+
             </div>
         </div>
     </div>
@@ -197,17 +221,6 @@
                     }
                 }
             });
-        });
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#sort').on('change', function() {
-            var url = $(this).val();
-            if(url){
-                window.location = url;
-            }
-            return false;
         });
     });
 </script>

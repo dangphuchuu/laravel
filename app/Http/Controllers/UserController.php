@@ -179,4 +179,63 @@ class UserController extends Controller
         $total_wishlist = Wishlist::where(['users_id'=>Auth::user()->id])->count();
         echo json_encode($total_wishlist);
     }
+    public function product_featured_all()
+    {
+        $categories = Categories::all();
+        $products = Products::where('active', 1)->where('featured_product',1)->orderBy('id', 'ASC')->Paginate(12);
+        $count = count($products);
+        return view('user.pages.product_featured_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+    }
+    public function product_latest_all()
+    {
+        $categories = Categories::all();
+        $products = Products::get()->where('active', 1)->sortByDesc('created_at')->take(21);
+        $count = count($products);
+        return view('user.pages.product_latest_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+    }
+    public function product_sale_all()
+    {
+        $categories = Categories::all();
+        $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
+        return view('user.pages.product_sale_all',['products'=>$products,'categories'=>$categories]);
+    }
+    public function product_all()
+    {
+        $categories = Categories::all();
+        $search = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(15);
+        $count = count($search);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_all', ['categories' => $categories, 'search' => $search, 'count' => $count,'wishlist'=>$wishlist]);
+    }
+    public function search_user(Request $request)
+    {
+        if($request['search'])
+        {
+            $categories = Categories::all();
+            $search = Products::where('active',1)->where('name','LIKE','%'.$request['search'].'%')->latest()->Paginate(15);
+            $count = count($search);
+            return view('user.pages.product_all',['categories' => $categories,'search'=>$search,'count' => $count]);
+        }
+        else
+        {
+            return redirect()->back()->with('canhbao','Empty Search');
+        }
+    }
+    public function product_brand($id)
+    {
+        $danhmuc = Brands::find($id);
+        $categories = Categories::all();
+        $products = Products::find($id)->where('active', 1)->where('brands_id', $id)->orderBy('id', 'ASC')->Paginate(15);
+        $count = count($products);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
+    }
+    public function wishlist_pages()
+    {
+        $categories = Categories::all();
+        $products = Products::orderBy('id','ASC')->Paginate(15);
+        $count = count($products);
+        $wishlist = new Wishlist;
+        return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist]);
+    }
 }

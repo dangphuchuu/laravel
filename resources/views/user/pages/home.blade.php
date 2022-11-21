@@ -7,7 +7,7 @@
  @include('user.layout.brands')
     <!-- Brands Section End -->
   <!-- Featured Section Begin -->
-    @include('user.pages.products_featured')
+    @include('user.layout.products_featured')
     <!-- Featured Section End -->
     <!-- Blog Section Begin -->
     @include('user.layout.rating_user')

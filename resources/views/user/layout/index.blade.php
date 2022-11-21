@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -38,12 +39,22 @@
     <!-- Header Section Begin -->
     @include('user.layout.header')
     <!-- Header Section End -->
-
+    @if (session('thongbao'))
+    <div class="alert alert-success">
+        {{ session('thongbao') }}
+    </div>
+    @endif
+    @if (session('canhbao'))
+    <div class="alert alert-warning">
+        {{ session('canhbao') }}
+    </div>
+    @endif
     <!-- Hero Section Begin -->
     <div id="notifDiv"></div>
-	@yield('content')
+    @yield('content')
+   
     <!-- Footer Section Begin -->
-   	@include('user.layout.footer')
+    @include('user.layout.footer')
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
@@ -56,11 +67,11 @@
     <script src="user_asset/js/owl.carousel.min.js"></script>
     <script src="user_asset/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-	@yield('script')
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    @yield('script')
 
 
 </body>

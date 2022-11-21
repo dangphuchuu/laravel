@@ -170,6 +170,13 @@ Route::prefix('admin')->group(function(){
     Route::get('/categories/{id}',[UserController::class,'product_grid']);
     Route::post('/wishlist',[UserController::class,'wishlist']);
     Route::get('/total_wishlist',[UserController::class,'total_wishlist']);
+    Route::get('/product_featured_all',[UserController::class,'product_featured_all']);
+    Route::get('/product_latest_all',[UserController::class,'product_latest_all']);
+    Route::get('/product_sale_all',[UserController::class,'product_sale_all']);
+    Route::get('/all_products',[UserController::class,'product_all']);
+    Route::get('/search',[UserController::class,'search_user']);
+    Route::get('/brands/{id}',[UserController::class,'product_brand']);
+    Route::get('/wishlist_pages',[UserController::class,'wishlist_pages']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

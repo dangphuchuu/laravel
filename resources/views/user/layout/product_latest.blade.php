@@ -1,10 +1,9 @@
-@include('user.pages.product_sale')
 <section class="featured spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Featured Product</h2>
+                    <a href="/product_latest_all"><h2>Latest Product</h2></a>
                 </div>
                 <div class="featured__controls">
 
@@ -12,9 +11,8 @@
             </div>
         </div>
         <div class="categories__slider owl-carousel">
-            @foreach($products as $pro)
-            @if($pro['featured_product'] == 1)
-            @if(isset($pro['image']))
+            @foreach($new_products as $new)
+            @if(isset($new['image']))
             <!-- <div class="col-lg-3">
                 <div class="categories__item set-bg">
                 <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
@@ -23,41 +21,39 @@
             </div> -->
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg">
-                        <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
+                    <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $new['image'] !!}">
+                        <!-- <img src="user_asset/images/products/{!! $new['image'] !!}" alt=""> -->
                         <ul class="featured__item__pic__hover">
                             @if(Auth::check())
                             @php
-                            $countWishlist =$wishlist->countWishlist($pro['id']);
+                            $countWishlist =$wishlist->countWishlist($new['id']);
                             @endphp
-                            <li><a href="javascript:void(0)" data-productid="{!! $pro['id'] !!}" class="wishlist">
+                            <li><a href="javascript:void(0)" data-productid="{!! $new['id'] !!}" class="wishlist">
                                     @if($countWishlist >0)
                                     <i class="fas fa-heart"></i>
                                     @else
                                     <i class="far fa-heart"></i>
                                     @endif
-
                                 </a></li>
                             @else
-                            <li><a href="/login" data-productid="{!! $pro['id'] !!}" class="wishlist">
+                            <li><a href="/login" data-productid="{!! $new['id'] !!}" class="wishlist">
                                     <i class="far fa-heart"></i>
                                 </a></li>
                             @endif
-                            <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet "></i></a></li>
+                            <li><a href="/products/{!! $new['id'] !!}"><i class="fa fa-retweet"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        @if(isset($pro['name']))
-                        <h6><a href="/products/{!! $pro['id'] !!}">{!! $pro['name'] !!}</a></h6>
+                        @if(isset($new['name']))
+                        <h6><a href="/products/{!! $new['id'] !!}">{!! $new['name'] !!}</a></h6>
                         @endif
-                        @if(isset($pro['price']))
-                        <h5>${!! number_format($pro['price']) !!}</h5>
+                        @if(isset($new['price']))
+                        <h5>${!! number_format($new['price']) !!}</h5>
                         @endif
                     </div>
                 </div>
             </div>
-            @endif
             @endif
             @endforeach
         </div>
@@ -121,4 +117,3 @@
     });
 </script>
 @endsection
-@include('user.pages.product_latest')
