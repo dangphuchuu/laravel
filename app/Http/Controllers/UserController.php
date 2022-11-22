@@ -232,10 +232,16 @@ class UserController extends Controller
     }
     public function wishlist_pages()
     {
+        $pro_wish = Wishlist::all();
+        $user = User::find(Auth::user()->id);
         $categories = Categories::all();
-        $products = Products::orderBy('id','ASC')->Paginate(15);
+        $products = Products::where('users_id',$user)->orderBy('id','ASC')->Paginate(15);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist]);
+        return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist,'pro_wish'=>$pro_wish]);
+    }
+    public function cart()
+    {
+        return view('user.pages.product_cart');
     }
 }

@@ -177,6 +177,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/search',[UserController::class,'search_user']);
     Route::get('/brands/{id}',[UserController::class,'product_brand']);
     Route::get('/wishlist_pages',[UserController::class,'wishlist_pages']);
+    Route::get('/cart',[UserController::class,'cart']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {
