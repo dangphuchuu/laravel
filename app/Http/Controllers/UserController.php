@@ -240,4 +240,8 @@ class UserController extends Controller
         $wishlist = new Wishlist;
         return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist,'pro_wish'=>$pro_wish]);
     }
+    public function cart()
+    {
+        return view('user.pages.product_cart');
+    }
 }
