@@ -22,31 +22,25 @@
 
 	.submenu-list_item.active {
 		background: red;
+		height: 50px;
+		padding-left: 30px !important;
+		transition: all 0.3s ease-in-out;
+		
 	}
+
+	.submenu-list_item.active a{
+		color: #fff;
+	} 
+
 
 	.submenu-list_item:first-child {
 		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
 	}
 
-	.submenu-list_item:last-child {
+	.submenu-list_item:last-of-type {
 		border-bottom-left-radius: 10px;
-	}
-
-	.submenu-list_item.active::after {
-		content: "";
-		position: absolute;
-		left: 99.5%;
-		/* width: 22px; */
-		height: 100%;
-		/* background: red; */
-		z-index: 10;
-		/* border-left: 5px solid transparent; */
-		/* border-right: 20px solid transparent; */
-		border-color: transparent transparent transparent red;
-		border-style: solid;
-		border-width: 17px;
-		height: 0;
-		width: 0;
+		border-bottom-right-radius: 10px;
 	}
 
 	/* .submenu-list_item:hover:after {}
@@ -158,7 +152,7 @@ background-color: red;
 		}
 	}
 </style>
-<section class="hero ">
+<section class="hero hero-normal ">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
@@ -362,7 +356,6 @@ background-color: red;
 			if (document.querySelector('.item-show.active') && document.querySelector('.submenu-list_item.active')) {
 				document.querySelector('.item-show.active').classList.remove('active');
 				document.querySelector('.submenu-list_item.active').classList.remove('active');
-
 			}
 			itemShow.classList.add('active');
 			item.classList.add('active');

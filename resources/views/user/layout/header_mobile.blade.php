@@ -1,3 +1,11 @@
+<style>
+    .dpd_categories{
+        padding-left: 12px;
+    }
+    .dpd_categories_item{
+        padding-left: 12px;
+    }
+</style>
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
@@ -45,6 +53,15 @@
                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                     <li><a href="./checkout.html">Check Out</a></li>
                     <li><a href="./blog-details.html">Blog Details</a></li>
+                </ul>
+            </li>
+            <li><a href="#">All Categories</a>
+                <ul class="header__menu__dropdown dpd_categories">
+                    <li class="dpd_categories"><a href="">vfdjhgnksd</a>
+                    <ul class="header__menu__dropdown ">
+                        <li class="dpd_categories_item"><a href="">dsfsdg</a></li>
+                    </ul>
+                    </li>
                 </ul>
             </li>
             <li><a href="./blog.html">Blog</a></li>
