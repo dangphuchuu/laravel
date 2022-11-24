@@ -152,7 +152,7 @@ background-color: red;
 		}
 	}
 </style>
-<section class="hero hero-normal ">
+<section class="hero">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
@@ -167,12 +167,12 @@ background-color: red;
 						<div class="item-show">
 							<div class="item-show_item">
 								<p class="item-show_item-head">
-									Thuong hieu
+									Danh mục con
 								</p>
 								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
+									@foreach($cat['Subcategories'] as $sub)
+									<a href="#">{!! $sub['name'] !!}</a>
+									@endforeach
 								</p>
 							</div>
 
