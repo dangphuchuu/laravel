@@ -1,105 +1,3 @@
-<style>
-	.submenu-medium {
-		width: 200px !important;
-	}
-
-	.submenu-list {
-		margin-right: 30px;
-		background: #ffffff;
-		width: 100% !important;
-		border-radius: 10px;
-	}
-
-	.submenu-list_item {
-		position: relative;
-		color: #ffffff;
-		min-height: 38px;
-		display: flex;
-		align-items: center;
-		cursor: pointer;
-		padding: 0 0 0 20px;
-	}
-
-	.submenu-list_item.active {
-		background: red;
-		height: 50px;
-		padding-left: 30px !important;
-		transition: all 0.3s ease-in-out;
-		
-	}
-
-	.submenu-list_item.active a{
-		color: #fff;
-	} 
-
-
-	.submenu-list_item:first-child {
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
-	}
-
-	.submenu-list_item:last-of-type {
-		border-bottom-left-radius: 10px;
-		border-bottom-right-radius: 10px;
-	}
-
-	/* .submenu-list_item:hover:after {}
-
-	/* .submenu-list_item:hover{
-background-color: red;
-} */
-
-	.submenu-list_item:hover .item-show {
-		display: block;
-	}
-
-	.item-show {
-		display: none;
-		position: absolute;
-		background-color: #ffffff;
-		top: 10px;
-		left: 100%;
-		min-width: 800px;
-		height: 400px;
-		margin-left: 5px;
-		border-radius: 8px;
-		padding: 20px 0;
-		color: #fff;
-		flex-wrap: wrap;
-		z-index: 1000;
-	}
-
-	.item-show.active {
-		display: flex;
-	}
-
-	.item-show_item {
-		margin: 0 20px;
-		flex: auto;
-	}
-
-	p.item-show_item-head {
-		color: #ff0000;
-		font-size: 17px;
-	}
-
-
-	.item-show_item-content {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.item-show_item-content a {
-		line-height: 22px;
-		text-decoration: none;
-		color: #000;
-	}
-
-	.item-show_item-content a:hover {
-		color: red;
-	}
-
-</style>
 <section class="hero hero-normal">
     <div class="container">
         <div class="row">
@@ -113,39 +11,52 @@ background-color: red;
 						@foreach($categories as $cat)
 						<li class="submenu-list_item"><a href="/categories/{!! $cat['id'] !!}">{!! $cat['name'] !!}</a></li>
 						<div class="item-show">
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
 
 							<div class="item-show_item">
 								<p class="item-show_item-head">
 									Thuong hieu
 								</p>
 								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
+									@foreach($brands as $br)
+									<a href="#">{!! $br['name'] !!}</a>
+									@endforeach
 								</p>
 							</div>
 
 							<div class="item-show_item">
 								<p class="item-show_item-head">
-									Thuong hieu
+									Loại Sản Phẩm
 								</p>
 								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
+									@foreach($cat['Subcategories'] as $sub)
+									@if($sub['active'] == 1)
+									<a href="#">{!! $sub['name'] !!}</a>
+									@endif
+									@endforeach
+								</p>
+							</div>
+
+							<div class="item-show_item">
+								<p class="item-show_item-head">
+									Giá bán
+								</p>
+								<p class="item-show_item-content">
+									<a href="#">Dưới 2 triệu</a>
+									<a href="#">2-5 triệu</a>
+									<a href="#">trên 5 triệu</a>
 								</p>
 							</div>
 							<div class="item-show_item">
+								<p class="item-show_item-head">
+									Phụ kiện
+								</p>
+								<p class="item-show_item-content">
+									<a href="#">Dây chuyền</a>
+									<a href="#">Túi đeo</a>
+									<a href="#">bao cao su</a>
+								</p>
+							</div>
+							<!-- <div class="item-show_item">
 								<p class="item-show_item-head">
 									Thuong hieu
 								</p>
@@ -230,7 +141,7 @@ background-color: red;
 									<a href="#">skms</a>
 									<a href="#">sksm</a>
 								</p>
-							</div>
+							</div> -->
 						</div>
 						@endforeach
 					</ul>
