@@ -1,11 +1,3 @@
-<style>
-    .dpd_categories{
-        padding-left: 12px;
-    }
-    .dpd_categories_item{
-        padding-left: 12px;
-    }
-</style>
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
