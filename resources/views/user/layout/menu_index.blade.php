@@ -11,18 +11,6 @@
 						@foreach($categories as $cat)
 						<li class="submenu-list_item"><a href="/categories/{!! $cat['id'] !!}">{!! $cat['name'] !!}</a></li>
 						<div class="item-show">
-
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									@foreach($brands as $br)
-									<a href="#">{!! $br['name'] !!}</a>
-									@endforeach
-								</p>
-							</div>
-
 							<div class="item-show_item">
 								<p class="item-show_item-head">
 									Loại Sản Phẩm
@@ -36,112 +24,6 @@
 								</p>
 							</div>
 
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Giá bán
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">Dưới 2 triệu</a>
-									<a href="#">2-5 triệu</a>
-									<a href="#">trên 5 triệu</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Phụ kiện
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">Dây chuyền</a>
-									<a href="#">Túi đeo</a>
-									<a href="#">bao cao su</a>
-								</p>
-							</div>
-							<!-- <div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div>
-							<div class="item-show_item">
-								<p class="item-show_item-head">
-									Thuong hieu
-								</p>
-								<p class="item-show_item-content">
-									<a href="#">wkk</a>
-									<a href="#">skms</a>
-									<a href="#">sksm</a>
-								</p>
-							</div> -->
 						</div>
 						@endforeach
 					</ul>
