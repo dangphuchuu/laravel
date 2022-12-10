@@ -1,6 +1,20 @@
 @extends('user.layout.index')
 @section('content')
 @include('user.layout.menu_product')
+
+<style>
+    .rating {
+        list-style-type: none;
+    }
+    .rating li {
+        float: right;
+        color: #EDBB0E;
+    }
+    .ral {
+        display: inline-block;
+        cursor: pointer;
+    }
+</style>
 <section class="product-details spad">
     <div class="container">
         <div class="row">
@@ -66,7 +80,7 @@
                     </a>
                     @endif
                     <ul>
-                    <li><b>Brand</b> <span><samp></samp></span></li>
+                        <li><b>Brand</b> <span><samp></samp></span></li>
                         <li><b>Availability</b>
                             @if($products['active'] == 1)
                             <span class="text-success">In Stock</span>
@@ -84,6 +98,27 @@
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
                         </li>
+                        <button class="btndanhgia">Viết Đánh Giá</button>
+                        <div class="formdanhgia">
+                            <form>
+                                <h6 class="tieude text-uppercase">GỬI ĐÁNH GIÁ CỦA BẠN</h6>
+                                <span class="danhgiacuaban">Đánh giá của bạn về sản phẩm này:</span>
+                                <div class="rating d-flex flex-row-reverse align-items-center justify-content-end">
+                                    <input type="radio" name="star" id="star1" value="5"><label for="star1"></label>
+                                    <input type="radio" name="star" id="star2" value="4"><label for="star2"></label>
+                                    <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
+                                    <input type="radio" name="star" id="star4" value="2"><label for="star4"></label>
+                                    <input type="radio" name="star" id="star5" value="1"><label for="star5"></label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="name" class="txtFullname w-100" placeholder="Mời bạn nhập tên">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="review" class="txtComment w-100" placeholder="Đánh giá của bạn về sản phẩm này">
+                                </div>
+                                <input type="hidden" name="addcomment" value="1">
+                                <button type="submit" name="id" value="" class="btn nutguibl">Gửi bình luận</button>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -112,18 +147,15 @@
                         @endif
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Products Infomation</h6>
-                                <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                                    Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                                    Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                                    sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                                    eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                                    sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                                    diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                                    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                                    Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                    Proin eget tortor risus.</p>
+                                <h5 style="margin-bottom: 0px">Tên User</h5>
+                                <ul class="ral rating">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <p style="font-size: 12px;">10/12/2022-18:05</p>
                             </div>
                         </div>
                     </div>
@@ -186,12 +218,12 @@
 @section('script')
 <script>
     totalWishlist();
-    function totalWishlist()
-    {
+
+    function totalWishlist() {
         $.ajax({
             type: 'GET',
             url: '/total_wishlist',
-            success:function(response){
+            success: function(response) {
                 var response = JSON.parse(response);
                 $('.total_wishlist').text(response);
             }
@@ -281,5 +313,12 @@
             });
         });
     });
+</script>
+<script>
+    var rating = document.querySelector('.btndanhgia');
+    var form_rating = document.querySelector('.formdanhgia');
+    rating.addEventListener('click', function(){
+        form_rating.classList.toggle('active')
+    })
 </script>
 @endsection

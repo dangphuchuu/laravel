@@ -1725,8 +1725,13 @@ ol {
 	padding: 16px 28px 14px;
 	margin-right: 6px;
 	margin-bottom: 5px;
+	border-radius: 6px;
+	transition: all 0.8s;
 }
-
+.product__details__text .primary-btn:hover
+{
+	box-shadow: 5px 5px 5px #ed9792;
+}
 .product__details__text .heart-icon {
 	display: inline-block;
 	font-size: 16px;
@@ -3536,8 +3541,8 @@ background-color: red;
 	background-color: #ffffff;
 	top: 10px;
 	left: 100%;
-	min-width: 800px;
-	height: 400px;
+	min-width: 200px;
+	min-height: 100px;
 	margin-left: 5px;
 	border-radius: 8px;
 	padding: 20px 0;
@@ -3633,4 +3638,92 @@ p.item-show_item-head {
 }
 .dpd_categories_item{
 	padding-left: 12px;
+}
+.btndanhgia{
+	background-color: transparent ;
+	color:red;
+	width:200px;
+	height:40px;
+	border:1px solid rgb(243 52 52);
+	border-radius: 20px;
+	transition: all, 0.5s
+}
+.btndanhgia:hover{
+	background:#CF111A;
+	color:white;
+	box-shadow: 5px 5px 5px #ed9792;
+}
+.formdanhgia .rating input{
+    display: none;
+    
+}
+
+.formdanhgia .rating label{
+    display: block;
+    cursor: pointer;
+    width: 15px;
+}
+
+.formdanhgia .rating label::before{
+    content: '\f005';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    position: relative;
+    display: block;
+    font-size: 15px;
+    color: rgb(187, 186, 186);
+}
+
+.formdanhgia .rating label::after{
+    content: '\f005';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    position: absolute;
+    display: block;
+    font-size: 15px;
+    color: rgb(255 214 10);
+	bottom: 148px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.formdanhgia .rating label:hover::after,
+.formdanhgia .rating label:hover ~ label::after,
+.formdanhgia .rating input:checked ~ label::after{
+    opacity: 1;
+}
+.formdanhgia .nutguibl {
+    border: 1px solid rgb(243 52 52);
+    color: red;
+    width: 60%;
+    font-weight: 500;
+	border-radius: 20px;
+	transition: all, 0.5s
+}
+
+.formdanhgia .nutguibl:hover 
+{
+	background: #CF111A;
+	color:white;
+	box-shadow: 5px 5px 5px #ed9792;
+
+}
+
+.formdanhgia .form-group input {padding: 6px 15px;font-size: 14px;border: 1px solid #d7d2d2;}
+
+.formdanhgia .danhgiacuaban {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.formdanhgia .tieude {
+    font-size: 17px!important;
+}
+.formdanhgia{
+	display:none;
+	margin-top: 27px;
+}
+.formdanhgia.active{
+	display:block;
 }
