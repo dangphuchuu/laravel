@@ -3682,7 +3682,7 @@ p.item-show_item-head {
     display: block;
     font-size: 15px;
     color: rgb(255 214 10);
-	bottom: 148px;
+	bottom: 158px;
     opacity: 0;
     transition: 0.2s;
 }

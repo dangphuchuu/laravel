@@ -111,12 +111,8 @@
                                     <input type="radio" name="star" id="star5" value="1"><label for="star5"></label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="name" class="txtFullname w-100" placeholder="Mời bạn nhập tên">
+                                <textarea class="form-control txtComment w-100" name="content" id="editor" placeholder="Đánh giá của bạn về sản phẩm này"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" name="review" class="txtComment w-100" placeholder="Đánh giá của bạn về sản phẩm này">
-                                </div>
-                                <input type="hidden" name="addcomment" value="1">
                                 <button type="submit" name="id" value="" class="btn nutguibl">Gửi bình luận</button>
                         </div>
                     </ul>
@@ -156,6 +152,7 @@
                                     <li><i class="fa fa-star"></i></li>
                                 </ul>
                                 <p style="font-size: 12px;">10/12/2022-18:05</p>
+                                <h6>Bình luận đánh giá</h6>
                             </div>
                         </div>
                     </div>

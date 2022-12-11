@@ -31,72 +31,14 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="sidebar__item">
-                        <h4>Price</h4>
-                        <div class="price-range-wrap">
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Popular Size</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Large
-                                <input type="radio" id="large">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                Medium
-                                <input type="radio" id="medium">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                Small
-                                <input type="radio" id="small">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                Tiny
-                                <input type="radio" id="tiny">
-                            </label>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span>{!! $count !!}</span> Products found</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
                             </div>
                         </div>
                     </div>

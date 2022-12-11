@@ -28,7 +28,7 @@
                             </ul>
                         </div>
                         <div class="header__top__right__auth">
-                            @hasexactroles('user')
+                            @hasrole('admin|user|staff')
                             <div class="dropdown show">
                                 <a type="button" href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>Xin chào <span class="text-success">{!! Auth::user()->lastname !!} {!! Auth::user()->firstname !!}</span></a>
                                 <div class="dropdown-menu">

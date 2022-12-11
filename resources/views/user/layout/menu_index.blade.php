@@ -35,7 +35,7 @@
 						<form action="/search">
 							<a href="/all_products">
 								<div class="hero__search__categories">
-									All Products
+								-> All Products <-
 								</div>
 							</a>
 							<input type="search" name="search" value="{!! Request::get('search') !!}" placeholder="Search...">

@@ -22,6 +22,7 @@
             <div class="col-lg-9 col-md-7">
                 <div class="row">
                     @foreach($pro_wish as $pro)
+                    @if(Auth::user()->id == $pro['users']['id'] )
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['products']['image'] !!}">
@@ -36,10 +37,6 @@
                                             @else
                                             <i class="far fa-heart"></i>
                                             @endif
-                                        </a></li>
-                                    @else
-                                    <li><a href="/login" data-productid="{!! $pro['products']['id'] !!}" class="wishlist">
-                                            <i class="far fa-heart"></i>
                                         </a></li>
                                     @endif
                                     <li><a href="/products/{!! $pro['products']['id'] !!}"><i class="fa fa-retweet"></i></a></li>
@@ -56,6 +53,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                 </div>
                 <!-- <div class="product__pagination">
