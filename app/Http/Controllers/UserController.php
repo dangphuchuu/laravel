@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\About;
 use App\Models\Banners;
+use App\Models\Rating;
 use App\Models\Brands;
 use App\Models\Products;
 use App\Models\Discounts;
@@ -138,11 +139,15 @@ class UserController extends Controller
     }
     public function product_deltails($id)
     {
+        $pro = Products::all();
         $products = Products::find($id);
         $related_products = Products::where('sub_id', $products['sub_id'])->take(4)->get();
         $wishlist = new Wishlist;
-        $countWishlist =$wishlist->countWishlist($products['id']);
-        return view('user.pages.product_details', ['products' => $products, 'related_products' => $related_products,'countWishlist'=>$countWishlist]);
+        $countWishlist = $wishlist->countWishlist($products['id']);
+        $ratings = Rating::where('products_id',$id)->get();
+        // dd($ratings);
+        // die;
+        return view('user.pages.product_details', ['products' => $products, 'related_products' => $related_products, 'countWishlist' => $countWishlist,'pro'=>$pro,'ratings'=>$ratings]);
     }
     public function product_grid($id)
     {
@@ -151,53 +156,49 @@ class UserController extends Controller
         $products = Products::find($id)->where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
+        return view('user.pages.product_grid', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function wishlist(Request $request)
     {
-        if($request->ajax()) 
-        {
+        if ($request->ajax()) {
             $data = $request->all();
             $wishlist = new Wishlist;
             $countWishlist = $wishlist->countWishlist($data['products_id']);
-            if($countWishlist == 0)
-            {
+            if ($countWishlist == 0) {
                 $wishlist->products_id = $data['products_id'];
                 $wishlist->users_id = $data['users_id'];
                 $wishlist->save();
-                return response()->json(['action' => 'add','message' =>'Product Added Successfully to Wishlist']);
-            }
-            else
-            {
-                Wishlist::where(['users_id' => Auth::user()->id,'products_id' => $data['products_id']])->delete();
-                return response()->json(['action' => 'remove','message' =>'Product Remove Successfully to Wishlist']);
+                return response()->json(['action' => 'add', 'message' => 'Product Added Successfully to Wishlist']);
+            } else {
+                Wishlist::where(['users_id' => Auth::user()->id, 'products_id' => $data['products_id']])->delete();
+                return response()->json(['action' => 'remove', 'message' => 'Product Remove Successfully to Wishlist']);
             }
         }
     }
     public function total_wishlist()
     {
-        $total_wishlist = Wishlist::where(['users_id'=>Auth::user()->id])->count();
+        $total_wishlist = Wishlist::where(['users_id' => Auth::user()->id])->count();
         echo json_encode($total_wishlist);
     }
     public function product_featured_all()
     {
         $categories = Categories::all();
-        $products = Products::where('active', 1)->where('featured_product',1)->orderBy('id', 'ASC')->Paginate(12);
+        $products = Products::where('active', 1)->where('featured_product', 1)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
-        return view('user.pages.product_featured_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+        return view('user.pages.product_featured_all', ['products' => $products, 'categories' => $categories, 'count' => $count]);
     }
     public function product_latest_all()
     {
         $categories = Categories::all();
         $products = Products::get()->where('active', 1)->sortByDesc('created_at')->take(21);
         $count = count($products);
-        return view('user.pages.product_latest_all',['products'=>$products,'categories'=>$categories,'count'=>$count]);
+        return view('user.pages.product_latest_all', ['products' => $products, 'categories' => $categories, 'count' => $count]);
     }
     public function product_sale_all()
     {
         $categories = Categories::all();
         $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
-        return view('user.pages.product_sale_all',['products'=>$products,'categories'=>$categories]);
+        return view('user.pages.product_sale_all', ['products' => $products, 'categories' => $categories]);
     }
     public function product_all()
     {
@@ -205,20 +206,17 @@ class UserController extends Controller
         $search = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(15);
         $count = count($search);
         $wishlist = new Wishlist;
-        return view('user.pages.product_all', ['categories' => $categories, 'search' => $search, 'count' => $count,'wishlist'=>$wishlist]);
+        return view('user.pages.product_all', ['categories' => $categories, 'search' => $search, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function search_user(Request $request)
     {
-        if($request['search'])
-        {
+        if ($request['search']) {
             $categories = Categories::all();
-            $search = Products::where('active',1)->where('name','LIKE','%'.$request['search'].'%')->latest()->Paginate(15);
+            $search = Products::where('active', 1)->where('name', 'LIKE', '%' . $request['search'] . '%')->latest()->Paginate(15);
             $count = count($search);
-            return view('user.pages.product_all',['categories' => $categories,'search'=>$search,'count' => $count]);
-        }
-        else
-        {
-            return redirect()->back()->with('canhbao','Empty Search');
+            return view('user.pages.product_all', ['categories' => $categories, 'search' => $search, 'count' => $count]);
+        } else {
+            return redirect()->back()->with('canhbao', 'Empty Search');
         }
     }
     public function product_brand($id)
@@ -228,20 +226,44 @@ class UserController extends Controller
         $products = Products::find($id)->where('active', 1)->where('brands_id', $id)->orderBy('id', 'ASC')->Paginate(15);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count,'wishlist'=>$wishlist]);
+        return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function wishlist_pages()
     {
         $pro_wish = Wishlist::all();
         $user = User::find(Auth::user()->id);
         $categories = Categories::all();
-        $products = Products::where('users_id',$user)->orderBy('id','ASC')->Paginate(15);
+        $products = Products::where('users_id', $user)->orderBy('id', 'ASC')->Paginate(15);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.wishlist',['categories'=>$categories, 'products'=>$products, 'count' => $count,'wishlist'=>$wishlist,'pro_wish'=>$pro_wish]);
+        return view('user.pages.wishlist', ['categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist, 'pro_wish' => $pro_wish]);
     }
     public function cart()
     {
         return view('user.pages.product_cart');
+    }
+    public function addRating(Request $request)
+    {
+        
+        $data = $request->all();
+        if(!isset($data['ratings']))
+        {
+            return redirect()->back()->with('canhbao', 'Add at least one star rating for this Product');
+        }
+        $ratingCount = Rating::where(['users_id'=>Auth::user()->id,'products_id'=>$data['products_id']])->count();
+        if($ratingCount > 0)
+        {
+            return redirect()->back()->with('canhbao', 'Your Rating is already exists for this Product');
+        }
+        else
+        {
+            $rating = new Rating;
+            $rating->users_id = Auth::user()->id;
+            $rating->products_id = $data['products_id'];
+            $rating->ratings = $data['ratings'];
+            $rating->content = $data['content'];
+            $rating->save();
+            return redirect()->back()->with('thongbao', 'Successfully');
+        }
     }
 }

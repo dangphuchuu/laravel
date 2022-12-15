@@ -98,23 +98,32 @@
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                             </div>
                         </li>
+                        @if(Auth::check())
                         <button class="btndanhgia">Viết Đánh Giá</button>
                         <div class="formdanhgia">
-                            <form>
+                            <form action="/addRating" method="POST">
+                            @csrf
                                 <h6 class="tieude text-uppercase">GỬI ĐÁNH GIÁ CỦA BẠN</h6>
                                 <span class="danhgiacuaban">Đánh giá của bạn về sản phẩm này:</span>
                                 <div class="rating d-flex flex-row-reverse align-items-center justify-content-end">
-                                    <input type="radio" name="star" id="star1" value="5"><label for="star1"></label>
-                                    <input type="radio" name="star" id="star2" value="4"><label for="star2"></label>
-                                    <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
-                                    <input type="radio" name="star" id="star4" value="2"><label for="star4"></label>
-                                    <input type="radio" name="star" id="star5" value="1"><label for="star5"></label>
+                                    <input type="radio" name="ratings" id="star1" value="5"><label for="star1"></label>
+                                    <input type="radio" name="ratings" id="star2" value="4"><label for="star2"></label>
+                                    <input type="radio" name="ratings" id="star3" value="3"><label for="star3"></label>
+                                    <input type="radio" name="ratings" id="star4" value="2"><label for="star4"></label>
+                                    <input type="radio" name="ratings" id="star5" value="1"><label for="star5"></label>
                                 </div>
                                 <div class="form-group">
                                 <textarea class="form-control txtComment w-100" name="content" id="editor" placeholder="Đánh giá của bạn về sản phẩm này"></textarea>
                                 </div>
-                                <button type="submit" name="id" value="" class="btn nutguibl">Gửi bình luận</button>
+                                <input type="hidden" name="products_id" value="{!! $products['id'] !!}">
+                                <button type="submit" class="btn nutguibl">Gửi bình luận</button>
+                            </form>
                         </div>
+                        @else
+                        <form action="/login">
+                        <button  class="btndanhgia">Please Login before rating</button>
+                        </form>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -143,16 +152,29 @@
                         @endif
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h5 style="margin-bottom: 0px">Tên User</h5>
+                            @if(count($ratings)>0)
+                                @foreach($ratings as $value)
+                                <h5 style="margin-bottom: 0px">{!! $value['users']['lastname'] !!} {!! $value['users']['firstname'] !!}</h5>
                                 <ul class="ral rating">
+                                  
+                                  <?php
+                                  $count=1;
+                                  while($count<=$value['ratings'])
+                                  {
+                                    ?>
                                     <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
+                                    <?php
+                                    $count++;
+                                  }
+                                   ?>
+                                  
                                 </ul>
-                                <p style="font-size: 12px;">10/12/2022-18:05</p>
-                                <h6>Bình luận đánh giá</h6>
+                                <p style="font-size: 12px;">{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</p>
+                                <h6>{!! $value['content'] !!}</h6>
+                                @endforeach
+                                @else
+                                <h3 style="margin-bottom: 0px;text-align: center;">Sản phẩm chưa có đánh giá</h3>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\Products;
+use App\Models\User;
 return new class extends Migration
 {
     /**
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Products::class,'products_id');
             $table->foreignIdFor(User::class,'users_id');
             $table->integer('ratings');
-            $table->string('content');
+            $table->longtext('content')->nullable();
             $table->timestamps();
         });
     }
