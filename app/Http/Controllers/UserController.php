@@ -144,10 +144,13 @@ class UserController extends Controller
         $related_products = Products::where('sub_id', $products['sub_id'])->take(4)->get();
         $wishlist = new Wishlist;
         $countWishlist = $wishlist->countWishlist($products['id']);
-        $ratings = Rating::where('products_id',$id)->get();
+        $ratings = Rating::where('products_id',$id)->orderBy('id', 'DESC')->get();
         // dd($ratings);
         // die;
-        return view('user.pages.product_details', ['products' => $products, 'related_products' => $related_products, 'countWishlist' => $countWishlist,'pro'=>$pro,'ratings'=>$ratings]);
+       
+        return view('user.pages.product_details', ['products' => $products, 
+        'related_products' => $related_products, 'countWishlist' => $countWishlist,
+        'pro'=>$pro,'ratings'=>$ratings]);
     }
     public function product_grid($id)
     {

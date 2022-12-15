@@ -6,10 +6,12 @@
     .rating {
         list-style-type: none;
     }
+
     .rating li {
-        float: right;
+        float: left;
         color: #EDBB0E;
     }
+
     .ral {
         display: inline-block;
         cursor: pointer;
@@ -38,12 +40,48 @@
                 <div class="product__details__text">
                     <h3>{!! $products['name'] !!}</h3>
                     <div class="product__details__rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <span>(10 reviews)</span>
+                        @if(count($ratings)!=0)
+                        <?php
+                        $count = count($ratings);
+                        $sum = 0;
+                        foreach ($ratings as $rt) {
+                            $sum += $rt['ratings'];
+                        }
+                        if ($count != 0) {
+                            $avgStar_ratings = round($sum / $count, 2);
+                        } else {
+                            $avgStar_ratings = 0;
+                        }
+
+                        $star = 0;
+                        while ($star < $avgStar_ratings) {
+                            if (($avgStar_ratings - $star) > 0.5) {
+                        ?>
+                                <i class="fa fa-star"></i>
+                            <?php
+                            } else if (($avgStar_ratings - $star) == 0.5) {
+                            ?>
+                                <i class="fa fa-star-half"></i>
+                            <?php
+                            } else if (($avgStar_ratings - $star) < 0.5) {
+                            ?>
+                                <i class="fa fa-star-o"></i>
+                        <?php
+                            }
+                            $star++;
+                        }
+                        ?>
+                        <span>({!! count($ratings) !!} reviews)</span>
+                        @else
+
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>(0 reviews)</span>
+
+                        @endif
                     </div>
                     <div class="product__details__price">
                         @if(isset($products['price_new']))
@@ -102,7 +140,7 @@
                         <button class="btndanhgia">Viết Đánh Giá</button>
                         <div class="formdanhgia">
                             <form action="/addRating" method="POST">
-                            @csrf
+                                @csrf
                                 <h6 class="tieude text-uppercase">GỬI ĐÁNH GIÁ CỦA BẠN</h6>
                                 <span class="danhgiacuaban">Đánh giá của bạn về sản phẩm này:</span>
                                 <div class="rating d-flex flex-row-reverse align-items-center justify-content-end">
@@ -113,7 +151,7 @@
                                     <input type="radio" name="ratings" id="star5" value="1"><label for="star5"></label>
                                 </div>
                                 <div class="form-group">
-                                <textarea class="form-control txtComment w-100" name="content" id="editor" placeholder="Đánh giá của bạn về sản phẩm này"></textarea>
+                                    <textarea class="form-control txtComment w-100" name="content" id="editor" placeholder="Đánh giá của bạn về sản phẩm này"></textarea>
                                 </div>
                                 <input type="hidden" name="products_id" value="{!! $products['id'] !!}">
                                 <button type="submit" class="btn nutguibl">Gửi bình luận</button>
@@ -121,7 +159,7 @@
                         </div>
                         @else
                         <form action="/login">
-                        <button  class="btndanhgia">Please Login before rating</button>
+                            <button class="btndanhgia">Please Login before rating</button>
                         </form>
                         @endif
                     </ul>
@@ -135,7 +173,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">Reviews <span>(1)</span></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">Reviews <span>({!! count($ratings) !!})</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -152,22 +190,29 @@
                         @endif
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                            @if(count($ratings)>0)
+                                @if(count($ratings)>0)
                                 @foreach($ratings as $value)
                                 <h5 style="margin-bottom: 0px">{!! $value['users']['lastname'] !!} {!! $value['users']['firstname'] !!}</h5>
                                 <ul class="ral rating">
-                                  
-                                  <?php
-                                  $count=1;
-                                  while($count<=$value['ratings'])
-                                  {
-                                    ?>
-                                    <li><i class="fa fa-star"></i></li>
                                     <?php
-                                    $count++;
-                                  }
-                                   ?>
-                                  
+                                    $count = 0;
+                                    while ($count < 5) {
+                                        if (($value['ratings'] - $count) > 0.5) {
+                                    ?>
+                                            <li><i class="fa fa-star"></i></li>
+                                        <?php
+                                        } else if (($value['ratings'] - $count) == 0.5) {
+                                        ?>
+                                            <li><i class="fa fa-star-half"></i></li>
+                                        <?php
+                                        } else if (($value['ratings'] - $count) < 0.5) {
+                                        ?>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                    <?php
+                                        }
+                                        $count++;
+                                    }
+                                    ?>
                                 </ul>
                                 <p style="font-size: 12px;">{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</p>
                                 <h6>{!! $value['content'] !!}</h6>
@@ -336,7 +381,7 @@
 <script>
     var rating = document.querySelector('.btndanhgia');
     var form_rating = document.querySelector('.formdanhgia');
-    rating.addEventListener('click', function(){
+    rating.addEventListener('click', function() {
         form_rating.classList.toggle('active')
     })
 </script>
