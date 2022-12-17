@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\About;
-use App\Models\Banners;
-use App\Models\Rating;
 use App\Models\Brands;
+use App\Models\Rating;
+use App\Models\Banners;
 use App\Models\Products;
+use App\Models\Wishlist;
 use App\Models\Discounts;
 use App\Models\Categories;
-use App\Models\SubCategories;
 use App\Models\Imagelibrary;
-use App\Models\Wishlist;
+use Illuminate\Http\Request;
+use App\Models\SubCategories;
+use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
-
+use Gloudemans\Shoppingcart\Facades\Cart;
 class UserController extends Controller
 {
     function __construct()
@@ -240,10 +240,6 @@ class UserController extends Controller
         $wishlist = new Wishlist;
         return view('user.pages.wishlist', ['categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist, 'pro_wish' => $pro_wish]);
     }
-    public function cart()
-    {
-        return view('user.pages.product_cart');
-    }
     public function addRating(Request $request)
     {
         
@@ -268,8 +264,48 @@ class UserController extends Controller
             return redirect()->back()->with('thongbao', 'Successfully');
         }
     }
+    public function Getcart()
+    {
+        return view('user.pages.product_cart');
+    }
+    public function Postcart(Request $request)
+    {
+        $products_id = $request->productid_hidden;
+        $quantity = $request->qty;
+
+        $products = Products::where('id',$products_id)->first();
+        // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
+      
+        $data['id'] = $products_id;
+        $data['qty'] = $quantity;
+        $data['name'] = $products['name'];
+        $data['price'] = $products['price']; 
+        $data['weight'] = 550; 
+        $data['options']['image'] = $products['image'];
+        $data['options']['price_new'] = $products['price_new'];
+        $data['options']['size'] = $products['size'];
+        Cart::add($data);
+        //   Cart::destroy();
+        return redirect('/cart')->with('thongbao','Sucessfully');
+       
+    }
+    public function index() {
+        return Cart::content();
+    }
     public function checkout()
     {
         return view('user.pages.product_checkout');
+    }
+    public function delete_cart($rowId) 
+    {
+        Cart::update($rowId,0);
+        return redirect('/cart')->with('thongbao','Sucessfully');
+    }
+    public function update_cart(Request $request)
+    {
+        $rowId = $request->rowId_cart;
+        $quantity = $request->cart_quantity;
+        Cart::update($rowId,$quantity);
+        return redirect('/cart')->with('thongbao','Sucessfully');
     }
 }

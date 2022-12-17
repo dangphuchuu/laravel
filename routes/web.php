@@ -177,8 +177,11 @@ Route::prefix('admin')->group(function(){
     Route::get('/search',[UserController::class,'search_user']);
     Route::get('/brands/{id}',[UserController::class,'product_brand']);
     Route::get('/wishlist_pages',[UserController::class,'wishlist_pages']);
-    Route::get('/cart',[UserController::class,'cart']);
+    Route::get('/cart',[UserController::class,'Getcart']);
+    Route::post('/cart',[UserController::class,'Postcart']);
     Route::get('/checkout',[UserController::class,'checkout']);
+    Route::get('/delete_cart/{rowId}',[UserController::class,'delete_cart']);
+    Route::post('/update_cart',[UserController::class,'update_cart']);
     Route::post('/addRating',[UserController::class,'addRating']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });

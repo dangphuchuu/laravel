@@ -94,15 +94,17 @@
                         {!! number_format($products['price']) !!}₫
                         @endif
                     </div>
-                    <!-- <p>{!! $products['content'] !!}</p> -->
+                   <form action="/cart" method="POST">
+                    @csrf
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="1">
+                                <input name="qty" type="text" min="1" value="1">
+                                <input name="productid_hidden" type="hidden" value="{!! $products['id'] !!}">
                             </div>
                         </div>
-                    </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
+                    </div>                   
+                    <button type="submit" class="primary-btn">ADD TO CARD</button>
                     @if(Auth::check())
                     <a href="javascript:void(0)" data-productid="{!! $products['id'] !!}" class="wishlist">
                         @if($countWishlist >0)
@@ -116,6 +118,7 @@
                         <i class="far fa-heart "></i>
                     </a>
                     @endif
+                    </form>
                     <ul>
                         <li><b>Brand</b> <span>{!! $products['brands']['name'] !!}</span></li>
                         <li><b>Availability</b>

@@ -1,6 +1,10 @@
 @extends('user.layout.index')
 @section('content')
 @include('user.layout.menu_product')
+<?php
+use Gloudemans\Shoppingcart\Facades\Cart;
+$content = Cart::content();
+?>
 <body>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="user_asset/images/breadcrumb.jpg">
@@ -31,77 +35,56 @@
                                     <th class="shoping__product">Products</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
                                     <th></th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($content as $value)                             
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="user_asset/images/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="user_asset/images/products/{!! $value->options->image !!}" width="200px" alt="">
+                                        <h5>{!! $value->name !!}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                       @if($value->options->price_new)
+                                        {!! number_format($value->options->price_new).' '.'đ' !!}
+                                        @else
+                                        {!! number_format($value->price).' '.'đ' !!}
+                                       @endif
                                     </td>
+                                    <form action="/update_cart" method="POST">
+                                        @csrf
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input type="text" name="cart_quantity" value="{!! $value->qty !!}">
+                                                
                                             </div>
                                         </div>
+                                        <input type="hidden" value="{!! $value->rowId !!}" name="rowId_cart">
                                     </td>
+                                    <td><input type="submit" value="Update" name="update_qty"></td>
+                                    </form>
                                     <td class="shoping__cart__total">
-                                        $110.00
+                                    <?php 
+                                        if($value->options->price_new)
+                                        {
+                                            $value->price = $value->options->price_new;
+                                            $sum = $value->price * $value->qty;
+                                        }
+                                        else
+                                        {
+                                            $sum = $value->price * $value->qty;
+                                        }
+                                        echo number_format($sum).' '.'đ';
+                                    ?>
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                       <a href="/delete_cart/{!! $value->rowId !!}"> <span class="icon_close"></span></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="user_asset/images/cart/cart-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $39.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="user_asset/images/cart/cart-3.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $69.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -130,8 +113,9 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span> {!! Cart::subtotal().' '.'đ' !!}</span></li>
+                            <li>Tax <span> {!! Cart::tax().' '.'đ' !!}</span></li>
+                            <li>Total <span> {!! Cart::total().' '.'đ' !!}</span></li>
                         </ul>
                         <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -144,12 +128,12 @@
 @section('script')
 <script>
     totalWishlist();
-    function totalWishlist()
-    {
+
+    function totalWishlist() {
         $.ajax({
             type: 'GET',
             url: '/total_wishlist',
-            success:function(response){
+            success: function(response) {
                 var response = JSON.parse(response);
                 $('.total_wishlist').text(response);
             }

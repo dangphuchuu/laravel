@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <a href="/product_featured_all"><h2>Featured Product</h2></a>
+                    <a href="/product_featured_all">
+                        <h2>Featured Product</h2>
+                    </a>
                 </div>
                 <div class="featured__controls">
 
@@ -24,12 +26,15 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}">
+                    <form action="/cart" method="POST">
+                    @csrf
                         <!-- <img src="user_asset/images/products/{!! $pro['image'] !!}" alt=""> -->
                         <ul class="featured__item__pic__hover">
                             @if(Auth::check())
                             @php
                             $countWishlist =$wishlist->countWishlist($pro['id']);
                             @endphp
+                            
                             <li><a href="javascript:void(0)" data-productid="{!! $pro['id'] !!}" class="wishlist">
                                     @if($countWishlist >0)
                                     <i class="fas fa-heart"></i>
@@ -44,8 +49,12 @@
                                 </a></li>
                             @endif
                             <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet "></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                           
+                               
+                                <li><a href="" type="submit"><i class="fa fa-shopping-cart"></i></a></li>
+                           
                         </ul>
+                    </form>
                     </div>
                     <div class="featured__item__text">
                         @if(isset($pro['name']))
@@ -66,12 +75,12 @@
 @section('script')
 <script>
     totalWishlist();
-    function totalWishlist()
-    {
+
+    function totalWishlist() {
         $.ajax({
             type: 'GET',
             url: '/total_wishlist',
-            success:function(response){
+            success: function(response) {
                 var response = JSON.parse(response);
                 $('.total_wishlist').text(response);
             }
