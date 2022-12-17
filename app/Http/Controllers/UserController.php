@@ -147,7 +147,6 @@ class UserController extends Controller
         $ratings = Rating::where('products_id',$id)->orderBy('id', 'DESC')->get();
         // dd($ratings);
         // die;
-       
         return view('user.pages.product_details', ['products' => $products, 
         'related_products' => $related_products, 'countWishlist' => $countWishlist,
         'pro'=>$pro,'ratings'=>$ratings]);
@@ -268,5 +267,9 @@ class UserController extends Controller
             $rating->save();
             return redirect()->back()->with('thongbao', 'Successfully');
         }
+    }
+    public function checkout()
+    {
+        return view('user.pages.product_checkout');
     }
 }

@@ -178,6 +178,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/brands/{id}',[UserController::class,'product_brand']);
     Route::get('/wishlist_pages',[UserController::class,'wishlist_pages']);
     Route::get('/cart',[UserController::class,'cart']);
+    Route::get('/checkout',[UserController::class,'checkout']);
     Route::post('/addRating',[UserController::class,'addRating']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });

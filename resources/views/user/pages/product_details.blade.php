@@ -52,9 +52,8 @@
                         } else {
                             $avgStar_ratings = 0;
                         }
-
                         $star = 0;
-                        while ($star < $avgStar_ratings) {
+                        while ($star < 5) {
                             if (($avgStar_ratings - $star) > 0.5) {
                         ?>
                                 <i class="fa fa-star"></i>
@@ -118,7 +117,7 @@
                     </a>
                     @endif
                     <ul>
-                        <li><b>Brand</b> <span><samp></samp></span></li>
+                        <li><b>Brand</b> <span>{!! $products['brands']['name'] !!}</span></li>
                         <li><b>Availability</b>
                             @if($products['active'] == 1)
                             <span class="text-success">In Stock</span>
@@ -126,7 +125,7 @@
                             <span class="text-danger">Out Stock</span>
                             @endif
                         </li>
-                        <li><b>Size</b> <span><samp>{!! $products['size'] !!}</samp></span></li>
+                        <li><b>Size</b> <span>{!! $products['size'] !!}</span></li>
                         <li><b>Quantity</b> <span>{!! $products['quantity'] !!}</span></li>
                         <li><b>Share on</b>
                             <div class="share">
