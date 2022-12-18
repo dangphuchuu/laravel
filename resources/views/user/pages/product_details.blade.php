@@ -103,8 +103,12 @@
                                 <input name="productid_hidden" type="hidden" value="{!! $products['id'] !!}">
                             </div>
                         </div>
-                    </div>                   
-                    <button type="submit" class="primary-btn">ADD TO CARD</button>
+                    </div>              
+                    @if(Auth::check())     
+                    <button type="submit" class="primary-btn">ADD TO CART</button>
+                    @else 
+                    <button type="submit" class="primary-btn">PLEASE LOGIN</button>
+                    @endif
                     @if(Auth::check())
                     <a href="javascript:void(0)" data-productid="{!! $products['id'] !!}" class="wishlist">
                         @if($countWishlist >0)

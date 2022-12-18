@@ -24,8 +24,7 @@
 
         <div class="categories__slider owl-carousel">
             @foreach($products as $pro)
-            @if(isset($pro['price']))
-            @if(isset($pro['price_new']))
+            @if(isset($pro['price']) && isset($pro['price_new']))
             <!-- <div class="col-lg-3">
                 <div class="categories__item set-bg">
                 <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
@@ -76,7 +75,6 @@
                     </div>
                 </div>
             </div>
-            @endif
             @endif
             @endforeach
         </div>

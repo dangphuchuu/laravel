@@ -113,9 +113,9 @@ $content = Cart::content();
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span> {!! Cart::subtotal().' '.'đ' !!}</span></li>
-                            <li>Tax <span> {!! Cart::tax().' '.'đ' !!}</span></li>
-                            <li>Total <span> {!! Cart::total().' '.'đ' !!}</span></li>
+                            <li>Subtotal <span> {!! Cart::pricetotal(0,',','.').' '.'đ' !!}</span></li>
+                            <li>Tax <span> {!! Cart::tax(0,',','.').' '.'đ' !!}</span></li>
+                            <li>Total <span> {!! Cart::total(0,',','.').' '.'đ' !!}</span></li>
                         </ul>
                         <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

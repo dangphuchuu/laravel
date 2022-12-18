@@ -73,19 +73,15 @@
             </div>
             <div class="col-lg-3">
                 <div class="header__cart">
-                    <ul>
                     @if(Auth::check())
+                    <ul>               
                         <li><a href="/wishlist_pages">
                             <i class="fas fa-heart"></i> <span class="total_wishlist"></span>
                         </a></li>
-                        @else 
-                        <li><a href="/login">
-                            <i class="fas fa-heart"></i> <span class="total_wishlist"></span>
-                        </a></li>
-                        @endif
-                        <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>                     
                     </ul>
                     <div class="header__cart__price">item: <span>$150.00</span></div>
+                    @endif
                 </div>
             </div>
         </div>

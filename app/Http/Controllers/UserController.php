@@ -135,6 +135,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        Cart::destroy();
         return redirect('/');
     }
     public function product_deltails($id)
@@ -286,6 +287,7 @@ class UserController extends Controller
         $data['options']['size'] = $products['size'];
         Cart::add($data);
         //   Cart::destroy();
+        Cart::setGlobalTax(0);
         return redirect('/cart')->with('thongbao','Sucessfully');
        
     }

@@ -16,13 +16,6 @@
         <div class="categories__slider owl-carousel">
             @foreach($products as $pro)
             @if($pro['featured_product'] == 1)
-            @if(isset($pro['image']))
-            <!-- <div class="col-lg-3">
-                <div class="categories__item set-bg">
-                <img src="user_asset/images/products/{!! $pro['image'] !!}" alt="">
-                    <h5><a href="#">{!! $pro['name'] !!}</a></h5>
-                </div>
-            </div> -->
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}">
@@ -66,7 +59,6 @@
                     </div>
                 </div>
             </div>
-            @endif
             @endif
             @endforeach
         </div>
