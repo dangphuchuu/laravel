@@ -11,6 +11,7 @@ use App\Models\Products;
 use App\Models\Wishlist;
 use App\Models\Discounts;
 use App\Models\Categories;
+use Illuminate\Support\Str;
 use App\Models\Imagelibrary;
 use Illuminate\Http\Request;
 use App\Models\SubCategories;
@@ -19,6 +20,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\File;
 class UserController extends Controller
 {
     function __construct()
@@ -76,6 +78,9 @@ class UserController extends Controller
                 return response()->json(['error' => "Can't delete admin account"]);
             } else {
                 $user->delete($id);
+                if ($user['image'] != 'avatar.jpg') {
+                    File::delete('upload/avatar/'.$user['image']);
+                }
                 return response()->json(['success' => 'Delete Successfully']);
             }
         } else {
@@ -137,6 +142,18 @@ class UserController extends Controller
         Auth::logout();
         Cart::destroy();
         return redirect('/');
+    }
+    public function profile()
+    {
+        if(Auth::check())
+        {
+            $user = Auth()->user();
+        }
+        else
+        {
+            return redirect('/login');
+        }
+        return view ('user.profile',['user' => $user]);
     }
     public function product_deltails($id)
     {
@@ -309,5 +326,56 @@ class UserController extends Controller
         $quantity = $request->cart_quantity;
         Cart::update($rowId,$quantity);
         return redirect('/cart')->with('thongbao','Sucessfully');
+    }
+    public function edit_img(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        if ($request->hasFile('Image')) {
+            $file =  $request->file('Image');
+            $format = $file->getClientOriginalExtension();
+            if ($format != 'jpg' && $format != 'jpeg' && $format != 'png') {
+                return redirect('/profile')->with('thongbao', 'Không hỗ trợ ' . $format);
+            }
+            $name = $file->getClientOriginalName();
+            $img = Str::random(4) . '-' . $name;
+            while (file_exists("upload/avatar" . $img)) {
+                $img = Str::random(4) . '-' . $name;
+            }
+            $file->move('upload/avatar/', $img);
+            if ($user['image'] != '') {
+                if ($user['image'] != 'avatar.jpg') {
+                    unlink('upload/avatar/' . $user->image);
+                }
+            }
+            User::where('id',Auth::user()->id)->update(['image'=>$img]);
+            // $request['image'] = $img;
+        }
+        return redirect('profile')->with('thongbao','Update successfully!');
+    }
+    public function edit_profile(Request $request) {
+        $user = User::find(Auth::user()->id);
+        $request->validate([
+            'firstname'=>'required',
+            'lastname'=>'required'
+        ],[
+            'firstname.required'=>'Vui lòng nhập tên',
+            'lastname.required'=>'Vui lòng nhập họ'
+        ]);
+        if($request['changepasswordprofile'] =='on')
+        {
+        $request->validate([
+            'password'=>'required',
+            'passwordagain'=>'required|same:password'
+        ],[
+            'password.required'=>'Vui lòng nhập mật khẩu mới',
+            'passwordagain.required'=>'Vui lòng nhập lại mật khẩu mới',
+            'passwordagain.same'=>'Mật khẩu nhập lại không đúng'
+        ]);
+        $request['password'] = bcrypt($request['password']);
+        }
+        $user->update($request->all());
+        // User::where('id',Auth::user()->id)->update($request->all());
+        return redirect('/profile')->with('thongbao','Cập nhật thành công');
+        // dd($user);
     }
 }

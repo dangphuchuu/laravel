@@ -217,7 +217,7 @@
                                     <h6 class="mb-0">@lang('lang.joining_date')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {!! $user['created_at'] !!}
+                                {!! date("d-m-Y H:m:s", strtotime($user['created_at'])) !!}
                                 </div>
                             </div>
                             <hr>

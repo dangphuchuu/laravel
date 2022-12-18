@@ -62,7 +62,6 @@ Route::prefix('admin')->group(function(){
     Route::prefix('user')->group(function()
     {
         Route::get('/list',[UserController::class,'list']);
-        Route::get('/delete/{id}',[UserController::class,'Delete']);
     });
     Route::prefix('categories')->group(function()
     {
@@ -166,6 +165,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/login',[UserController::class,'get_login']);
     Route::post('/login',[UserController::class,'post_login']);
     Route::get('/logout',[UserController::class,'logout']);
+    Route::get('/profile',[UserController::class,'profile']);
     Route::get('/products/{id}',[UserController::class,'product_deltails']);
     Route::get('/categories/{id}',[UserController::class,'product_grid']);
     Route::post('/wishlist',[UserController::class,'wishlist']);
@@ -183,6 +183,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/delete_cart/{rowId}',[UserController::class,'delete_cart']);
     Route::post('/update_cart',[UserController::class,'update_cart']);
     Route::post('/addRating',[UserController::class,'addRating']);
+    Route::post('/editimg_user',[UserController::class,'edit_img']);
+    Route::post('/edit_profile',[UserController::class,'edit_profile']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

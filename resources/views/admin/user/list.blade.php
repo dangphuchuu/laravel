@@ -68,7 +68,7 @@
                                             <td>
                                                 <input type="checkbox" class="toggle-class" data-toggle="toggle" data-id="{!! $value['id'] !!}" data-onstyle="primary" data-offstyle="danger" {!! $value['active']==true ? 'checked' : '' !!}>
                                             </td>
-                                            <td class="center "><a class="btn btn-danger " href="admin/user/delete/{!! $value['id'] !!}" onclick="return confirm('Are you sure you want to delete this?');">@lang('lang.delete')</a></td>
+                                            <td class="center "><a href="javascript:void(0)" data-url="{{ url('ajax/delete_staff', $value['id'] ) }}" class="btn btn-danger delete-staff">@lang('lang.delete')</a></td>
                                             @endcan
                                         </tr>
                                         @endif
@@ -101,6 +101,35 @@
                 'active': active,
                 'user_id': user_id
             },
+        });
+    });
+
+    //delete ajax
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.delete-staff').on('click', function() {
+            var userURL = $(this).data('url');
+            var trObj = $(this);
+            if (confirm("Are you sure you want to remove it?") == true) {
+                $.ajax({
+                    url: userURL,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data['success']) {
+                            // alert(data.success);
+                            trObj.parents("tr").remove();
+                        } else if (data['error']) {
+                            alert(data.error);
+                        }
+                    }
+                });
+            }
+
         });
     });
 </script>
