@@ -69,8 +69,8 @@
                                             <td>{!! $value['code'] !!}</td>
                                             <td>{!! $value['discounts'] !!}%</td>
                                             <td>{!! $value['quantity'] !!}</td>
-                                            <td>{!! $value['created_at'] !!}</td>
-                                            <td>{!! $value['updated_at'] !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['updated_at'])) !!}</td>
                                             @can('add discounts')
                                             <td>
                                                 <input type="checkbox" class="toggle-class" data-toggle="toggle" data-id="{!! $value['id'] !!}" data-onstyle="primary" data-offstyle="danger" {!! $value['active']==true ? 'checked' : '' !!}>

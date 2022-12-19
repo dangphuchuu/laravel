@@ -90,7 +90,7 @@ return [
     "what_new"=>"What's new",
     'joining_date'=>'Joining date',
     'amount'=>'Amount',
-    
+    'rating'=>'Rating',
 
 
 

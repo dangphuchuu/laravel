@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\About;
+use App\Models\Rating;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Str;
@@ -251,5 +252,10 @@ class AdminController extends Controller
         $user->syncPermissions($data['permission']);
 
         return redirect('admin/staff/list')->with('thongbao','Thêm quyền thành công');
+    }
+    public function getRating()
+    {
+        $rating = Rating::all();
+        return view ('admin.rating.list',['rating' => $rating]);
     }
 }

@@ -99,6 +99,17 @@
                     </a>
                 </li>
                 @endcan
+                @role('admin')
+                 <!-- Ratings -->
+                <li class="pcoded">
+                    <a href="admin/rating" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-info "></i>
+                        </span>
+                        <span class="pcoded-mtext">@lang('lang.rating')</span>
+                    </a>
+                </li>
+                @endrole
                 <!-- Banner -->
                 @can('list banners')
                 <li class="pcoded">

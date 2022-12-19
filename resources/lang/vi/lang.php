@@ -90,5 +90,6 @@ return [
     "what_new"=>'Tin tức mới',
     'joining_date'=>'Ngày tham gia',
     'amount'=>'Số lượng',
+    'rating'=>'Đánh giá',
 
 ];

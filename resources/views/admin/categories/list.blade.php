@@ -65,8 +65,8 @@
                                         <tr align="center">
                                             <td><input type="checkbox" class="sub_chk" data-id="{!! $value['id'] !!}"></td>
                                             <td>{!! $value['name'] !!}</td>
-                                            <td>{!! $value['created_at'] !!}</td>
-                                            <td>{!! $value['updated_at'] !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['updated_at'])) !!}</td>
                                             @can('add category')
                                             <td>
                                                 <input type="checkbox" class="toggle-class" data-toggle="toggle" data-id="{!! $value['id'] !!}" data-onstyle="primary" data-offstyle="danger" {!! $value['active']==true ? 'checked' : '' !!}>

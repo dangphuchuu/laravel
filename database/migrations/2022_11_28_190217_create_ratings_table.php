@@ -3,8 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Products;
-use App\Models\User;
 return new class extends Migration
 {
     /**
@@ -16,11 +14,14 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Products::class,'products_id');
-            $table->foreignIdFor(User::class,'users_id');
+            $table->unsignedInteger('products_id');
+            $table->unsignedInteger('users_id');
             $table->integer('ratings');
             $table->longtext('content')->nullable();
             $table->timestamps();
+            
+            $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

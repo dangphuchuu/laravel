@@ -59,8 +59,8 @@
                                         <tr align="center">
                                             <td>{!! $value['id'] !!}</td>
                                             <td>{!! $value['name'] !!}</td>
-                                            <td>{!! $value['created_at'] !!}</td>
-                                            <td>{!! $value['updated_at'] !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>
+                                            <td>{!! date("d-m-Y H:m:s", strtotime($value['updated_at'])) !!}</td>
                                             @can('edit orders')
                                             <td class="center "><a class="btn btn-warning " href="admin/roles/edit/{!! $value['id'] !!}">Edit</a></td>
                                             @endcan

@@ -118,6 +118,9 @@ Route::prefix('admin')->group(function(){
         Route::get('/', [ AboutController::class, 'getEdit']);
         Route::post('/', [ AboutController::class, 'postEdit']);
     });
+    Route::prefix('rating')->group(function(){
+        Route::get('/', [ AdminController::class, 'getRating']);
+    });
     Route::prefix('roles')->group(function()
     {
         Route::get('/list',[RolesController::class,'list']);
@@ -154,7 +157,7 @@ Route::prefix('admin')->group(function(){
     Route::delete('ajax/deleteall_discounts',[ DiscountsController::class, 'deleteall_discounts']);
     Route::delete('ajax/delete_banners/{id}',[ BannersController::class, 'delete_banners']);
     Route::delete('ajax/deleteall_banners',[ BannersController::class, 'deleteall_banners']);
-
+    Route::delete('ajax/delete_rating/{id}',[ UserController::class, 'delete_rating']);
     Route::delete('ajax/delete_staff/{id}',[ UserController::class, 'delete_staff']);
     Route::delete('ajax/delete_products/{id}',[ ProductsController::class, 'delete_products']);
     Route::delete('ajax/deleteimages/{id}',[ ProductsController::class, 'Deleteimages']);

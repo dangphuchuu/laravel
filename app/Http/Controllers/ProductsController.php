@@ -82,7 +82,7 @@ class ProductsController extends Controller
              
              $products->save();
              
-        }
+      
         if($request->hasFile('Imagelibrary'))
         {
          foreach( $request->file('Imagelibrary') as $file)
@@ -104,7 +104,7 @@ class ProductsController extends Controller
              Imagelibrary::create($request->all());
          }
         }
-
+    }
 
         return redirect('admin/products/list')->with('thongbao','Thêm thành công');
     }

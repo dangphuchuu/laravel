@@ -87,6 +87,12 @@ class UserController extends Controller
             return response()->json(['error' => "Can't delete because Status being activated "]);
         }
     }
+    public function delete_rating($id) 
+    {
+        $rating = Rating::find($id);
+        $rating->delete($id);
+        return response()->json(['success' => 'Delete Successfully']);
+    }
     public function get_register()
     {
         return view('user.register');
