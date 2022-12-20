@@ -188,6 +188,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/addRating',[UserController::class,'addRating']);
     Route::post('/editimg_user',[UserController::class,'edit_img']);
     Route::post('/edit_profile',[UserController::class,'edit_profile']);
+    Route::post('/order_place',[UserController::class,'order_place']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

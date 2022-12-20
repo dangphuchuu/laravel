@@ -10,6 +10,8 @@ use App\Models\Banners;
 use App\Models\Products;
 use App\Models\Wishlist;
 use App\Models\Discounts;
+use App\Models\Orders;
+use App\Models\Orders_Detail;
 use App\Models\Categories;
 use Illuminate\Support\Str;
 use App\Models\Imagelibrary;
@@ -319,7 +321,8 @@ class UserController extends Controller
     }
     public function checkout()
     {
-        return view('user.pages.product_checkout');
+        $user = Auth::user();
+        return view('user.pages.product_checkout',['user' => $user]);
     }
     public function delete_cart($rowId) 
     {
@@ -360,13 +363,6 @@ class UserController extends Controller
     }
     public function edit_profile(Request $request) {
         $user = User::find(Auth::user()->id);
-        $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required'
-        ],[
-            'firstname.required'=>'Vui lòng nhập tên',
-            'lastname.required'=>'Vui lòng nhập họ'
-        ]);
         if($request['changepasswordprofile'] =='on')
         {
         $request->validate([
@@ -383,5 +379,33 @@ class UserController extends Controller
         // User::where('id',Auth::user()->id)->update($request->all());
         return redirect('/profile')->with('thongbao','Cập nhật thành công');
         // dd($user);
+    }
+    public function order_place(Request $request)
+    {
+        $content = Cart::content();
+    //    echo $content;
+        //insert orders
+        $orders = array();
+        $orders['users_id'] = Auth::user()->id;
+        $orders['lastname'] = $request->lastname;
+        $orders['firstname'] = $request->firstname;
+        $orders['address'] = $request->address;
+        $orders['district'] = $request->district;
+        $orders['city'] = $request->city;
+        $orders['phone'] = $request->phone;
+        $orders['email'] = $request->email;
+        $orders['content'] = $request->content;
+        $orders['total'] =  Cart::total(0,',','.');
+        $orders_id = Orders::insertGetId($orders);       
+        //insert order_details
+        foreach($content as $value)
+        {
+            $orders_detail['orders_id'] = $orders_id;
+            $orders_detail['product_id'] = $value->id;
+            $orders_detail['quantity'] = $value->qty;
+            $orders_detail['price'] = $value->price;       
+            Orders_Detail::create($orders_detail);
+        }
+       return redirect('/checkout')->with('thongbao','Successfully');
     }
 }

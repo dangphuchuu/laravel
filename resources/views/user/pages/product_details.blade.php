@@ -98,10 +98,10 @@
                     @csrf
                     <div class="product__details__quantity">
                         <div class="quantity">
-                            <div class="pro-qty">
-                                <input name="qty" type="text" min="1" value="1">
+                            <!-- <div class="pro-qty"> -->
+                                <input name="qty" type="number" min="1" value="1">
                                 <input name="productid_hidden" type="hidden" value="{!! $products['id'] !!}">
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>              
                     @if(Auth::check())     
