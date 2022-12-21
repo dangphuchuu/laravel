@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->longtext('content')->nullable();
-            $table->float('total');
+            $table->string('total');
             $table->integer('status')->default(1);
             $table->timestamps();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

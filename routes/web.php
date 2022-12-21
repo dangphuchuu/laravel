@@ -125,17 +125,11 @@ Route::prefix('admin')->group(function(){
     {
         Route::get('/list',[RolesController::class,'list']);
     });
-    // Route::prefix('orders')->group(function()
-    // {
-    //     Route::get('/list',[OrdersController::class,'list']);
-    //     Route::get('/active/{id}',[OrdersController::class,'Active']);
-    //     Route::get('/block/{id}',[OrdersController::class,'Block']);
-    //     Route::get('/edit/{id}',[OrdersController::class,'getEdit']);
-    //     Route::post('/edit/{id}',[OrdersController::class,'postEdit']);
-    //     Route::get('/delete/{id}',[OrdersController::class,'Delete']);
-    //     Route::get('/create',[OrdersController::class,'getCreate']);
-    //     Route::post('/create',[OrdersController::class,'postCreate']);
-    // });
+    Route::prefix('orders')->group(function()
+    {
+        Route::get('/list',[UserController::class,'orders_list']);
+        Route::get('/details/{orders_id}',[UserController::class,'orders_details']);
+    });
     });
     Route::get('ajax/Subcategories/{cat_id}',[ AjaxController::class, 'getSub']);
     Route::get('ajax/active_cate',[ AjaxController::class, 'Categories']);

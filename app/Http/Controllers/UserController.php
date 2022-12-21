@@ -402,10 +402,22 @@ class UserController extends Controller
         {
             $orders_detail['orders_id'] = $orders_id;
             $orders_detail['product_id'] = $value->id;
+            $orders_detail['name'] = $value->name;
+            $orders_detail['image'] = $value->options->image;
             $orders_detail['quantity'] = $value->qty;
             $orders_detail['price'] = $value->price;       
             Orders_Detail::create($orders_detail);
         }
        return redirect('/checkout')->with('thongbao','Successfully');
+    }
+    public function orders_list() 
+    {
+        $orders = Orders::all();
+        return view ('admin/orders/list',['orders'=>$orders]);
+    }
+    public function orders_details($orders_id)
+    {
+        $orders_detail = Orders_Detail::where('orders_id',$orders_id)->get();
+        return view('admin/orders/details',['orders_detail'=>$orders_detail]);
     }
 }
