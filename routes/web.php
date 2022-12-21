@@ -156,6 +156,7 @@ Route::prefix('admin')->group(function(){
     Route::delete('ajax/delete_staff/{id}',[ UserController::class, 'delete_staff']);
     Route::delete('ajax/delete_products/{id}',[ ProductsController::class, 'delete_products']);
     Route::delete('ajax/deleteimages/{id}',[ ProductsController::class, 'Deleteimages']);
+    Route::delete('ajax/delete_orders/{id}',[ UserController::class, 'delete_orders']);
     
     Route::get('/',[UserController::class,'home']);
     Route::get('/register',[UserController::class,'get_register']);
@@ -184,6 +185,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/editimg_user',[UserController::class,'edit_img']);
     Route::post('/edit_profile',[UserController::class,'edit_profile']);
     Route::post('/order_place',[UserController::class,'order_place']);
+    Route::get('/your_orders',[UserController::class,'your_orders']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

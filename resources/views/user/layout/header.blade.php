@@ -33,7 +33,7 @@
                                 <a type="button" href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>Xin chào <span class="text-success">{!! Auth::user()->lastname !!} {!! Auth::user()->firstname !!}</span></a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/profile">Profile</a>
-                                    <a class="dropdown-item" href="#">Your Orders</a>
+                                    <a class="dropdown-item" href="/your_orders">Your Orders</a>
                                     <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
                             </div>

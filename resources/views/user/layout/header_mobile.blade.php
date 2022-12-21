@@ -21,12 +21,12 @@
             </ul>
         </div>
         <div class="header__top__right__auth">
-            @hasexactroles('user')
+        @hasrole('admin|user|staff')
             <div class="dropdown show">
                 <a type="button" href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>Xin chào <span class="text-success">{!! Auth::user()->lastname !!} {!! Auth::user()->firstname !!}</span></a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Your Orders</a>
+                    <a class="dropdown-item" href="/profile">Profile</a>
+                    <a class="dropdown-item" href="/your_orders">Your Orders</a>
                     <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
             </div>
@@ -37,8 +37,8 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="./">Home</a></li>
-            <li><a href="./shop-grid.html">Shop</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/all_products">Shop</a></li>
             <li><a href="#">Pages</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="./shop-details.html">Shop Details</a></li>

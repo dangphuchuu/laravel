@@ -69,11 +69,11 @@
                                             @csrf
                                            <td>
                                                 <div class="form-group">
-                                                <select name="status" style="text-align: center;" >                                             
-                                                <option {!! $value['status'] !!}  value="1" class="text-warning">Processing</option>
-                                                <option {!! $value['status'] !!}  value="2" class="text-primary">Delivery</option>
-                                                <option {!! $value['status'] !!}  value="3" class="text-success">Success</option>
-                                                <option {!! $value['status'] !!}  value="4" class="text-danger">Denied</option>
+                                                <select name="status" style="text-align: center;">                                          
+                                                <option @if($value['status'] == 1)  {!! 'selected' !!} @endif {!! $value['status'] !!}  value="1" class="text-warning">Processing</option>                                                          
+                                                <option @if($value['status'] == 2)  {!! 'selected' !!} @endif {!! $value['status'] !!}  value="2" class="text-primary">Delivery</option>
+                                                <option @if($value['status'] == 3)  {!! 'selected' !!} @endif {!! $value['status'] !!}  value="3" class="text-success">Success</option>
+                                                <option @if($value['status'] == 4)  {!! 'selected' !!} @endif {!! $value['status'] !!}  value="4" class="text-danger">Denied</option>
                                                 </select>
                                                 </div>
                                            </td>
@@ -84,7 +84,7 @@
                                             <td class="center "><a class="btn btn-warning " href="admin/orders/edit/{!! $value['id'] !!}">Edit</a></td>
                                             @endcan
                                             @can('delete orders')
-                                            <td class="center "><a class="btn btn-danger " href="admin/roles/delete/">Delete</a></td>
+                                            <td class="center "><a href="javascript:void(0)" class="btn btn-danger delete-orders" data-url="{{ url('ajax/delete_orders', $value['id'] ) }}" >Delete</a></td>
                                             @endcan
                                         </tr>
                                        @endforeach
@@ -102,4 +102,35 @@
     @else
     <h1 align="center"> Không có quyền truy cập</h1>
     @endcan
+    @section('script') 
+    <script>
+            $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.delete-orders').on('click', function() {
+            var userURL = $(this).data('url');
+            var trObj = $(this);
+            if (confirm("Are you sure you want to remove it?") == true) {
+                $.ajax({
+                    url: userURL,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data['success']) {
+                            // alert(data.success);
+                            trObj.parents("tr").remove();
+                        } else if (data['error']) {
+                            alert(data.error);
+                        }
+                    }
+                });
+            }
+
+        });
+    });
+    </script>
+    @endsection
     @endsection
