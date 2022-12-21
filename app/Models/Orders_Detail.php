@@ -17,12 +17,4 @@ class Orders_Detail extends Model
         'price'
         
     ];
-    public function orders()
-    {
-        return $this->belongsTo(Orders::class,'orders_id','id');
-    }
-    public function products()
-    {
-        return $this->hasmany(Products::class,'product_id','id');
-    }
 }

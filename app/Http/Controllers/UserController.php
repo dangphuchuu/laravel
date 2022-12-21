@@ -418,6 +418,11 @@ class UserController extends Controller
     public function orders_details($orders_id)
     {
         $orders_detail = Orders_Detail::where('orders_id',$orders_id)->get();
-        return view('admin/orders/details',['orders_detail'=>$orders_detail]);
+        return view('admin.orders.details',['orders_detail'=>$orders_detail]);
+    }
+    public function update(Request $request,$id)
+    {
+        Orders::find($id)->update($request->all());
+        return redirect()->back()->with('thongbao',"Successfully");
     }
 }

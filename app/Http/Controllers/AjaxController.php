@@ -10,7 +10,6 @@ use App\Models\Discounts;
 use App\Models\User;
 use App\Models\Products;
 use App\Models\Banners;
-
 class AjaxController extends Controller
 {
     public function getSub($cat_id)

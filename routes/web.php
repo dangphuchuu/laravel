@@ -129,6 +129,7 @@ Route::prefix('admin')->group(function(){
     {
         Route::get('/list',[UserController::class,'orders_list']);
         Route::get('/details/{orders_id}',[UserController::class,'orders_details']);
+        Route::post('/update/{id}', [UserController::class, 'update']);
     });
     });
     Route::get('ajax/Subcategories/{cat_id}',[ AjaxController::class, 'getSub']);

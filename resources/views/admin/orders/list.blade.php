@@ -45,8 +45,7 @@
                                             <th>District</th>
                                             <th>Total</th>
                                             <th>Status</th>
-                                            <th>Created_at</th>
-                                            <th>Updated_at</th>
+                                            <th>Update</th>
                                             @can('edit orders')
                                             <th>Details</th>                                          
                                             <th>Edit</th>
@@ -65,29 +64,24 @@
                                            <td>{!! $value['phone'] !!}</td>
                                            <td>{!! $value['address'] !!}</td>
                                            <td>{!! $value['district'] !!}</td>            
-                                           <td>{!! $value['total']!!} đ</td>    
-                                           <td>{!! $value['created_at'] !!}</td>
-                                           <td>{!! $value['updated_at'] !!}</td>                                       
-                                            @if($value['status'] == 1)
-                                            <td class="text-warning">
-                                            Đang xử lý
+                                           <td>{!! $value['total']!!} đ</td>
+                                           <form action="admin/orders/update/{!! $value['id'] !!}" method="POST">
+                                            @csrf
+                                           <td>
+                                                <div class="form-group">
+                                                <select name="status" style="text-align: center;" >                                             
+                                                <option {!! $value['status'] !!}  value="1" class="text-warning">Processing</option>
+                                                <option {!! $value['status'] !!}  value="2" class="text-primary">Delivery</option>
+                                                <option {!! $value['status'] !!}  value="3" class="text-success">Success</option>
+                                                <option {!! $value['status'] !!}  value="4" class="text-danger">Denied</option>
+                                                </select>
+                                                </div>
                                            </td>
-                                           @elseif($value['status'] == 2)
-                                           <td class="text-primary">
-                                           Đang giao hàng
-                                           </td>
-                                           @elseif($value['status'] == 3)
-                                           <td class="text-success">
-                                           Thành công
-                                           </td>
-                                           @elseif($value['status'] == 4)
-                                           <td class="text-danger">
-                                           Đơn hàng đã bị hủy
-                                           </td>
-                                           @endif                                  
+                                           <td><button type="submit" class="btn btn-success">Update</button></td>
+                                           </form>
                                             @can('edit orders')
                                             <td class="center "><a class="btn btn-primary " href="admin/orders/details/{!! $value['id'] !!}">Details</a></td>
-                                            <td class="center "><a class="btn btn-warning " href="admin/roles/edit/">Edit</a></td>
+                                            <td class="center "><a class="btn btn-warning " href="admin/orders/edit/{!! $value['id'] !!}">Edit</a></td>
                                             @endcan
                                             @can('delete orders')
                                             <td class="center "><a class="btn btn-danger " href="admin/roles/delete/">Delete</a></td>

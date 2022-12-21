@@ -41,6 +41,7 @@
                                             <th>Product_image</th>
                                             <th>Quantity</th>
                                             <th>Price</th>
+                                            <th>Created_at</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,7 +50,8 @@
                                            <td>{!! $value['name'] !!}</td>
                                            <td><img style="width: 300px" src="user_asset/images/products/{!! $value['image'] !!}" alt=""></td>
                                            <td>{!! $value['quantity'] !!}</td>
-                                           <td>{!! number_format($value['price']).' '.'đ' !!}</td>                                                                                
+                                           <td>{!! number_format($value['price']).' '.'đ' !!}</td>       
+                                           <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>                                                                        
                                         </tr>
                                         @endforeach
                                     </tbody>
