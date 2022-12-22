@@ -36,42 +36,24 @@ $content = Cart::content();
                         <table class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Id Orders</th>
-                                    <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>District</th>
-                                    <th>City</th>
-                                    <th>Content</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Order_detail</th>
+                                    <th>Product</th>
+                                    <th>Image</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Created_at</th>
+                                    <th>Updated_at</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($orders as $value)
-                                @if(Auth::user()->id == $value['users_id'])
+                                @foreach($orders_detail as $value)
                                 <tr>
-                                    <td>{!! $value['id'] !!}</td>
-                                    <td>{!! $value['lastname'] !!} {!! $value['firstname'] !!}</td>
-                                    <td>{!! $value['phone'] !!}</td>
-                                    <td>{!! $value['address'] !!}</td>
-                                    <td>{!! $value['district'] !!}</td>
-                                    <td>{!! $value['city'] !!}</td>
-                                    <td>{!! $value['content'] !!}</td>
-                                    <td>{!! $value['total'] !!} đ</td>
-                                    @if($value['status'] == 1)
-                                    <td class="text-warning">Processing</td>
-                                    @elseif($value['status'] == 2)
-                                    <td class="text-primary">Delivery</td>
-                                    @elseif($value['status'] == 3)
-                                    <td class="text-success">Success</td>
-                                    @elseif($value['status'] == 4)
-                                    <td class="text-danger">Denied</td>
-                                    @endif
-                                    <td><a href="/your_orders_detail/{!! $value['id'] !!}" class="btn btn-info">Detail</a></td>
+                                    <td>{!! $value['name'] !!}</td>
+                                    <td><img style="width: 200px" src="user_asset/images/products/{!! $value['image'] !!}" alt=""></td>
+                                    <td>{!! $value['quantity'] !!}</td>
+                                    <td>{!! $value['price'] !!} đ</td>
+                                    <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>
+                                    <td>{!! date("d-m-Y H:m:s", strtotime($value['updated_at'])) !!}</td>
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>

@@ -1,3 +1,7 @@
+<?php
+use Gloudemans\Shoppingcart\Facades\Cart;
+$content = Cart::content();
+?>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -57,7 +61,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li class=""><a href="/">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
+                        <li><a href="/all_products">Shop</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Shop Details</a></li>
@@ -78,9 +82,9 @@
                         <li><a href="/wishlist_pages">
                             <i class="fas fa-heart"></i> <span class="total_wishlist"></span>
                         </a></li>
-                        <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>                     
+                        <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>{!! $content->count() !!}</span></a></li>                     
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">item: <span>{!! Cart::total(0,',','.').' '.'đ' !!}</span></div>
                     @endif
                 </div>
             </div>

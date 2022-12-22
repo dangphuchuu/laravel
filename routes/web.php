@@ -186,6 +186,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/edit_profile',[UserController::class,'edit_profile']);
     Route::post('/order_place',[UserController::class,'order_place']);
     Route::get('/your_orders',[UserController::class,'your_orders']);
+    Route::get('/your_orders_detail/{id}',[UserController::class,'your_orders_detail']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){
     });
 // Route::get('/', function () {

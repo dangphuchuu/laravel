@@ -409,7 +409,7 @@ class UserController extends Controller
             Orders_Detail::create($orders_detail);
         }
         Cart::destroy();
-       return redirect('/checkout')->with('thongbao','Successfully');
+       return redirect('/your_orders')->with('thongbao','Successfully');
     }
     public function orders_list() 
     {
@@ -428,12 +428,18 @@ class UserController extends Controller
     }
     public function your_orders()
     {
-        return view('user.pages.orders');
+        $orders = Orders::all();
+        return view('user.pages.orders',['orders'=>$orders]);
     }
     public function delete_orders($id)
     {
         $orders = Orders::find($id);
         $orders->delete($id);
         return response()->json(['success' => 'Delete Successfully']);
+    }
+    public function your_orders_detail($id)
+    {
+        $orders_detail = Orders_Detail::where('orders_id',$id)->get();
+        return view('user.pages.orders_detail',['orders_detail' => $orders_detail]);
     }
 }
