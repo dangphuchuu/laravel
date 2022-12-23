@@ -2,6 +2,21 @@
 @section('content')
 @include('user.layout.menu_product')
 <!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="user_asset/images/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>{!! $about['name'] !!}</h2>
+                    <div class="breadcrumb__option">
+                       <a href="/">Home</a>
+                            <span>{!! $danhmuc['name'] !!}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Breadcrumb Section End -->
 <!-- Product Section Begin -->
 <section class="product spad">
@@ -18,7 +33,7 @@
                         </ul>
                     </div>
                     <div class="sidebar__item">
-                        <h4>Price</h4>
+                        <!-- <h4>Price</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -31,9 +46,9 @@
                                     <input type="text" id="maxamount">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="sidebar__item">
+                    <!-- <div class="sidebar__item">
                         <h4>Popular Size</h4>
                         <div class="sidebar__item__size">
                             <label for="large">
@@ -59,7 +74,7 @@
                                 <input type="radio" id="tiny">
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -67,7 +82,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <form>
+                                <!-- <form>
                                     @csrf
                                     <span>Sort By</span>
                                     <select name="sort" id="sort">
@@ -77,7 +92,7 @@
                                         <option value="0">A -> Z</option>
                                         <option value="0">Z -> A</option>
                                     </select>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -86,10 +101,10 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
+                            <!-- <div class="filter__option">
                                 <span class="icon_grid-2x2"></span>
                                 <span class="icon_ul"></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

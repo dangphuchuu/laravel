@@ -31,7 +31,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="sidebar__item">
+                    <!-- <div class="sidebar__item">
                         <h4>Price</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
@@ -46,8 +46,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sidebar__item">
+                    </div> -->
+                    <!-- <div class="sidebar__item">
                         <h4>Popular Size</h4>
                         <div class="sidebar__item__size">
                             <label for="large">
@@ -73,13 +73,13 @@
                                 <input type="radio" id="tiny">
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
+                        <!-- <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
                                 <span>Sort By</span>
                                 <select>
@@ -87,17 +87,17 @@
                                     <option value="0">Default</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span>{!! $count !!}</span> Products found</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
+                            <!-- <div class="filter__option">
                                 <span class="icon_grid-2x2"></span>
                                 <span class="icon_ul"></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,4 @@
   <!-- Featured Section Begin -->
     @include('user.layout.products_featured')
     <!-- Featured Section End -->
-    <!-- Blog Section Begin -->
-    @include('user.layout.rating_user')
-    <!-- Blog Section End -->
 @endsection

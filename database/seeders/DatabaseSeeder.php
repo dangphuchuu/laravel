@@ -17,13 +17,23 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
+    {  
         DB::table('users')->insert([
             'firstname' => 'Phúc Hữu',
             'lastname' => 'Đặng',
             'email'=>'admin@gmail.com',
             'username' => 'admin',
+            'image' => 'avatar.jpg',
+            'password' => bcrypt('1'),
+            'active' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('users')->insert([
+            'firstname' => 'Phúc Hữu',
+            'lastname' => 'Đặng',
+            'email'=>'phuchuu0120@gmail.com',
+            'username' => 'dangphuchuu',
             'image' => 'avatar.jpg',
             'password' => bcrypt('1'),
             'active' => 1,

@@ -85,8 +85,6 @@ $content = Cart::content();
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                  
-                            @csrf
                             <div class="checkout__order">                              
                                 <h4>Your Order</h4>                             
                                 <div class="checkout__order__products">Products <span>Total</span></div>

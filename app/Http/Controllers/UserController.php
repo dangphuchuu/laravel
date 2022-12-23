@@ -179,19 +179,21 @@ class UserController extends Controller
     }
     public function product_grid($id)
     {
+        $danhmuc = Categories::find($id);
         $categories = Categories::all();
         $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid', ['categories' => $categories,'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+        return view('user.pages.product_grid', ['danhmuc'=>$danhmuc,'categories' => $categories,'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function product_grid_sub($id)
     {
+        $danhmuc = SubCategories::find($id);
         $categories = Categories::all();
         $products = Products::where('active', 1)->where('sub_id', $id)->orderBy('id', 'ASC')->Paginate(3);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid_sub', ['categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+        return view('user.pages.product_grid_sub', ['danhmuc'=>$danhmuc,'categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function wishlist(Request $request)
     {
@@ -258,7 +260,7 @@ class UserController extends Controller
     {
         $danhmuc = Brands::find($id);
         $categories = Categories::all();
-        $products = Products::find($id)->where('active', 1)->where('brands_id', $id)->orderBy('id', 'ASC')->Paginate(15);
+        $products = Products::where('active', 1)->where('brands_id', $id)->orderBy('id', 'ASC')->Paginate(15);
         $count = count($products);
         $wishlist = new Wishlist;
         return view('user.pages.product_brand', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
@@ -305,21 +307,27 @@ class UserController extends Controller
     {
         $products_id = $request->productid_hidden;
         $quantity = $request->qty;
-
         $products = Products::where('id',$products_id)->first();
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
-      
-        $data['id'] = $products_id;
-        $data['qty'] = $quantity;
-        $data['name'] = $products['name'];
-        $data['price'] = $products['price']; 
-        $data['weight'] = 550; 
-        $data['options']['image'] = $products['image'];
-        $data['options']['price_new'] = $products['price_new'];
-        $data['options']['size'] = $products['size'];
-        Cart::add($data);
-        //   Cart::destroy();
-        Cart::setGlobalTax(0);
+        if($quantity>=$products['quantity'])
+        {
+            return redirect()->back()->with('canhbao','Vui lòng đặt hàng ít hơn số lượng: '.$products['quantity'].' !!!');
+        }
+        else
+        {
+            $data['id'] = $products_id;
+            $data['qty'] = $quantity;
+            $data['name'] = $products['name'];
+            $data['price'] = $products['price']; 
+            $data['weight'] = 550; 
+            $data['options']['image'] = $products['image'];
+            $data['options']['price_new'] = $products['price_new'];
+            $data['options']['size'] = $products['size'];
+            Cart::add($data);
+            //   Cart::destroy();
+            Cart::setGlobalTax(0);
+        }
+        
         return redirect('/cart')->with('thongbao','Sucessfully');
        
     }
@@ -390,7 +398,7 @@ class UserController extends Controller
     public function order_place(Request $request)
     {
         $content = Cart::content();
-    //    echo $content;
+        //echo $content;
         //insert orders
         $orders = array();
         $orders['users_id'] = Auth::user()->id;
