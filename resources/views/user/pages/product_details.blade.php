@@ -94,34 +94,34 @@
                         {!! number_format($products['price']) !!}₫
                         @endif
                     </div>
-                   <form action="/cart" method="POST">
-                    @csrf
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <!-- <div class="pro-qty"> -->
+                    <form action="/cart" method="POST">
+                        @csrf
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <!-- <div class="pro-qty"> -->
                                 <input name="qty" type="number" min="1" value="1">
                                 <input name="productid_hidden" type="hidden" value="{!! $products['id'] !!}">
-                            <!-- </div> -->
+                                <!-- </div> -->
+                            </div>
                         </div>
-                    </div>              
-                    @if(Auth::check())     
-                    <button type="submit" class="primary-btn">ADD TO CART</button>
-                    @else 
-                    <button type="submit" class="primary-btn">PLEASE LOGIN</button>
-                    @endif
-                    @if(Auth::check())
-                    <a href="javascript:void(0)" data-productid="{!! $products['id'] !!}" class="wishlist">
-                        @if($countWishlist >0)
-                        <i class="fas fa-heart "></i>
+                        @if(Auth::check())
+                        <button type="submit" class="primary-btn">ADD TO CART</button>
                         @else
-                        <i class="far fa-heart "></i>
+                        <button type="submit" class="primary-btn">PLEASE LOGIN</button>
                         @endif
-                    </a>
-                    @else
-                    <a href="/login" data-productid="{!! $products['id'] !!}" class=" wishlist">
-                        <i class="far fa-heart "></i>
-                    </a>
-                    @endif
+                        @if(Auth::check())
+                        <a href="javascript:void(0)" data-productid="{!! $products['id'] !!}" class="wishlist">
+                            @if($countWishlist >0)
+                            <i class="fas fa-heart "></i>
+                            @else
+                            <i class="far fa-heart "></i>
+                            @endif
+                        </a>
+                        @else
+                        <a href="/login" data-productid="{!! $products['id'] !!}" class=" wishlist">
+                            <i class="far fa-heart "></i>
+                        </a>
+                        @endif
                     </form>
                     <ul>
                         <li><b>Brand</b> <span>{!! $products['brands']['name'] !!}</span></li>
@@ -270,7 +270,7 @@
                                 </a></li>
                             @endif
                             <li><a href="/products/{!! $related['id'] !!}"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
                         </ul>
                     </div>
                     <div class="product__item__text">

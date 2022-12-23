@@ -167,6 +167,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/profile',[UserController::class,'profile']);
     Route::get('/products/{id}',[UserController::class,'product_deltails']);
     Route::get('/categories/{id}',[UserController::class,'product_grid']);
+    Route::get('/subcategories/{id}',[UserController::class,'product_grid_sub']);
     Route::post('/wishlist',[UserController::class,'wishlist']);
     Route::get('/total_wishlist',[UserController::class,'total_wishlist']);
     Route::get('/product_featured_all',[UserController::class,'product_featured_all']);

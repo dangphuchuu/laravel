@@ -179,12 +179,19 @@ class UserController extends Controller
     }
     public function product_grid($id)
     {
-        $danhmuc = Categories::find($id);
         $categories = Categories::all();
-        $products = Products::find($id)->where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
+        $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid', ['categories' => $categories, 'danhmuc' => $danhmuc, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+        return view('user.pages.product_grid', ['categories' => $categories,'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+    }
+    public function product_grid_sub($id)
+    {
+        $categories = Categories::all();
+        $products = Products::where('active', 1)->where('sub_id', $id)->orderBy('id', 'ASC')->Paginate(3);
+        $count = count($products);
+        $wishlist = new Wishlist;
+        return view('user.pages.product_grid_sub', ['categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function wishlist(Request $request)
     {

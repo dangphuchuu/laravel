@@ -15,7 +15,6 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $new['image'] !!}">
-                        <!-- <img src="user_asset/images/products/{!! $new['image'] !!}" alt=""> -->
                         <ul class="featured__item__pic__hover">
                             @if(Auth::check())
                             @php
@@ -33,8 +32,8 @@
                                     <i class="far fa-heart"></i>
                                 </a></li>
                             @endif
-                            <li><a href="/products/{!! $new['id'] !!}"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="/products/{!! $new['id'] !!}"><i class="fa fa-retweet"></i></a></li>      
+                            <!-- <li><button type="submit" href="#"><i class="fa fa-shopping-cart"></i></button></li> -->
                         </ul>
                     </div>
                     <div class="featured__item__text">

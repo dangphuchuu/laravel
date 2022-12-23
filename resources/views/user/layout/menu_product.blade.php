@@ -18,7 +18,8 @@
 								<p class="item-show_item-content">
 									@foreach($cat['Subcategories'] as $sub)
 									@if($sub['active'] == 1)
-									<a href="#">{!! $sub['name'] !!}</a>
+									<a href="/subcategories/{!! $sub['id'] !!}">{!! $sub['name'] !!}</a>
+									<br>
 									@endif
 									@endforeach
 								</p>

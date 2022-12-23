@@ -13,7 +13,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <a href="/product_sale_all"><h2>Sale Off</h2></a>
+                    <a href="/product_sale_all">
+                        <h2>Sale Off</h2>
+                    </a>
                 </div>
 
                 <div class="featured__controls">
@@ -33,7 +35,7 @@
             </div> -->
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
-                <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}" >
+                    <div class="featured__item__pic set-bg" data-setbg="user_asset/images/products/{!! $pro['image'] !!}">
                         <div class="product__discount__item__pic set-bg">
                             <!-- <img src="user_asset/images/products/{!! $pro['image'] !!}" alt=""> -->
                             @if($pro['price'] > $pro['price_new'])
@@ -59,9 +61,12 @@
                                     </a></li>
                                 @endif
                                 <li><a href="/products/{!! $pro['id'] !!}"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                   
+                                <!-- <li><a onclick="submit()"><i class="fa fa-shopping-cart"></i></a></li> -->
+                                                              
                             </ul>
                         </div>
+                        
                     </div>
                     <div class="featured__item__text">
                         @if(isset($pro['name']))
@@ -81,14 +86,19 @@
     </div>
 </section>
 @section('script')
+<!-- <script>
+    function submit(){
+       document.getElementById("form").submit();
+    }
+    </script> -->
 <script>
     totalWishlist();
-    function totalWishlist()
-    {
+
+    function totalWishlist() {
         $.ajax({
             type: 'GET',
             url: '/total_wishlist',
-            success:function(response){
+            success: function(response) {
                 var response = JSON.parse(response);
                 $('.total_wishlist').text(response);
             }

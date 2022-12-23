@@ -19,6 +19,7 @@
 									@foreach($cat['Subcategories'] as $sub)
 									@if($sub['active'] == 1)
 									<a href="/subcategories/{!! $sub['id'] !!}">{!! $sub['name'] !!}</a>
+									<br>
 									@endif
 									@endforeach
 								</p>
