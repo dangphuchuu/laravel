@@ -91,5 +91,6 @@ return [
     'joining_date'=>'Ngày tham gia',
     'amount'=>'Số lượng',
     'rating'=>'Đánh giá',
+    'pro_rating' =>'Số lượng đánh giá',
 
 ];

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Orders;
 use App\Models\About;
+use App\Models\Orders_Detail;
 use App\Models\Rating;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -16,8 +18,22 @@ class AdminController extends Controller
 {
     function __construct()
     {
+        $sum=0;
+        $rating = Rating::all();
+        $orders_new = Orders_Detail::get()->sortByDesc('created_at')->take(1);
+        $orders = Orders::all();
+        $orders_detail=Orders_Detail::all();
+        $orders_detail_new = Orders_Detail::get()->sortByDesc('created_at')->take(1);
+        $user_new = User::get()->sortByDesc('created_at')->take(1);
         $user = User::all();
         view()->share('user',$user);
+        view()->share('user_new',$user_new);
+        view()->share('orders_detail_new', $orders_detail_new);
+        view()->share('orders_detail',$orders_detail);
+        view()->share('orders',$orders);
+        view()->share('sum',$sum);
+        view()->share('orders_new',$orders_new);
+        view()->share('rating',$rating);
     }
     public function home()
     {

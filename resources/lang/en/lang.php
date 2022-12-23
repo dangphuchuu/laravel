@@ -17,7 +17,7 @@ return [
     'about'=>'About',
     'home'=>'Home',
     'manage'=>'Manage',
-    'num_user'=>'Number of users',
+    'num_user'=>'Total Users',
     'total_order'=>'Total orders',
     'total_revenue'=>'Total Revenue',
     'pro_sold'=>'Products sold',
@@ -91,7 +91,7 @@ return [
     'joining_date'=>'Joining date',
     'amount'=>'Amount',
     'rating'=>'Rating',
-
+    'pro_rating' => 'Total Rating'
 
 
 ];

@@ -82,6 +82,8 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'delete banners']);
         $user = User::find(1);
         $user->assignRole('admin');
+        $user = User::find(2);
+        $user->assignRole('user');
         $permission = Permission::all();
         $user->givePermissionTo($permission);
         
