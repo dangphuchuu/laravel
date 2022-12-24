@@ -49,14 +49,7 @@
                 <div class="row align-items-center m-b-30">
                     <div class="col">
                         <h6 class="m-b-5 text-white">@lang('lang.total_price')</h6>
-                        <?php
-                        $sum=0;
-                        foreach($orders as $value)
-                        {
-                            $sum+=$value['total'];
-                        }
-                        ?>
-                        <h3 class="m-b-0 f-w-700 text-white">{!! $sum !!}</h3>
+                        <h3 class="m-b-0 f-w-700 text-white">100,000 $</h3>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign text-c-green f-18"></i>

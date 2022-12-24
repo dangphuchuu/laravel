@@ -181,7 +181,7 @@ class UserController extends Controller
     {
         $danhmuc = Categories::find($id);
         $categories = Categories::all();
-        $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(3);
+        $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
         $wishlist = new Wishlist;
         return view('user.pages.product_grid', ['danhmuc'=>$danhmuc,'categories' => $categories,'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
@@ -190,7 +190,7 @@ class UserController extends Controller
     {
         $danhmuc = SubCategories::find($id);
         $categories = Categories::all();
-        $products = Products::where('active', 1)->where('sub_id', $id)->orderBy('id', 'ASC')->Paginate(3);
+        $products = Products::where('active', 1)->where('sub_id', $id)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
         $wishlist = new Wishlist;
         return view('user.pages.product_grid_sub', ['danhmuc'=>$danhmuc,'categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
