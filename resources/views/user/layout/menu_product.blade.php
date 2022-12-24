@@ -5,7 +5,7 @@
 				<div class="hero__categories">
 					<div class="hero__categories__all">
 						<i class="fa fa-bars"></i>
-						<span>All Categories</span>
+						<span>@lang('lang.cate')</span>
 					</div>
 					<ul class="submenu-list">
 						@foreach($categories as $cat)
@@ -13,7 +13,7 @@
 						<div class="item-show">
 							<div class="item-show_item">
 								<p class="item-show_item-head">
-									Loại Sản Phẩm
+								@lang('lang.subcate')
 								</p>
 								<p class="item-show_item-content">
 									@foreach($cat['Subcategories'] as $sub)
@@ -35,11 +35,11 @@
                         <form action="/search" >
                         <a href="/all_products">
                             <div class="hero__search__categories">
-                                -> All Products <-
+                                -> @lang('lang.all') @lang('lang.products') <-
                             </div>
                         </a>
-                            <input type="search" name="search" value="{!! Request::get('search') !!}" placeholder="Search...">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                            <input type="search" name="search" value="{!! Request::get('search') !!}" placeholder="@lang('lang.search')...">
+                            <button type="submit" class="site-btn">@lang('lang.search')</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">

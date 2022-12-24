@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="section-title">
                     <a href="/product_featured_all">
-                        <h2>Featured Product</h2>
+                        <h2>@lang('lang.featured_product')</h2>
                     </a>
                 </div>
                 <div class="featured__controls">

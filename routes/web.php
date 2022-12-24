@@ -186,6 +186,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/editimg_user',[UserController::class,'edit_img']);
     Route::post('/edit_profile',[UserController::class,'edit_profile']);
     Route::post('/order_place',[UserController::class,'order_place']);
+    Route::post('/discount',[UserController::class,'discount']);
+    Route::post('/delete_discount',[UserController::class,'delete_discount']);
     Route::get('/your_orders',[UserController::class,'your_orders']);
     Route::get('/your_orders_detail/{id}',[UserController::class,'your_orders_detail']);
     Route::prefix('/')->middleware('admin','role:user')->group(function(){

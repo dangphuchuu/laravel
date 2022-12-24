@@ -48,7 +48,6 @@
                                             <th>Update</th>
                                             @can('edit orders')
                                             <th>Details</th>                                          
-                                            <th>Edit</th>
                                             @endcan
                                             @can('delete orders')
                                             <th>Delete</th>
@@ -81,7 +80,6 @@
                                            </form>
                                             @can('edit orders')
                                             <td class="center "><a class="btn btn-primary " href="admin/orders/details/{!! $value['id'] !!}">Details</a></td>
-                                            <td class="center "><a class="btn btn-warning " href="admin/orders/edit/{!! $value['id'] !!}">Edit</a></td>
                                             @endcan
                                             @can('delete orders')
                                             <td class="center "><a href="javascript:void(0)" class="btn btn-danger delete-orders" data-url="{{ url('ajax/delete_orders', $value['id'] ) }}" >Delete</a></td>

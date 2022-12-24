@@ -148,10 +148,11 @@
                                         <input class="form-control" type="number" name="price" placeholder="@lang('lang.enter') @lang('lang.price')" value="{!! $products['price'] !!}" />
                                     </div>
                                 </div>
+                                <input type="checkbox" id="checkPrice" name="changeprice">
                                 <div class="form-group row">
                                     <label class="col-sm-1 col-form-label">@lang('lang.new_price')</label>
                                     <div class="col-sm-11">
-                                        <input class="form-control" type="number" name="price_new" placeholder="@lang('lang.enter') @lang('lang.new_price')" value="{!! $products['price_new'] !!}" />
+                                        <input class="price_new form-control" type="number" name="price_new" disabled placeholder="@lang('lang.enter') @lang('lang.new_price')" value="{!! $products['price_new'] !!}" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -190,6 +191,20 @@
 </div>
 @endsection
 @section('script')
+<script>
+        $(document).ready(function(){
+            $('#checkPrice').change(function(){
+            if($(this).is(":checked"))
+            {
+                $('.price_new').removeAttr('disabled');
+            }
+            else 
+                {
+                 $('.price_new').attr('disabled','');
+                 }
+            });
+        });
+    </script>
 <script>
     //active
      $(document).ready(function(){

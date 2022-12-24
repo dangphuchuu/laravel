@@ -10,7 +10,7 @@
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>All Categories</h4>
+                        <h4>@lang('lang.all') @lang('lang.cate')</h4>
                         <ul>
                             @foreach($categories as $cat)
                             <li><a href="/categories/{!! $cat['id'] !!}">{!! $cat['name'] !!}</a></li>

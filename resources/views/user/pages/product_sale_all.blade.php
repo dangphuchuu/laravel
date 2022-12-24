@@ -19,7 +19,8 @@
                 <div class="breadcrumb__text">
                     <h2>{!! $about['name'] !!}</h2>
                     <div class="breadcrumb__option">
-                        <span> Home</span> <span> -> Sale Off </span>
+                    <a href="/">@lang('lang.home') </a>
+                        <span>@lang('lang.sale_off')</span>
                     </div>
                 </div>
             </div>
@@ -34,14 +35,14 @@
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>All Categories</h4>
+                        <h4>@lang('lang.all') @lang('lang.cate')</h4>
                         <ul>
                             @foreach($categories as $cat)
                             <li><a href="/categories/{!! $cat['id'] !!}">{!! $cat['name'] !!}</a></li>
                             @endforeach
                         </ul>
                     </div>
-                    <div class="sidebar__item">
+                    <!-- <div class="sidebar__item">
                         <h4>Price</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
@@ -83,7 +84,7 @@
                                 <input type="radio" id="tiny">
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -91,22 +92,23 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
+                                <!-- <span>Sort By</span>
                                 <select>
                                     <option value="0">Default</option>
                                     <option value="0">Default</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                            <div class="filter__found">
+                        <div class="filter__found">
+                                <h6><span>{!! $count !!}</span> @lang('lang.products') @lang('lang.found')</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
+                            <!-- <div class="filter__option">
                                 <span class="icon_grid-2x2"></span>
                                 <span class="icon_ul"></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

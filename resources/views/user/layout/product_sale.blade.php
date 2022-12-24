@@ -14,7 +14,7 @@
             <div class="col-lg-12">
                 <div class="section-title">
                     <a href="/product_sale_all">
-                        <h2>Sale Off</h2>
+                        <h2>@lang('lang.sale_off')</h2>
                     </a>
                 </div>
 

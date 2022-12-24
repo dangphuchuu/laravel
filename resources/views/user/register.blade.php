@@ -3494,21 +3494,21 @@ iframe {
 					</span>
 
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="firstname" placeholder="Firstname" required>
+						<input class="input100" type="text" name="firstname" placeholder="@lang('lang.fristname')" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
                     <div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="lastname" placeholder="Lastname"required>
+						<input class="input100" type="text" name="lastname" placeholder="@lang('lang.lastname')"required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="username" placeholder="username"required>
+						<input class="input100" type="text" name="username" placeholder="@lang('lang.username')"required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -3522,14 +3522,14 @@ iframe {
 						</span>
 					</div>
                     <div class="wrap-input100 validate-input" >
-						<input class="input100" type="password" name="password" placeholder="Password"required>
+						<input class="input100" type="password" name="password" placeholder="@lang('lang.password')"required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
                     <div class="wrap-input100 validate-input" >
-						<input class="input100" type="password" name="passwordagain" placeholder="RePassword"required>
+						<input class="input100" type="password" name="passwordagain" placeholder="@lang('lang.password_again')"required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -3537,21 +3537,21 @@ iframe {
 					</div>
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Register
+						@lang('lang.register')
 						</button>
 					</div>
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Forgot
+						@lang('lang.forgot')
 						</span>
 						<a class="txt2" href="#">
-							Username / Password?
+						@lang('lang.username') / @lang('lang.password')?
 						</a>
 					</div>
 					<div class="text-center p-t-136">
 						<a class="txt2" href="/login">
-							Login Account
+						@lang('lang.login') @lang('lang.account')
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>

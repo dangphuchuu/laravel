@@ -2,20 +2,21 @@
 @section('content')
 @include('user.layout.menu_product')
 <!-- Breadcrumb Section Begin -->
-<!-- <section class="breadcrumb-section set-bg" data-setbg="user_asset/images/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="user_asset/images/breadcrumb.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
                     <h2>{!! $about['name'] !!}</h2>
                     <div class="breadcrumb__option">
-                        <a href="/">Home <span> -> All Products</span></a>
+                        <a href="/">@lang('lang.home') </a>
+                        <span>@lang('lang.all') @lang('lang.products')</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 <!-- Breadcrumb Section End -->
 <!-- Product Section Begin -->
 <section class="product spad">
@@ -24,7 +25,7 @@
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>All Categories</h4>
+                        <h4>@lang('lang.all') @lang('lang.cate')</h4>
                         <ul>
                             @foreach($categories as $cat)
                             <li><a href="/categories/{!! $cat['id'] !!}">{!! $cat['name'] !!}</a></li>
@@ -36,10 +37,31 @@
             <div class="col-lg-9 col-md-7">
                 <div class="filter__item">
                     <div class="row">
+                    <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <!-- <form>
+                                    @csrf
+                                    <span>Sort By</span>
+                                    <select name="sort" id="sort">
+                                        <option value="0">Default</option>
+                                        <option value="0">Price Increase</option>
+                                        <option value="0">Price Decrease</option>
+                                        <option value="0">A -> Z</option>
+                                        <option value="0">Z -> A</option>
+                                    </select>
+                                </form> -->
+                            </div>
+                        </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>{!! $count !!}</span> Products found</h6>
+                                <h6><span>{!! $count !!}</span> @lang('lang.products') @lang('lang.found')</h6>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <!-- <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div> -->
                         </div>
                     </div>
                 </div>

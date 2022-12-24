@@ -7,8 +7,8 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="./">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{!! $user['username'] !!} Profile</li>
+                <li class="breadcrumb-item"><a href="./">@lang('lang.home')</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@lang('lang.profile') {!! $user['username'] !!} </li>
             </ol>
         </nav>
         <!-- /Breadcrumb -->
@@ -30,7 +30,6 @@
                                 <button class="btn btn-outline-primary">Message</button> -->
                                 <form action="/editimg_user" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <label>Đổi ảnh</label>
                                     <input type='file' name='Image' class="form-control">
                                     <button type="submit" class="btn btn-danger bg-gradient">@lang('lang.submit')</button>
                                 </form>
@@ -68,12 +67,12 @@
                                 </svg>Instagram</h6>
                             <span class="text-secondary">bootdey</span>
                         </li> -->
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                                 </svg>Facebook</h6>
                             <span class="text-secondary">bootdey</span>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -84,7 +83,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">First Name</h6>
+                                    <h6 class="mb-0">@lang('lang.fristname')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                 <input type="text" value="{!! $user['firstname'] !!}" class="form-control" name="firstname" placeholder="">
@@ -93,7 +92,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Last Name</h6>
+                                    <h6 class="mb-0">@lang('lang.lastname')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                 <input type="text" value="{!! $user['lastname'] !!}" class="form-control" name="lastname" placeholder="">
@@ -111,7 +110,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
+                                    <h6 class="mb-0">@lang('lang.phone')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                 <input type="phone" value="{!! $user['phone'] !!}" class="form-control" name="phone" placeholder="">
@@ -134,7 +133,7 @@
                                     <h6 class="mb-0">@lang('lang.password')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="password" class="password form-control" name="password" disabled placeholder="Enter Password" />
+                                    <input type="password" class="password form-control" name="password" disabled placeholder="@lang('lang.enter') @lang('lang.password')" />
                                 </div>
                             </div>
                             <hr>
@@ -143,7 +142,7 @@
                                     <h6 class="mb-0">@lang('lang.password_again')</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="password" class="password form-control" name="passwordagain" disabled placeholder="Enter RePassword" />
+                                    <input type="password" class="password form-control" name="passwordagain" disabled placeholder="@lang('lang.password_again')" />
                                 </div>
                             </div>
                             <hr>

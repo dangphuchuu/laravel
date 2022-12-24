@@ -15,10 +15,10 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Orders</h2>
+                        <h2>@lang('lang.order')</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Orders</span>
+                            <a href="./index.html">@lang('lang.home')</a>
+                            <span>@lang('lang.order')</span>
                         </div>
                     </div>
                 </div>
@@ -32,16 +32,15 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
-
                         <table class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Image</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
+                                    <th>@lang('lang.products')</th>
+                                    <th>@lang('lang.image')</th>
+                                    <th>@lang('lang.quanty')</th>
+                                    <th>@lang('lang.price')</th>
+                                    <th>@lang('lang.created')</th>
+                                    <th>@lang('lang.updated')</th>
                                 </tr>
                             </thead>
                             <tbody>

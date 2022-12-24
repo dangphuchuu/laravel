@@ -23,26 +23,25 @@ $content = Cart::content();
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <img src="user_asset/images/language.png" alt="">
-                            <div>English</div>
+                            <span class="seLect" >@lang('lang.lang')</span >
                             <span class="arrow_carrot-down"></span>
                             <ul>
-                                <li><a href="#">VietNamese</a></li>
-                                <li><a href="#">English</a></li>
+                                <li><a href="lang/vi">@lang('lang.vi')</a></li>
+                                <li><a href="lang/en">@lang('lang.en')</a></li>
                             </ul>
                         </div>
                         <div class="header__top__right__auth">
                             @hasrole('admin|user|staff')
                             <div class="dropdown show">
-                                <a type="button" href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>Xin chào <span class="text-success">{!! Auth::user()->lastname !!} {!! Auth::user()->firstname !!}</span></a>
+                                <a type="button" href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>@lang('lang.hello') <span class="text-success">{!! Auth::user()->lastname !!} {!! Auth::user()->firstname !!}</span></a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/profile">Profile</a>
-                                    <a class="dropdown-item" href="/your_orders">Your Orders</a>
-                                    <a class="dropdown-item" href="/logout">Logout</a>
+                                    <a class="dropdown-item" href="/profile">@lang('lang.profile')</a>
+                                    <a class="dropdown-item" href="/your_orders">@lang('lang.your_orders')</a>
+                                    <a class="dropdown-item" href="/logout">@lang('lang.logout')</a>
                                 </div>
                             </div>
                             @else
-                            <a href="/login"><i class="fa fa-user"></i> Login</a>
+                            <a href="/login"><i class="fa fa-user"></i>@lang('lang.login')</a>
                             @endrole
                         </div>
                     </div>
@@ -60,18 +59,18 @@ $content = Cart::content();
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="/">Home</a></li>
-                        <li><a href="/all_products">Shop</a></li>
+                        <li class=""><a href="/">@lang('lang.home')</a></li>
+                        <li><a href="/all_products">@lang('lang.products')</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">Shop Details</a></li>
-                                <li><a href="./cart">Shoping Cart</a></li>
-                                <li><a href="./checkout.html">Check Out</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
+                                <li><a href="#">Shop Details</a></li>
+                                <li><a href="#">Shoping Cart</a></li>
+                                <li><a href="#">Check Out</a></li>
+                                <li><a href="#">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -84,7 +83,7 @@ $content = Cart::content();
                         </a></li>
                         <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>{!! $content->count() !!}</span></a></li>                     
                     </ul>
-                    <div class="header__cart__price">item: <span>{!! Cart::total(0,',','.').' '.'đ' !!}</span></div>
+                    <div class="header__cart__price">@lang('lang.item'): <span>{!! Cart::total(0,',','.').' '.'đ' !!}</span></div>
                     @endif
                 </div>
             </div>

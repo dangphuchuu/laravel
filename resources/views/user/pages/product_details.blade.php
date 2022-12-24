@@ -70,7 +70,7 @@
                             $star++;
                         }
                         ?>
-                        <span>({!! count($ratings) !!} reviews)</span>
+                        <span>({!! count($ratings) !!} @lang('lang.reviews'))</span>
                         @else
 
                         <i class="fa fa-star-o"></i>
@@ -78,7 +78,7 @@
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
-                        <span>(0 reviews)</span>
+                        <span>(0 @lang('lang.reviews'))</span>
 
                         @endif
                     </div>
@@ -105,9 +105,9 @@
                             </div>
                         </div>
                         @if(Auth::check())
-                        <button type="submit" class="primary-btn">ADD TO CART</button>
+                        <button type="submit" class="primary-btn">@lang('lang.add_to_cart')</button>
                         @else
-                        <button type="submit" class="primary-btn">PLEASE LOGIN</button>
+                        <button type="submit" class="primary-btn">@lang('lang.please_login')</button>
                         @endif
                         @if(Auth::check())
                         <a href="javascript:void(0)" data-productid="{!! $products['id'] !!}" class="wishlist">
@@ -124,16 +124,16 @@
                         @endif
                     </form>
                     <ul>
-                        <li><b>Brand</b> <span>{!! $products['brands']['name'] !!}</span></li>
-                        <li><b>Availability</b>
+                        <li><b>@lang('lang.brands')</b> <span>{!! $products['brands']['name'] !!}</span></li>
+                        <li><b>@lang('lang.availability')</b>
                             @if($products['active'] == 1)
-                            <span class="text-success">In Stock</span>
+                            <span class="text-success">@lang('lang.in_stock')</span>
                             @else
-                            <span class="text-danger">Out Stock</span>
+                            <span class="text-danger">@lang('lang.out_stock')</span>
                             @endif
                         </li>
-                        <li><b>Size</b> <span>{!! $products['size'] !!}</span></li>
-                        <li><b>Quantity</b> <span>{!! $products['quantity'] !!}</span></li>
+                        <li><b>@lang('lang.size')</b> <span>{!! $products['size'] !!}</span></li>
+                        <li><b>@lang('lang.quanty')</b> <span>{!! $products['quantity'] !!}</span></li>
                         <li><b>Share on</b>
                             <div class="share">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -143,7 +143,7 @@
                             </div>
                         </li>
                         @if(Auth::check())
-                        <button class="btndanhgia">Viết Đánh Giá</button>
+                        <button class="btndanhgia">@lang('lang.your_review')</button>
                         <div class="formdanhgia">
                             <form action="/addRating" method="POST">
                                 @csrf
@@ -165,7 +165,7 @@
                         </div>
                         @else
                         <form action="/login">
-                            <button class="btndanhgia">Please Login before rating</button>
+                            <button class="btndanhgia">@lang('lang.please_login_before_rating')</button>
                         </form>
                         @endif
                     </ul>
@@ -175,18 +175,18 @@
                 <div class="product__details__tab">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Description</a>
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">@lang('lang.description')</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">Reviews <span>({!! count($ratings) !!})</span></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">@lang('lang.reviews') <span>({!! count($ratings) !!})</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         @if(isset($products['content']))
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Products Infomation</h6>
+                                <h6>@lang('lang.product_info')</h6>
                                 <p>{!! $products['content'] !!}</p>
                                 @if(isset($products['link']))
                                 <p> <iframe style="height: 700px;" width="100%" src="https://www.youtube.com/embed/{!! $products['link'] !!} " title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
@@ -224,7 +224,7 @@
                                 <h6>{!! $value['content'] !!}</h6>
                                 @endforeach
                                 @else
-                                <h3 style="margin-bottom: 0px;text-align: center;">Sản phẩm chưa có đánh giá</h3>
+                                <h3 style="margin-bottom: 0px;text-align: center;">@lang('lang.none_rating')</h3>
                                 @endif
                             </div>
                         </div>
@@ -242,7 +242,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title related__product__title">
-                    <h2>Related Product</h2>
+                    <h2>@lang('lang.related_product')</h2>
                 </div>
             </div>
         </div>

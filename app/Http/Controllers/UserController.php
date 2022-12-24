@@ -235,7 +235,8 @@ class UserController extends Controller
     {
         $categories = Categories::all();
         $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
-        return view('user.pages.product_sale_all', ['products' => $products, 'categories' => $categories]);
+        $count = count($products);
+        return view('user.pages.product_sale_all', ['count'=>$count,'products' => $products, 'categories' => $categories]);
     }
     public function product_all()
     {
@@ -456,5 +457,33 @@ class UserController extends Controller
     {
         $orders_detail = Orders_Detail::where('orders_id',$id)->get();
         return view('user.pages.orders_detail',['orders_detail' => $orders_detail]);
+    }
+    public function discount(Request $request)
+    {
+        $discounts = Discounts::all();
+        foreach($discounts as $value) 
+        {
+            if($value['code']==$request->code )
+            {
+                if($value['active'] == 1)
+                {
+                    $data = $value['discounts'];
+                    Cart::setGlobalDiscount($data);
+                    return redirect()->back()->with('thongbao','Apply Coupon Successfully');
+                    
+                }
+                else
+                {
+                    return redirect()->back()->with('canhbao','Code not available');
+                }
+            }
+        }
+        return redirect()->back()->with('canhbao','Wrong coupon code');
+        
+    }
+    public function delete_discount() 
+    {
+        Cart::setGlobalDiscount(0);
+        return redirect()->back()->with('thongbao','Delete Coupon Successfully');
     }
 }

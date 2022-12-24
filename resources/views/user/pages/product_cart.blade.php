@@ -12,10 +12,10 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Shopping Cart</h2>
+                        <h2>@lang('lang.shopping_cart')</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Shopping Cart</span>
+                            <a href="./index.html">@lang('lang.home')</a>
+                            <span>@lang('lang.shopping_cart')</span>
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,11 @@ $content = Cart::content();
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th class="shoping__product">@lang('lang.products')</th>
+                                    <th>@lang('lang.price')</th>
+                                    <th>@lang('lang.quanty')</th>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th>@lang('lang.total_price')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,7 +64,7 @@ $content = Cart::content();
                                         </div>
                                         <input type="hidden" value="{!! $value->rowId !!}" name="rowId_cart">
                                     </td>
-                                    <td><input type="submit" value="Update" name="update_qty"></td>
+                                    <td><input type="submit" value="@lang('lang.update')" name="update_qty"></td>
                                     </form>
                                     <td class="shoping__cart__total">
                                     <?php 
@@ -93,32 +93,36 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="/" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <a href="/" class="primary-btn cart-btn">@lang('lang.continue_shopping')</a>
+                        <form action="/delete_discount" method="POST">
+                            @csrf
+                        <button type="submit" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        @lang('lang.delete_coupon')</button>
+                            </form>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__continue">
                         <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            <h5>@lang('lang.coupon')</h5>
+                            <form action="/discount" method="POST">
+                                @csrf
+                                <input type="text" name="code" placeholder="@lang('lang.enter') @lang('lang.coupon')">
+                                <button type="submit" class="site-btn">@lang('lang.apply')</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
+                        <h5>@lang('lang.cart_total')</h5>
                         <ul>
-                            <li>Subtotal <span> {!! Cart::pricetotal(0,',','.').' '.'đ' !!}</span></li>
-                            <li>Discount<span></span></li>
-                            <li>Tax <span> {!! Cart::tax(0,',','.').' '.'đ' !!}</span></li>                      
-                            <li>Total <span> {!! Cart::total(0,',','.').' '.'đ' !!}</span></li>
+                            <li>@lang('lang.subtotal') <span> {!! Cart::pricetotal(0,',','.').' '.'đ' !!}</span></li>
+                            <li>@lang('lang.discounts')<span> {!! Cart::discount(0,',','.').' '.'đ' !!}</span></li>
+                            <li>@lang('lang.tax') <span> {!! Cart::tax(0,',','.').' '.'đ' !!}</span></li>                      
+                            <li>@lang('lang.total_price') <span> {!! Cart::total(0,',','.').' '.'đ' !!}</span></li>
                         </ul>
-                        <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="/checkout" class="primary-btn">@lang('lang.proceed_checkout')</a>
                     </div>
                 </div>
             </div>

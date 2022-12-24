@@ -12,10 +12,10 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
+                        <h2>@lang('lang.checkout')</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Checkout</span>
+                            <a href="./index.html">@lang('lang.home')</a>
+                            <span>@lang('lang.checkout')</span>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ $content = Cart::content();
                 </div>
             </div>
             <div class="checkout__form">
-                <h4>Billing Details</h4>
+                <h4>@lang('lang.billing_details')</h4>
                 <form action="/order_place" method="post">
                     @csrf
                     <div class="row">
@@ -41,33 +41,33 @@ $content = Cart::content();
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                    <p>Last name<span>*</span></p>
+                                    <p>@lang('lang.lastname')<span>*</span></p>
                                         <input type="text" name="lastname" value="{!! $user['lastname']?$user['lastname']:'' !!}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>First name<span>*</span></p>
+                                        <p>@lang('lang.fristname')<span>*</span></p>
                                         <input type="text" name="firstname" value="{!! $user['firstname']?$user['firstname']:'' !!}" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" name="address" placeholder="Street Address" class="checkout__input__add" required>
+                                <p>@lang('lang.address')<span>*</span></p>
+                                <input type="text" name="address"  class="checkout__input__add" required>
                             </div>
                             <div class="checkout__input">
-                                <p>District<span>*</span></p>
+                                <p>@lang('lang.district')<span>*</span></p>
                                 <input type="text" name="district" required>
                             </div>
                             <div class="checkout__input">
-                                <p>City<span>*</span></p>
+                                <p>@lang('lang.city')<span>*</span></p>
                                 <input type="text" name="city" required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
+                                        <p>@lang('lang.phone')<span>*</span></p>
                                         <input type="text" name="phone" value="{!! $user['phone']?$user['phone']:'' !!}" required>
                                     </div>
                                 </div>
@@ -79,15 +79,15 @@ $content = Cart::content();
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Order notes</p>
+                                <p>@lang('lang.order_notes')</p>
                                 <input type="text" name="content"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
+                                    placeholder="@lang('lang.write_order_notes')">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">                              
-                                <h4>Your Order</h4>                             
-                                <div class="checkout__order__products">Products <span>Total</span></div>
+                                <h4>@lang('lang.your_orders')</h4>                             
+                                <div class="checkout__order__products">@lang('lang.products') <span>@lang('lang.total_price')</span></div>
                                 @foreach($content as $value)   
                                 <ul>
                                     <li>{!! $value->name !!} 
@@ -108,9 +108,9 @@ $content = Cart::content();
                                     </li>
                                 </ul>
                                 @endforeach  
-                                <div class="checkout__order__subtotal">Subtotal <span>{!! Cart::pricetotal(0,',','.').' '.'đ' !!}</span></div>
-                                <div class="checkout__order__total">Discount <span></span></div>
-                                <div class="checkout__order__total">Total <span>{!! Cart::total(0,',','.').' '.'đ' !!}</span></div>
+                                <div class="checkout__order__subtotal">@lang('lang.subtotal') <span>{!! Cart::pricetotal(0,',','.').' '.'đ' !!}</span></div>
+                                <div class="checkout__order__total">@lang('lang.discounts') <span>{!! Cart::discount(0,',','.').' '.'đ' !!}</span></div>
+                                <div class="checkout__order__total">@lang('lang.total_price') <span>{!! Cart::total(0,',','.').' '.'đ' !!}</span></div>
                                 <!-- <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -134,7 +134,7 @@ $content = Cart::content();
                                         <span class="checkmark"></span>
                                     </label>
                                 </div> -->
-                                <button type="submit"class="site-btn">PLACE ORDER</button>                                                       
+                                <button type="submit"class="site-btn">@lang('lang.place_order')</button>                                                       
                             </div>                          
                         </div>
                     </div>

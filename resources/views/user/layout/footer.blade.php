@@ -7,8 +7,8 @@
                             <a href="./"><img src="upload/logos/{!! ($about!=null)?$about['logo']: '' !!}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: {!! ($about!=null)?$about['address']: ''!!}</li>
-                            <li>Phone: {!! ($about!=null)?$about['phone']: ''!!}</li>
+                            <li>@lang('lang.address'): {!! ($about!=null)?$about['address']: ''!!}</li>
+                            <li>@lang('lang.phone'): {!! ($about!=null)?$about['phone']: ''!!}</li>
                             <li>Email: {!! ($about!=null)?$about['email']: ''!!}</li>
                         </ul>
                     </div>

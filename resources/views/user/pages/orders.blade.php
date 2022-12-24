@@ -15,10 +15,10 @@ $content = Cart::content();
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Orders</h2>
+                        <h2>@lang('lang.order')</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Orders</span>
+                            <a href="./index.html">@lang('lang.home')</a>
+                            <span>@lang('lang.order')</span>
                         </div>
                     </div>
                 </div>
@@ -36,16 +36,16 @@ $content = Cart::content();
                         <table class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Id Orders</th>
-                                    <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>District</th>
-                                    <th>City</th>
-                                    <th>Content</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Order_detail</th>
+                                    <th>@lang('lang.id') @lang('lang.order')</th>
+                                    <th>@lang('lang.customer')</th>
+                                    <th>@lang('lang.phone')</th>
+                                    <th>@lang('lang.address')</th>
+                                    <th>@lang('lang.district')</th>
+                                    <th>@lang('lang.city')</th>
+                                    <th>@lang('lang.content')</th>
+                                    <th>@lang('lang.total_price')</th>
+                                    <th>@lang('lang.active')</th>
+                                    <th>@lang('lang.order_detail')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,15 +61,15 @@ $content = Cart::content();
                                     <td>{!! $value['content'] !!}</td>
                                     <td>{!! $value['total'] !!} đ</td>
                                     @if($value['status'] == 1)
-                                    <td class="text-warning">Processing</td>
+                                    <td class="text-warning">@lang('lang.processing')</td>
                                     @elseif($value['status'] == 2)
-                                    <td class="text-primary">Delivery</td>
+                                    <td class="text-primary">@lang('lang.delivery')</td>
                                     @elseif($value['status'] == 3)
-                                    <td class="text-success">Success</td>
+                                    <td class="text-success">@lang('lang.success')</td>
                                     @elseif($value['status'] == 4)
-                                    <td class="text-danger">Denied</td>
+                                    <td class="text-danger">@lang('lang.denied')</td>
                                     @endif
-                                    <td><a href="/your_orders_detail/{!! $value['id'] !!}" class="btn btn-info">Detail</a></td>
+                                    <td><a href="/your_orders_detail/{!! $value['id'] !!}" class="btn btn-info">@lang('lang.detail')</a></td>
                                 </tr>
                                 @endif
                                 @endforeach
