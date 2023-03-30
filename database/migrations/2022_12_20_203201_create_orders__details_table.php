@@ -19,12 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->integer('quantity');
-            $table->string('price');
+            $table->integer('price');
             $table->timestamps();
-            
+
             $table->foreign('orders_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
         });
     }
 

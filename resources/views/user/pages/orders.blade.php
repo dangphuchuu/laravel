@@ -59,7 +59,7 @@ $content = Cart::content();
                                     <td>{!! $value['district'] !!}</td>
                                     <td>{!! $value['city'] !!}</td>
                                     <td>{!! $value['content'] !!}</td>
-                                    <td>{!! $value['total'] !!} đ</td>
+                                    <td>{!! number_format($value['total']) !!} đ</td>
                                     @if($value['status'] == 1)
                                     <td class="text-warning">@lang('lang.processing')</td>
                                     @elseif($value['status'] == 2)

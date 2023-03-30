@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\File;
+
 class UserController extends Controller
 {
     function __construct()
@@ -81,7 +82,7 @@ class UserController extends Controller
             } else {
                 $user->delete($id);
                 if ($user['image'] != 'avatar.jpg') {
-                    File::delete('upload/avatar/'.$user['image']);
+                    File::delete('upload/avatar/' . $user['image']);
                 }
                 return response()->json(['success' => 'Delete Successfully']);
             }
@@ -89,7 +90,7 @@ class UserController extends Controller
             return response()->json(['error' => "Can't delete because Status being activated "]);
         }
     }
-    public function delete_rating($id) 
+    public function delete_rating($id)
     {
         $rating = Rating::find($id);
         $rating->delete($id);
@@ -153,15 +154,12 @@ class UserController extends Controller
     }
     public function profile()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth()->user();
-        }
-        else
-        {
+        } else {
             return redirect('/login');
         }
-        return view ('user.profile',['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
     public function product_deltails($id)
     {
@@ -170,12 +168,14 @@ class UserController extends Controller
         $related_products = Products::where('sub_id', $products['sub_id'])->take(4)->get();
         $wishlist = new Wishlist;
         $countWishlist = $wishlist->countWishlist($products['id']);
-        $ratings = Rating::where('products_id',$id)->orderBy('id', 'DESC')->get();
+        $ratings = Rating::where('products_id', $id)->orderBy('id', 'DESC')->get();
         // dd($ratings);
         // die;
-        return view('user.pages.product_details', ['products' => $products, 
-        'related_products' => $related_products, 'countWishlist' => $countWishlist,
-        'pro'=>$pro,'ratings'=>$ratings]);
+        return view('user.pages.product_details', [
+            'products' => $products,
+            'related_products' => $related_products, 'countWishlist' => $countWishlist,
+            'pro' => $pro, 'ratings' => $ratings
+        ]);
     }
     public function product_grid($id)
     {
@@ -184,7 +184,7 @@ class UserController extends Controller
         $products = Products::where('active', 1)->where('categories_id', $id)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid', ['danhmuc'=>$danhmuc,'categories' => $categories,'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+        return view('user.pages.product_grid', ['danhmuc' => $danhmuc, 'categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function product_grid_sub($id)
     {
@@ -193,7 +193,7 @@ class UserController extends Controller
         $products = Products::where('active', 1)->where('sub_id', $id)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
         $wishlist = new Wishlist;
-        return view('user.pages.product_grid_sub', ['danhmuc'=>$danhmuc,'categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
+        return view('user.pages.product_grid_sub', ['danhmuc' => $danhmuc, 'categories' => $categories, 'products' => $products, 'count' => $count, 'wishlist' => $wishlist]);
     }
     public function wishlist(Request $request)
     {
@@ -236,7 +236,7 @@ class UserController extends Controller
         $categories = Categories::all();
         $products = Products::where('active', 1)->orderBy('id', 'ASC')->Paginate(12);
         $count = count($products);
-        return view('user.pages.product_sale_all', ['count'=>$count,'products' => $products, 'categories' => $categories]);
+        return view('user.pages.product_sale_all', ['count' => $count, 'products' => $products, 'categories' => $categories]);
     }
     public function product_all()
     {
@@ -278,19 +278,15 @@ class UserController extends Controller
     }
     public function addRating(Request $request)
     {
-        
+
         $data = $request->all();
-        if(!isset($data['ratings']))
-        {
+        if (!isset($data['ratings'])) {
             return redirect()->back()->with('canhbao', 'Add at least one star rating for this Product');
         }
-        $ratingCount = Rating::where(['users_id'=>Auth::user()->id,'products_id'=>$data['products_id']])->count();
-        if($ratingCount > 0)
-        {
+        $ratingCount = Rating::where(['users_id' => Auth::user()->id, 'products_id' => $data['products_id']])->count();
+        if ($ratingCount > 0) {
             return redirect()->back()->with('canhbao', 'Your Rating is already exists for this Product');
-        }
-        else
-        {
+        } else {
             $rating = new Rating;
             $rating->users_id = Auth::user()->id;
             $rating->products_id = $data['products_id'];
@@ -308,19 +304,16 @@ class UserController extends Controller
     {
         $products_id = $request->productid_hidden;
         $quantity = $request->qty;
-        $products = Products::where('id',$products_id)->first();
+        $products = Products::where('id', $products_id)->first();
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
-        if($quantity>=$products['quantity'])
-        {
-            return redirect()->back()->with('canhbao','Vui lòng đặt hàng ít hơn số lượng: '.$products['quantity'].' !!!');
-        }
-        else
-        {
+        if ($quantity >= $products['quantity']) {
+            return redirect()->back()->with('canhbao', 'Vui lòng đặt hàng ít hơn số lượng: ' . $products['quantity'] . ' !!!');
+        } else {
             $data['id'] = $products_id;
             $data['qty'] = $quantity;
             $data['name'] = $products['name'];
-            $data['price'] = $products['price']; 
-            $data['weight'] = 550; 
+            $data['price'] = $products['price'];
+            $data['weight'] = 550;
             $data['options']['image'] = $products['image'];
             $data['options']['price_new'] = $products['price_new'];
             $data['options']['size'] = $products['size'];
@@ -328,29 +321,29 @@ class UserController extends Controller
             //   Cart::destroy();
             Cart::setGlobalTax(0);
         }
-        
-        return redirect('/cart')->with('thongbao','Sucessfully');
-       
+
+        return redirect('/cart')->with('thongbao', 'Sucessfully');
     }
-    public function index() {
+    public function index()
+    {
         return Cart::content();
     }
     public function checkout()
     {
         $user = Auth::user();
-        return view('user.pages.product_checkout',['user' => $user]);
+        return view('user.pages.product_checkout', ['user' => $user]);
     }
-    public function delete_cart($rowId) 
+    public function delete_cart($rowId)
     {
-        Cart::update($rowId,0);
-        return redirect('/cart')->with('thongbao','Sucessfully');
+        Cart::update($rowId, 0);
+        return redirect('/cart')->with('thongbao', 'Sucessfully');
     }
     public function update_cart(Request $request)
     {
         $rowId = $request->rowId_cart;
         $quantity = $request->cart_quantity;
-        Cart::update($rowId,$quantity);
-        return redirect('/cart')->with('thongbao','Sucessfully');
+        Cart::update($rowId, $quantity);
+        return redirect('/cart')->with('thongbao', 'Sucessfully');
     }
     public function edit_img(Request $request)
     {
@@ -372,28 +365,28 @@ class UserController extends Controller
                     unlink('upload/avatar/' . $user->image);
                 }
             }
-            User::where('id',Auth::user()->id)->update(['image'=>$img]);
+            User::where('id', Auth::user()->id)->update(['image' => $img]);
             // $request['image'] = $img;
         }
-        return redirect('profile')->with('thongbao','Update successfully!');
+        return redirect('profile')->with('thongbao', 'Update successfully!');
     }
-    public function edit_profile(Request $request) {
+    public function edit_profile(Request $request)
+    {
         $user = User::find(Auth::user()->id);
-        if($request['changepasswordprofile'] =='on')
-        {
-        $request->validate([
-            'password'=>'required',
-            'passwordagain'=>'required|same:password'
-        ],[
-            'password.required'=>'Vui lòng nhập mật khẩu mới',
-            'passwordagain.required'=>'Vui lòng nhập lại mật khẩu mới',
-            'passwordagain.same'=>'Mật khẩu nhập lại không đúng'
-        ]);
-        $request['password'] = bcrypt($request['password']);
+        if ($request['changepasswordprofile'] == 'on') {
+            $request->validate([
+                'password' => 'required',
+                'passwordagain' => 'required|same:password'
+            ], [
+                'password.required' => 'Vui lòng nhập mật khẩu mới',
+                'passwordagain.required' => 'Vui lòng nhập lại mật khẩu mới',
+                'passwordagain.same' => 'Mật khẩu nhập lại không đúng'
+            ]);
+            $request['password'] = bcrypt($request['password']);
         }
         $user->update($request->all());
         // User::where('id',Auth::user()->id)->update($request->all());
-        return redirect('/profile')->with('thongbao','Cập nhật thành công');
+        return redirect('/profile')->with('thongbao', 'Cập nhật thành công');
         // dd($user);
     }
     public function order_place(Request $request)
@@ -411,41 +404,42 @@ class UserController extends Controller
         $orders['phone'] = $request->phone;
         $orders['email'] = $request->email;
         $orders['content'] = $request->content;
-        $orders['total'] =  Cart::total(0,',','.');
-        $orders_id = Orders::insertGetId($orders);       
+        $orders['total'] = (int)preg_replace("/[,]+/", "", Cart::total(0));
+        // dd((int)preg_replace("/[,]+/", "", Cart::total(0)));
+        $orders_id = Orders::insertGetId($orders);
+
         //insert order_details
-        foreach($content as $value)
-        {
+        foreach ($content as $value) {
             $orders_detail['orders_id'] = $orders_id;
             $orders_detail['product_id'] = $value->id;
             $orders_detail['name'] = $value->name;
             $orders_detail['image'] = $value->options->image;
             $orders_detail['quantity'] = $value->qty;
-            $orders_detail['price'] = $value->price;       
+            $orders_detail['price'] = $value->price;
             Orders_Detail::create($orders_detail);
         }
         Cart::destroy();
-       return redirect('/your_orders')->with('thongbao','Successfully');
+        return redirect('/your_orders')->with('thongbao', 'Successfully');
     }
-    public function orders_list() 
+    public function orders_list()
     {
         $orders = Orders::all();
-        return view ('admin/orders/list',['orders'=>$orders]);
+        return view('admin.orders.list', ['orders' => $orders]);
     }
     public function orders_details($orders_id)
     {
-        $orders_detail = Orders_Detail::where('orders_id',$orders_id)->get();
-        return view('admin.orders.details',['orders_detail'=>$orders_detail]);
+        $orders_detail = Orders_Detail::where('orders_id', $orders_id)->get();
+        return view('admin.orders.details', ['orders_detail' => $orders_detail]);
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         Orders::find($id)->update($request->all());
-        return redirect()->back()->with('thongbao',"Successfully");
+        return redirect()->back()->with('thongbao', "Successfully");
     }
     public function your_orders()
     {
         $orders = Orders::all();
-        return view('user.pages.orders',['orders'=>$orders]);
+        return view('user.pages.orders', ['orders' => $orders]);
     }
     public function delete_orders($id)
     {
@@ -455,35 +449,28 @@ class UserController extends Controller
     }
     public function your_orders_detail($id)
     {
-        $orders_detail = Orders_Detail::where('orders_id',$id)->get();
-        return view('user.pages.orders_detail',['orders_detail' => $orders_detail]);
+        $orders_detail = Orders_Detail::where('orders_id', $id)->get();
+        return view('user.pages.orders_detail', ['orders_detail' => $orders_detail]);
     }
     public function discount(Request $request)
     {
         $discounts = Discounts::all();
-        foreach($discounts as $value) 
-        {
-            if($value['code']==$request->code )
-            {
-                if($value['active'] == 1)
-                {
+        foreach ($discounts as $value) {
+            if ($value['code'] == $request->code) {
+                if ($value['active'] == 1) {
                     $data = $value['discounts'];
                     Cart::setGlobalDiscount($data);
-                    return redirect()->back()->with('thongbao','Apply Coupon Successfully');
-                    
-                }
-                else
-                {
-                    return redirect()->back()->with('canhbao','Code not available');
+                    return redirect()->back()->with('thongbao', 'Apply Coupon Successfully');
+                } else {
+                    return redirect()->back()->with('canhbao', 'Code not available');
                 }
             }
         }
-        return redirect()->back()->with('canhbao','Wrong coupon code');
-        
+        return redirect()->back()->with('canhbao', 'Wrong coupon code');
     }
-    public function delete_discount() 
+    public function delete_discount()
     {
         Cart::setGlobalDiscount(0);
-        return redirect()->back()->with('thongbao','Delete Coupon Successfully');
+        return redirect()->back()->with('thongbao', 'Delete Coupon Successfully');
     }
 }

@@ -49,7 +49,7 @@ $content = Cart::content();
                                     <td>{!! $value['name'] !!}</td>
                                     <td><img style="width: 200px" src="user_asset/images/products/{!! $value['image'] !!}" alt=""></td>
                                     <td>{!! $value['quantity'] !!}</td>
-                                    <td>{!! $value['price'] !!} đ</td>
+                                    <td>{!! number_format($value['price']) !!} đ</td>
                                     <td>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</td>
                                     <td>{!! date("d-m-Y H:m:s", strtotime($value['updated_at'])) !!}</td>
                                 </tr>

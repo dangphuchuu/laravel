@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 @section('content')
 <style>
-    .rating  {
+    .rating {
         margin-left: -32px;
         color: #EDBB0E;
     }
@@ -19,7 +19,7 @@
                         <i class="fas fa-money-bill-alt text-c-red f-18"></i>
                     </div>
                 </div>
-               @foreach($user_new as $value)
+                @foreach($user_new as $value)
                 <p class="m-b-0 text-white">From {!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</p>
                 @endforeach
             </div>
@@ -49,7 +49,9 @@
                 <div class="row align-items-center m-b-30">
                     <div class="col">
                         <h6 class="m-b-5 text-white">@lang('lang.total_price')</h6>
-                        <h3 class="m-b-0 f-w-700 text-white">100,000 $</h3>
+                        <h3 class="m-b-0 f-w-700 text-white">
+                            {!! number_format($sum) !!}
+                        </h3>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign text-c-green f-18"></i>
@@ -102,29 +104,29 @@
                             <i class="feather icon-check f-w-600 bg-c-green update-icon"></i>
                         </div>
                         <div class="col p-l-5">
-                                <h6>{!! $value['users']['lastname'] !!} {!! $value['users']['firstname'] !!}</h6>
+                            <h6>{!! $value['users']['lastname'] !!} {!! $value['users']['firstname'] !!}</h6>
                             <p class="text-muted m-b-0">
-                                <ul class=" ral rating">
-                            <?php
-                                    $count = 0;
-                                    while ($count < 5) {
-                                        if (($value['ratings'] - $count) > 0.5) {
-                                    ?>
-                                            <i class="fa fa-star"></i>
-                                        <?php
-                                        } else if (($value['ratings'] - $count) == 0.5) {
-                                        ?>
-                                            <i class="fa fa-star-half"></i>
-                                        <?php
-                                        } else if (($value['ratings'] - $count) < 0.5) {
-                                        ?>
-                                            <i class="fa fa-star-o"></i>
+                            <ul class=" ral rating">
+                                <?php
+                                $count = 0;
+                                while ($count < 5) {
+                                    if (($value['ratings'] - $count) > 0.5) {
+                                ?>
+                                        <i class="fa fa-star"></i>
                                     <?php
-                                        }
-                                        $count++;
-                                    }
+                                    } else if (($value['ratings'] - $count) == 0.5) {
                                     ?>
-                                    </ul>
+                                        <i class="fa fa-star-half"></i>
+                                    <?php
+                                    } else if (($value['ratings'] - $count) < 0.5) {
+                                    ?>
+                                        <i class="fa fa-star-o"></i>
+                                <?php
+                                    }
+                                    $count++;
+                                }
+                                ?>
+                            </ul>
                             </p>
                             <p class="text-white m-b-0">@lang('lang.products'): {!! $value['products']['name'] !!}</p>
                             <p class="text-white m-b-0">{!! $value['content'] !!}</p>
@@ -155,7 +157,7 @@
                 <div class="align-middle m-b-35">
                     <img src="upload/avatar/{!! $value['image'] !!}" alt="user image" class="img-radius img-40 align-top m-r-15">
                     <div class="d-inline-block">
-                            <h6>{!! $value['lastname'] !!} {!! $value['firstname'] !!}</h6>
+                        <h6>{!! $value['lastname'] !!} {!! $value['firstname'] !!}</h6>
                         <p class="text-muted m-b-0">{!! $value['email'] !!}!</p>
                         <span class="status deactive text-mute"><i class="far fa-clock m-r-10"></i>{!! date("d-m-Y H:m:s", strtotime($value['created_at'])) !!}</span>
                     </div>

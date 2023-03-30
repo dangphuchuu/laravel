@@ -18,65 +18,69 @@ class AdminController extends Controller
 {
     function __construct()
     {
-        $sum=0;
+        $sum = 0;
         $rating = Rating::all();
         $orders_new = Orders_Detail::get()->sortByDesc('created_at')->take(1);
         $orders = Orders::all();
-        $orders_detail=Orders_Detail::all();
+        $orders_detail = Orders_Detail::all();
         $orders_detail_new = Orders_Detail::get()->sortByDesc('created_at')->take(1);
         $user_new = User::get()->sortByDesc('created_at')->take(1);
         $user = User::all();
-        view()->share('user',$user);
-        view()->share('user_new',$user_new);
+        view()->share('user', $user);
+        view()->share('user_new', $user_new);
         view()->share('orders_detail_new', $orders_detail_new);
-        view()->share('orders_detail',$orders_detail);
-        view()->share('orders',$orders);
-        view()->share('sum',$sum);
-        view()->share('orders_new',$orders_new);
-        view()->share('rating',$rating);
+        view()->share('orders_detail', $orders_detail);
+        view()->share('orders', $orders);
+        view()->share('sum', $sum);
+        view()->share('orders_new', $orders_new);
+        view()->share('rating', $rating);
     }
     public function home()
     {
-        return view('admin.home.list');
+        $sum = 0;
+        $orders = Orders::all();
+        foreach ($orders as $value) {
+            if ($value['status'] == 3) {
+                $sum +=  $value['total'];
+            }
+        }
+        return view('admin.home.list', ['sum' => $sum]);
     }
     public function profile()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth()->user();
-        }
-        else
-        {
+        } else {
             return redirect('admin/login');
         }
-        return view ('admin.profile',[
-        'user' => $user])->with('roles','permissions');
+        return view('admin.profile', [
+            'user' => $user
+        ])->with('roles', 'permissions');
     }
     public function edit_profile(Request $request)
     {
-       $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
         $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required'
-        ],[
-            'firstname.required'=>'Vui lòng nhập tên',
-            'lastname.required'=>'Vui lòng nhập họ'
+            'firstname' => 'required',
+            'lastname' => 'required'
+        ], [
+            'firstname.required' => 'Vui lòng nhập tên',
+            'lastname.required' => 'Vui lòng nhập họ'
         ]);
-        if($request['changepasswordprofile'] =='on')
-        {
-        $request->validate([
-            'password'=>'required',
-            'passwordagain'=>'required|same:password'
-        ],[
-            'password.required'=>'Vui lòng nhập mật khẩu mới',
-            'passwordagain.required'=>'Vui lòng nhập lại mật khẩu mới',
-            'passwordagain.same'=>'Mật khẩu nhập lại không đúng'
-        ]);
-        $request['password'] = bcrypt($request['password']);
+        if ($request['changepasswordprofile'] == 'on') {
+            $request->validate([
+                'password' => 'required',
+                'passwordagain' => 'required|same:password'
+            ], [
+                'password.required' => 'Vui lòng nhập mật khẩu mới',
+                'passwordagain.required' => 'Vui lòng nhập lại mật khẩu mới',
+                'passwordagain.same' => 'Mật khẩu nhập lại không đúng'
+            ]);
+            $request['password'] = bcrypt($request['password']);
         }
         $user->update($request->all());
         // User::where('id',Auth::user()->id)->update($request->all());
-        return redirect('admin/profile')->with('thongbao','Cập nhật thành công');
+        return redirect('admin/profile')->with('thongbao', 'Cập nhật thành công');
         // dd($user);
     }
     public function edit_img(Request $request)
@@ -99,16 +103,16 @@ class AdminController extends Controller
                     unlink('upload/avatar/' . $user->image);
                 }
             }
-            User::where('id',Auth::user()->id)->update(['image'=>$img]);
+            User::where('id', Auth::user()->id)->update(['image' => $img]);
             // $request['image'] = $img;
         }
-        return redirect('admin/profile')->with('thongbao','Update successfully!');
+        return redirect('admin/profile')->with('thongbao', 'Update successfully!');
     }
-    public function edit_facebook(Request $request) 
+    public function edit_facebook(Request $request)
     {
         $user = User::find(Auth::user()->id);
         $user->update($request->all());
-        return redirect('admin/profile')->with('thongbao','Update successfully!');
+        return redirect('admin/profile')->with('thongbao', 'Update successfully!');
     }
     public function getLogin()
     {
@@ -121,26 +125,22 @@ class AdminController extends Controller
         //  $user->assignRole('admin');
         // $per = Permission::all();
         // $user->givePermissionTo($per);
-        
+
         return view('admin.login');
-        
     }
     public function postLogin(Request $request)
     {
         $request->validate([
-            'username' =>'required',
-            'password' =>'required'
-        ],[
-            'username.required'=>"Vui lòng nhập username",
-            'password.required' =>"Vui lòng nhập mật khẩu"
+            'username' => 'required',
+            'password' => 'required'
+        ], [
+            'username.required' => "Vui lòng nhập username",
+            'password.required' => "Vui lòng nhập mật khẩu"
         ]);
-        if(Auth::attempt(['username'=>$request['username'],'password'=>$request['password']]))
-        {
+        if (Auth::attempt(['username' => $request['username'], 'password' => $request['password']])) {
             return redirect('admin');
-        }
-        else
-        {
-            return redirect('admin/login')->with('canhbao','Đăng nhập không thành công');
+        } else {
+            return redirect('admin/login')->with('canhbao', 'Đăng nhập không thành công');
         }
     }
     public function getLogout()
@@ -150,45 +150,45 @@ class AdminController extends Controller
     }
     public function list()
     {
-       
+
         // $users = User::orderBy('id','DESC')->Paginate(1);
-        $users = User::with('roles','permissions')->orderBy('id','DESC')->get();
-        return view('admin.staff.list',[
+        $users = User::with('roles', 'permissions')->orderBy('id', 'DESC')->get();
+        return view('admin.staff.list', [
             'users' => $users,
         ]);
     }
     public function getcreate()
     {
-        $role = Role::orderBy('id','ASC')->get();
-        return view('admin/staff/create',['role'=>$role]);
+        $role = Role::orderBy('id', 'ASC')->get();
+        return view('admin/staff/create', ['role' => $role]);
     }
     public function postcreate(Request $request)
     {
         $request->validate([
-        'firstname'=>'required|min:1',
-        'lastname'=>'required|min:1',
-        'username'=>'required|unique:users',
-        'email'=>'required|unique:users',
-        'password'=>'required',
-        'passwordagain'=>'required|same:password'
-    ],[
-        'firstname.required'=> 'Vui lòng nhập tên',
-        'firstname.min'=>'Tên ít nhất 1 kí tự',
-        'lastname.required'=>'Vui lòng nhập họ',
-        'lastname.min'=>'Họ ít nhất 1 kí tự',
-        'username.required'=>'Vui lòng nhập username',
-        'username.unique'=>'username đã tồn tại',
-        'email.required'=>'Vui lòng nhập email',
-        'email.unique'=>'Email đã tồn tại',
-        'password.required'=>'Vui lòng nhập mật khẩu', 
-        'passwordagain.required'=>'Vui lòng nhập lại mật khẩu',
-        'passwordagain.same'=>'Mật khẩu nhập lại không trùng'      
-    ]);
-    $request['password'] = bcrypt($request['password']);
-    $request['image'] = 'avatar.jpg';
-    $user=User::create($request->all());
-    $user->syncRoles('staff');
-    return redirect('admin/staff/list')->with('thongbao','Thêm thành công');
+            'firstname' => 'required|min:1',
+            'lastname' => 'required|min:1',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'passwordagain' => 'required|same:password'
+        ], [
+            'firstname.required' => 'Vui lòng nhập tên',
+            'firstname.min' => 'Tên ít nhất 1 kí tự',
+            'lastname.required' => 'Vui lòng nhập họ',
+            'lastname.min' => 'Họ ít nhất 1 kí tự',
+            'username.required' => 'Vui lòng nhập username',
+            'username.unique' => 'username đã tồn tại',
+            'email.required' => 'Vui lòng nhập email',
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'passwordagain.required' => 'Vui lòng nhập lại mật khẩu',
+            'passwordagain.same' => 'Mật khẩu nhập lại không trùng'
+        ]);
+        $request['password'] = bcrypt($request['password']);
+        $request['image'] = 'avatar.jpg';
+        $user = User::create($request->all());
+        $user->syncRoles('staff');
+        return redirect('admin/staff/list')->with('thongbao', 'Thêm thành công');
     }
     public function getEdit($id)
     {
@@ -196,69 +196,67 @@ class AdminController extends Controller
         $user = User::find($id);
         // $name_role = $user->roles->first()->name;
         $all_role = $user->roles->first();
-        return view('admin.staff.edit',['user' => $user,'role'=>$role,'all_role'=>$all_role]);
+        return view('admin.staff.edit', ['user' => $user, 'role' => $role, 'all_role' => $all_role]);
     }
-    public function postEdit(Request $request,$id)
+    public function postEdit(Request $request, $id)
     {
         $request->validate([
-        'firstname'=>'required|min:1',
-        'lastname'=>'required|min:1',
-        'username'=>'required',
-        'email'=>'required'
-        
-    ],[
-        'firstname.required'=> 'Vui lòng nhập tên',
-        'firstname.min'=>'Tên ít nhất 1 kí tự',
-        'lastname.required'=>'Vui lòng nhập họ',
-        'lastname.min'=>'Họ ít nhất 1 kí tự',
-        'username.required'=>'Vui lòng nhập username',
-        'username.unique'=>'username đã tồn tại',
-        'email.required'=>'Vui lòng nhập email',
-    ]);
-    if($request['changepassword'] =='on')
-    {
-        $request->validate([
-            'password'=>'required',
-            'passwordagain'=>'required|same:password'
-        ],[
-            'password.unique'=>'Mật khẩu mới trùng với mật khẩu cũ',
-            'password.required'=>'Vui lòng nhập mật khẩu mới',
-            'passwordagain.required'=>'Vui lòng nhập lại mật khẩu mới',
-            'passwordagain.same'=>'Mật khẩu nhập lại không đúng'
+            'firstname' => 'required|min:1',
+            'lastname' => 'required|min:1',
+            'username' => 'required',
+            'email' => 'required'
+
+        ], [
+            'firstname.required' => 'Vui lòng nhập tên',
+            'firstname.min' => 'Tên ít nhất 1 kí tự',
+            'lastname.required' => 'Vui lòng nhập họ',
+            'lastname.min' => 'Họ ít nhất 1 kí tự',
+            'username.required' => 'Vui lòng nhập username',
+            'username.unique' => 'username đã tồn tại',
+            'email.required' => 'Vui lòng nhập email',
         ]);
-        $request['password'] = bcrypt($request['password']);
+        if ($request['changepassword'] == 'on') {
+            $request->validate([
+                'password' => 'required',
+                'passwordagain' => 'required|same:password'
+            ], [
+                'password.unique' => 'Mật khẩu mới trùng với mật khẩu cũ',
+                'password.required' => 'Vui lòng nhập mật khẩu mới',
+                'passwordagain.required' => 'Vui lòng nhập lại mật khẩu mới',
+                'passwordagain.same' => 'Mật khẩu nhập lại không đúng'
+            ]);
+            $request['password'] = bcrypt($request['password']);
+        }
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect('admin/staff/list')->with('thongbao', 'Thành công');
     }
-    $user = User::find($id);
-    $user->update($request->all());
-    return redirect('admin/staff/list')->with('thongbao','Thành công');
-    }  
     public function getrole($id)
     {
         $user = User::find($id);
         $role = Role::all();
         $all_role = $user->roles->first();
         $permission = Permission::all();
-        return view('admin.staff.role',['role'=>$role,'user'=>$user,'all_role'=>$all_role,'permission'=>$permission]);
+        return view('admin.staff.role', ['role' => $role, 'user' => $user, 'all_role' => $all_role, 'permission' => $permission]);
     }
-    public function postrole(Request $request,$id)
+    public function postrole(Request $request, $id)
     {
         $data = $request->all();
         $user = User::find($id);
         $user->syncRoles($data['role']);
-        return redirect('admin/staff/list')->with('thongbao','Update vai trò thành công');
+        return redirect('admin/staff/list')->with('thongbao', 'Update vai trò thành công');
     }
     public function getpermission($id)
     {
         $user = User::find($id);
         // $roles = $user->roles->first()->name;
         $permission = Permission::orderBy('id', 'asc')->get();
-        $user_per=$user->getDirectPermissions();// table:model_has_permission (hoặc có thể dùng $user->permissions)
+        $user_per = $user->getDirectPermissions(); // table:model_has_permission (hoặc có thể dùng $user->permissions)
         // $role_per=$user->getPermissionsViaRoles();// table:role_has_permissions
         // dd($user_per);
-        return view('admin.staff.permission',['user'=>$user,'permission'=>$permission,'user_per'=>$user_per]);
-        
+        return view('admin.staff.permission', ['user' => $user, 'permission' => $permission, 'user_per' => $user_per]);
     }
-    public function postpermission(Request $request,$id)
+    public function postpermission(Request $request, $id)
     {
         $data = $request->all();
         $user = User::find($id);
@@ -267,11 +265,11 @@ class AdminController extends Controller
         // $role = Role::find($role_id);
         $user->syncPermissions($data['permission']);
 
-        return redirect('admin/staff/list')->with('thongbao','Thêm quyền thành công');
+        return redirect('admin/staff/list')->with('thongbao', 'Thêm quyền thành công');
     }
     public function getRating()
     {
         $rating = Rating::all();
-        return view ('admin.rating.list',['rating' => $rating]);
+        return view('admin.rating.list', ['rating' => $rating]);
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Products;
 use App\Models\User;
+
 return new class extends Migration
 {
     /**
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->longtext('content')->nullable();
-            $table->string('total');
+            $table->integer('total');
             $table->integer('status')->default(1);
             $table->timestamps();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

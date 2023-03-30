@@ -11,16 +11,16 @@ class DiscountsController extends Controller
         $discounts = Discounts::orderBy('id','DESC')->Paginate(10);
         return view('admin.discounts.list',['discounts' => $discounts]);
     }
-    public function Active($id)
-    {
-        Discounts::where('id',$id)->update(['active' => 1]);
-        return redirect('admin/discounts/list')->with('thongbao','Update thành công');
-    }
-    public function Block($id)
-    {
-        Discounts::where('id',$id)->update(['active' => 0]);
-        return redirect('admin/discounts/list')->with('thongbao','Update thành công');
-    }
+    // public function Active($id)
+    // {
+    //     Discounts::where('id',$id)->update(['active' => 1]);
+    //     return redirect('admin/discounts/list')->with('thongbao','Update thành công');
+    // }
+    // public function Block($id)
+    // {
+    //     Discounts::where('id',$id)->update(['active' => 0]);
+    //     return redirect('admin/discounts/list')->with('thongbao','Update thành công');
+    // }
     public function getEdit($id)
     {
         $discounts = Discounts::find($id);
