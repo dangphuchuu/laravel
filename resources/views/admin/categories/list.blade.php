@@ -37,12 +37,12 @@
                         <div class="card-block">
                             @can('add category')
                             <a href="admin/categories/create" class="text-light">
-                                <button  class=" btn btn-primary float-right mb-3" >@lang('lang.add')</button>
+                                <button class=" btn btn-primary float-right mb-3">@lang('lang.add')</button>
                             </a>
-                                <button style="margin-bottom: 10px" data-url="{{ url('ajax/deleteall_categories') }}" class="btn btn-danger delete_all">@lang('lang.delete_all')</button>
+                            <button style="margin-bottom: 10px" data-url="{{ url('ajax/deleteall_categories') }}" class="btn btn-danger delete_all">@lang('lang.delete_all')</button>
                             @endcan
                             <div class="dt-responsive table-responsive">
-                                <table id="autofill" class="table table-striped table-bordered nowrap ngu" >
+                                <table id="autofill" class="table table-striped table-bordered nowrap ngu">
                                     <thead>
                                         <tr align="center">
                                             <th><input type="checkbox" id="master"></th>
@@ -73,7 +73,7 @@
                                             </td>
                                             @endcan
                                             @can('edit category')
-                                            <td class="center "><a href="admin/categories/edit/{!! $value['id'] !!}" class="btn btn-warning " >@lang('lang.edit')</a></td>
+                                            <td class="center "><a href="admin/categories/edit/{!! $value['id'] !!}" class="btn btn-warning ">@lang('lang.edit')</a></td>
                                             @endcan
                                             @can('delete category')
                                             <td class="center "><a href="javascript:void(0)" data-url="{{ url('ajax/delete_categories', $value['id'] ) }}" class="btn btn-danger delete-categories"> @lang('lang.delete')</a></td>

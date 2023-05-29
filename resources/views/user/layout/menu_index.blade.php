@@ -13,7 +13,7 @@
 						<div class="item-show">
 							<div class="item-show_item">
 								<p class="item-show_item-head">
-								@lang('lang.subcate')
+									@lang('lang.subcate')
 								</p>
 								<p class="item-show_item-content">
 									@foreach($cat['Subcategories'] as $sub)
@@ -35,8 +35,7 @@
 						<form action="/search">
 							<a href="/all_products">
 								<div class="hero__search__categories">
-								->@lang('lang.all') @lang('lang.products') <-
-								</div>
+									->@lang('lang.all') @lang('lang.products') <- </div>
 							</a>
 							<input type="search" name="search" value="{!! Request::get('search') !!}" placeholder="@lang('lang.search')...">
 							<button type="submit" class="site-btn">@lang('lang.search')</button>
@@ -56,15 +55,9 @@
 					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 							@foreach($banners as $value)
-							@if($value['id'] == 1)
-							<div class="carousel-item active">
+							<div class="carousel-item @if($loop->first) active @endif">
 								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
 							</div>
-							@else
-							<div class="carousel-item">
-								<img class="d-block w-100" src="user_asset/images/banners/{!! $value['image'] !!}" alt="First slide" style="height: 450px">
-							</div>
-							@endif
 							@endforeach
 							<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
