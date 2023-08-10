@@ -84,7 +84,7 @@
                                             https://www.youtube.com/embed/{!! $value['link'] !!} 
                                             @endif" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         </td> -->
-                                            <td>{!! $value['name'] !!}</td>
+                                            <td  style="width:200px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical">{!! $value['name'] !!}</td>
                                             <td>{!! $value['size'] !!}</td>
                                             <td>{!! $value['quantity'] !!}</td>
                                             <td>{!! number_format($value['price']) !!}</td>
